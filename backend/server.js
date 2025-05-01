@@ -836,7 +836,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5500, () => {
-  console.log("Server Running in 5500");
+app.listen(process.env.PORT || 5500, () => {
+  console.log("Server Running in ", process.env.PORT);
   mongodbConnect();
 });
