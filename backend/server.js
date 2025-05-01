@@ -31,7 +31,13 @@ app.use(express.static("/public"));
 
 /* third party middleware */
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "freelancing-frontend-lake.vercel.app",
+    credentials: true,
+  })
+);
+
 const mongodbConnect = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI);
