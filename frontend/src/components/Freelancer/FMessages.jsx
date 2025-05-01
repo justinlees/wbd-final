@@ -79,7 +79,7 @@ export default function FMessages() {
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const response = await axios.post(
-    `http://localhost:5500/freelancer/${params.fUser}/tasks/${params.userId}/messages`,
+    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/tasks/${params.userId}/messages`,
     formData
   );
   if (response.data) {

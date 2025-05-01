@@ -13,10 +13,10 @@ import "../../styles/home.css";
 
 const handleLogout = () => {
   // Remove the token from local storage
-  localStorage.removeItem('token');
+  localStorage.removeItem("token");
 
   // Redirect to the home page
-  window.location.href = '/';
+  window.location.href = "/";
 };
 
 function Home() {
@@ -103,7 +103,7 @@ export async function Loader({ params }) {
   }
   try {
     const response = await axios.get(
-      `http://localhost:5500/home/${params.userId}`,
+      `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}`,
       {
         headers: {
           Authorization: token,

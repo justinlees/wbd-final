@@ -26,7 +26,7 @@ export default function MessageEntry() {
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const response = await axios.post(
-    `http://localhost:5500/home/${params.userId}/tasks/${params.fUser}/messages`,
+    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/tasks/${params.fUser}/messages`,
     formData
   );
   if (response.data)

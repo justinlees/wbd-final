@@ -10,7 +10,7 @@ export default function CmessageDisplay() {
     const messageFetch = () => {
       axios
         .get(
-          `http://localhost:5500/home/${params.userId}/tasks/${params.fUser}/messages`
+          `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/tasks/${params.fUser}/messages`
         )
         .then((res) => res)
         .then((data) => setAllMessages(data.data));

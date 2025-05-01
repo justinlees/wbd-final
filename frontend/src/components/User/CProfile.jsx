@@ -27,7 +27,12 @@ export default function CProfile() {
           <p>Phone Number: {clientData.user.MobileNo}</p>
           <Form method="POST">
             <legend>Delete Account</legend>
-            <input type="text" value="delete" name="delete" style={{display: "none"}}/>
+            <input
+              type="text"
+              value="delete"
+              name="delete"
+              style={{ display: "none" }}
+            />
             <button>Delete</button>
           </Form>
         </div>
@@ -39,7 +44,7 @@ export default function CProfile() {
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const res = await axios.post(
-    `http://localhost:5500/home/${params.userId}/profile`,
+    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/profile`,
     formData
   );
   if (res === "success") {

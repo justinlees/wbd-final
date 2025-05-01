@@ -39,7 +39,7 @@ export default function CTasks() {
 
 export async function Loader({ params }) {
   const res = await axios.get(
-    `http://localhost:5500/home/${params.userId}/tasks`
+    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/tasks`
   );
   return res.data;
 }

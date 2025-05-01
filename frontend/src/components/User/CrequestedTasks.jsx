@@ -45,7 +45,7 @@ export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const errors = {};
   const response = await axios.post(
-    `http://localhost:5500/home/${params.userId}/tasks`,
+    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/tasks`,
     formData
   );
 

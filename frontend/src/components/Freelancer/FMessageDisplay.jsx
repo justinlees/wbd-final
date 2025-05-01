@@ -10,7 +10,7 @@ export default function FMessageDisplay() {
     const messageFetch = () => {
       axios
         .get(
-          `http://localhost:5500/freelancer/${params.fUser}/tasks/${params.userId}/messages`
+          `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/tasks/${params.userId}/messages`
         )
         .then((res) => res)
         .then((data) => setMessages(data.data));

@@ -128,7 +128,7 @@ export default function FsignUp() {
   const checkRepeatedEmail = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5500/check-repeated-email",
+        `${process.env.REACT_APP_BACKEND_URI}/check-repeated-email`,
         { Email: formData.Email }
       );
       if (response.status === 200) {
@@ -149,7 +149,7 @@ export default function FsignUp() {
   const checkRepeatedUserName = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5500/check-repeated-username",
+        `${process.env.REACT_APP_BACKEND_URI}/check-repeated-username`,
         { UserName: formData.UserName }
       );
       if (response.status === 200) {
@@ -169,9 +169,12 @@ export default function FsignUp() {
 
   const sendVerificationEmail = async () => {
     try {
-      await axios.post("http://localhost:5500/send-verification-email", {
-        Email: formData.Email,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URI}/send-verification-email`,
+        {
+          Email: formData.Email,
+        }
+      );
     } catch (error) {
       setMailMsg("Error sending verification email.");
       console.error(error);
@@ -181,10 +184,13 @@ export default function FsignUp() {
   const validateOTP = async () => {
     try {
       console.log(formData.OTP);
-      const response = await axios.post("http://localhost:5500/validate-code", {
-        Email: formData.Email,
-        code: formData.OTP,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URI}/validate-code`,
+        {
+          Email: formData.Email,
+          code: formData.OTP,
+        }
+      );
       if (response.status === 200) {
         setMailVerified(true);
         setMailMsg("Verfied Successfully");
@@ -214,7 +220,7 @@ export default function FsignUp() {
       // Check if username already exists
       try {
         const response = await axios.post(
-          "http://localhost:5500/check-repeated-username",
+          `${process.env.REACT_APP_BACKEND_URI}/check-repeated-username`,
           { UserName: formData.UserName }
         );
         if (response.status === 200) {
@@ -472,7 +478,7 @@ export async function Action({ request }) {
     return errors;
   }
   const res = await axios.post(
-    "http://localhost:5500/signUp/freelancer",
+    `${process.env.REACT_APP_BACKEND_URI}/signUp/freelancer`,
     formData
   );
   if (res.data) {

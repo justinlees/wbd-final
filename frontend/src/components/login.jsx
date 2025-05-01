@@ -30,11 +30,11 @@ export default function Login() {
           <fieldset className="linking">
             <div className="externalLinking">
               <label childrenlassName="signUpRedirect">
-                Create an Account? 
+                Create an Account?
                 <Link to="/"> SignUp </Link>
               </label>
               <label childrenlassName="forgotPassword">
-                Forgot Password? Click 
+                Forgot Password? Click
                 <Link to="/forgotpassword"> here </Link>
               </label>
             </div>
@@ -50,7 +50,10 @@ export default function Login() {
 
 export async function Action({ request }) {
   const formData = Object.fromEntries(await request.formData());
-  const res = await axios.post("http://localhost:5500/login", formData);
+  const res = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URI}/login`,
+    formData
+  );
   const errors = {};
   console.log("checking");
   if (res.data.token) {

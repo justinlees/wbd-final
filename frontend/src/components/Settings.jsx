@@ -32,7 +32,7 @@ const Settings = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.post(
-          "http://localhost:5500/updatePassword",
+          `${process.env.REACT_APP_BACKEND_URI}/updatePassword`,
           formData,
           {
             headers: {

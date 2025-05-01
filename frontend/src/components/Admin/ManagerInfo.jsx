@@ -56,7 +56,7 @@ export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
 
   const response = await axios.post(
-    `http://localhost:5500/admin/${params.aUser}/utilities`,
+    `${process.env.REACT_APP_BACKEND_URI}/admin/${params.aUser}/utilities`,
     formData
   );
   console.log(response.data);
@@ -67,7 +67,7 @@ export async function Action({ request, params }) {
 
 export async function Loader({ request, params }) {
   const res = await axios
-    .get(`http://localhost:5500/admin/${params.aUser}/utilities`)
+    .get(`${process.env.REACT_APP_BACKEND_URI}/admin/${params.aUser}/utilities`)
     .then((res) => res)
     .then((data) => data.data);
   if (res) {

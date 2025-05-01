@@ -82,7 +82,7 @@ export default function FacceptedTasks() {
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const res = await axios.post(
-    `http://localhost:5500/freelancer/${params.fUser}/tasks/acceptedTasks`,
+    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/tasks/acceptedTasks`,
     formData
   );
   if (res) {

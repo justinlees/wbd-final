@@ -12,7 +12,9 @@ const ForgotPassword = () => {
 
   const sendOtp = async () => {
     try {
-      await axios.post("http://localhost:5500/forgot-password", { Email });
+      await axios.post(`${process.env.REACT_APP_BACKEND_URI}/forgot-password`, {
+        Email,
+      });
       setStep(2);
       setMessage("OTP sent to your email.");
     } catch (error) {
@@ -23,7 +25,7 @@ const ForgotPassword = () => {
 
   const validateOtp = async () => {
     try {
-      await axios.post("http://localhost:5500/validate-code", {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URI}/validate-code`, {
         Email,
         code: otp.toString(),
       });
@@ -37,7 +39,7 @@ const ForgotPassword = () => {
 
   const resetPassword = async () => {
     try {
-      await axios.post("http://localhost:5500/reset-password", {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URI}/reset-password`, {
         Email,
         newPassword,
       });

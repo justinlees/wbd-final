@@ -133,7 +133,7 @@ export default function FsideBar({ userData }) {
 export async function Action({ request, params }) {
   const formData = await request.formData();
   const res = await axios.post(
-    `http://localhost:5500/freelancer/${params.fUser}`,
+    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}`,
     formData
   );
   if (res) {

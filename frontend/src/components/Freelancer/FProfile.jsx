@@ -72,7 +72,7 @@ export default function FProfile() {
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
   const res = await axios.post(
-    `http://localhost:5500/freelancer/${params.fUser}/profile`,
+    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/profile`,
     formData
   );
   if (res === "success") {

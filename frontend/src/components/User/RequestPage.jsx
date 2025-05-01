@@ -95,7 +95,7 @@ export default function RequestPage() {
 export async function Action({ params, request }) {
   const formData = Object.fromEntries(await request.formData());
   const res = await axios.post(
-    `http://localhost:5500/home/${params.userId}/${params.fUser}/requestPage`,
+    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/${params.fUser}/requestPage`,
     formData
   );
   if (res.data) return redirect(`/home/${params.userId}/tasks`);

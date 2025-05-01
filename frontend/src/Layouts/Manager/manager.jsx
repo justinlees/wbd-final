@@ -37,7 +37,7 @@ export async function Loader({ params }) {
 
   try {
     const response = await axios.get(
-      `http://localhost:5500/manager/${params.mUser}`,
+      `${process.env.REACT_APP_BACKEND_URI}/manager/${params.mUser}`,
       {
         headers: {
           Authorization: token,
@@ -49,4 +49,4 @@ export async function Loader({ params }) {
   } catch (error) {
     return "";
   }
-} 
+}

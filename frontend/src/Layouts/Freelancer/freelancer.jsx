@@ -35,7 +35,7 @@ export async function Loader({ params }) {
 
   try {
     const response = await axios.get(
-      `http://localhost:5500/freelancer/${params.fUser}`,
+      `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}`,
       {
         headers: {
           Authorization: token,
