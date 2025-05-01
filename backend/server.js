@@ -33,7 +33,8 @@ app.use(express.static("/public"));
 
 app.use(
   cors({
-    origin: "freelancing-frontend-lake.vercel.app",
+    origin: "https://freelancing-frontend-lake.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
