@@ -13,7 +13,7 @@ const userAuth = (req, res) => {
     return res.status(403).json({ message: "No token" });
   }
 
-  jwt.verify(token, "mySecret", async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) res.status(403).json({ message: "Invalid Token" });
     else if (decoded?.data) {
       //modified from if to else if statement

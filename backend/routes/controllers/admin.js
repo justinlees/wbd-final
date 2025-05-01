@@ -12,7 +12,7 @@ const adminAuth = (req, res) => {
     return res.status(403).json({ message: "Token required" });
   }
 
-  jwt.verify(token, "mySecret", async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
 
     const admin = await collectionA.findOne({ UserName: decoded.data });

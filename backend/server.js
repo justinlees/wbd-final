@@ -178,7 +178,7 @@ app.post("/login", async (req, res) => {
         {
           data: freelancer.UserName,
         },
-        "mySecret",
+        process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
 
@@ -192,7 +192,7 @@ app.post("/login", async (req, res) => {
         {
           data: admin.UserName,
         },
-        "mySecret",
+        process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
       res.send({ token, admin });
@@ -205,7 +205,7 @@ app.post("/login", async (req, res) => {
         {
           data: client.UserName,
         },
-        "mySecret",
+        process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
       res.send({ token, client });
@@ -218,7 +218,7 @@ app.post("/login", async (req, res) => {
         {
           data: manager.UserName,
         },
-        "mySecret",
+        process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
       res.send({ token, manager });
