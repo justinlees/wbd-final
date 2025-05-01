@@ -1,0 +1,466 @@
+.freelanceDashBoard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #dbcede;
+}
+
+.freelanceDashBoard .mainContent {
+  width: 100%;
+  height: 100%;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+/* sideBar styling --> */
+
+.freelanceDashBoard .fSideBar {
+  width: 15rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(240, 240, 240);
+  position: fixed;
+  left: 0;
+  top: 4rem;
+  z-index: 1;
+}
+
+.freelanceDashBoard .fSideBar .top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.freelanceDashBoard .fSideBar .top * {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.freelanceDashBoard .fSideBar .top hr {
+  width: 11.5rem;
+  height: 2px;
+  margin: 0.5rem;
+  padding: 0;
+  background-color: black;
+}
+
+.freelanceDashBoard .fSideBar .middle {
+  width: 100%;
+  height: 100%;
+}
+
+.freelanceDashBoard .fSideBar .middle ul {
+  list-style-type: none;
+}
+
+.freelanceDashBoard .fSideBar .middle ul li {
+  margin: 0.5rem;
+  padding: 0.2rem 1rem;
+  line-height: 2rem;
+  font-size: 1.2rem;
+}
+
+.freelanceDashBoard .fSideBar .middle ul .NavLink {
+  display: block;
+  padding: 0 0.6rem;
+  text-decoration: none;
+  color: black;
+}
+
+.freelanceDashBoard .fSideBar .middle ul .activeNavLink {
+  display: block;
+  background-color: #c8c8c8;
+  color: rgb(233, 60, 75);
+  text-decoration: none;
+  padding: 0 0.6rem;
+  border-radius: 8px;
+}
+
+.freelanceDashBoard .fSideBar .bottom {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.freelanceDashBoard .fSideBar .bottom button {
+  width: 100%;
+  height: 3rem;
+  font-size: 20px;
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 4rem;
+  border: none;
+}
+
+.freelanceDashBoard .fSideBar .top figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+}
+
+.freelanceDashBoard .fSideBar .top figure article {
+  width: 400px;
+  height: 400px;
+  position: fixed;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  left: 14rem;
+  top: 5rem;
+  background-color: rgba(16, 16, 16, 0.336);
+  backdrop-filter: blur(5px);
+  border-radius: 8px;
+}
+
+.freelanceDashBoard .fSideBar .top figure article .picUpload {
+  position: relative;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 8px;
+}
+
+.freelanceDashBoard .fSideBar .top figure article .picUpload button {
+  width: 6rem;
+  border: none;
+  background-color: #007bff;
+  border-radius: 5px;
+}
+
+.freelanceDashBoard .fSideBar .top figure article .picUpload button:hover {
+  background-color: #0056b3;
+}
+
+.freelanceDashBoard .fSideBar .top figure img {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.freelanceDashBoard .fSideBar .top figure figcaption {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  padding: 0;
+  background-color: rgb(240, 240, 240);
+  display: flex;
+  border: 2px solid black;
+  align-items: center;
+  font-size: 2rem;
+  justify-content: center;
+}
+
+/* <-- sideBar styling */
+
+.freelanceDashBoard .freelanceDetail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 0;
+}
+
+/* Top Header styling --> */
+
+.freelanceDashBoard .freelanceDetail .topHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0rem 0rem 17rem;
+  color: black;
+}
+
+.freelanceDashBoard .freelanceDetail .topHeader h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  font-family: "Roboto", sans-serif;
+}
+
+/* <-- Top Header styling */
+
+/* dashBoard top Header --> */
+
+.freelanceDashBoard .freelanceDetail .topHeader2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0rem 0rem 17rem;
+  color: black;
+}
+
+.freelanceDashBoard .freelanceDetail .topHeader2 .left {
+  margin-left: 2rem;
+}
+
+.freelanceDashBoard .freelanceDetail .topHeader2 .left h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  font-family: "Kanit", sans-serif;
+}
+
+.freelanceDashBoard .freelanceDetail .topHeader2 .left h3 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 7rem;
+  font-family: "Rubik", sans-serif;
+}
+
+.freelanceDashBoard .freelanceDetail .topHeader2 .right {
+  margin-right: 18rem;
+  border: 4px double #333;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+/* <-- dashBoard top header */
+
+.freelanceDashBoard .freelanceDetail .top-nav {
+  display: flex;
+  align-items: center;
+  background-color: #dedede;
+  margin: 2rem 2rem 0rem 17rem;
+  /* padding-left: 1rem; */
+}
+
+.top-nav div {
+  width: 8rem;
+  line-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 0.8s;
+}
+
+.top-nav .activeTasks div {
+  background-color: whitesmoke;
+  border-bottom: 4px solid tomato;
+  color: black;
+}
+
+/* top-nav ended */
+
+.freelanceDashBoard .freelanceDetail .briefDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: grey rgba(0, 0, 0, 0);
+}
+
+.freelanceDashBoard .freelanceDetail .briefDetails .block1 {
+  width: 50%;
+  border-radius: 8px;
+  margin: 2rem 0rem 2rem 17rem;
+  padding: 1rem;
+  background-color: rgb(240, 240, 240);
+}
+
+.freelanceDashBoard .freelanceDetail .briefDetails .block1 * {
+  padding: 0.4rem;
+}
+
+.freelanceDashBoard
+  .freelanceTasks
+  .briefDetails
+  .requestedClients
+  .requestButtons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.freelanceDashBoard .freelanceTasks .briefDetails .acceptedRequests {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.freelanceDashBoard .freelanceTasks .acceptedRequests .acceptButtons {
+  display: flex;
+  align-items: center;
+}
+
+.freelanceDashBoard .freelanceTasks .acceptedRequests .acceptButtons button {
+  background-color: turquoise;
+  border: none;
+  width: 6rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  margin: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.freelanceDashBoard .freelanceTasks .briefDetails .requestedClients button {
+  width: 5rem;
+  height: 2rem;
+  margin: 0rem 1rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.freelanceDashBoard .freelanceTasks .briefDetails .requestedClients .accept {
+  background-image: #0f0;
+  cursor: pointer;
+}
+
+.freelanceDashBoard .freelanceTasks .briefDetails .requestedClients .reject {
+  background-color: tomato;
+  cursor: pointer;
+}
+
+.freelanceDashBoard .messageDisplay {
+  width: 100%;
+  height: 20rem;
+  overflow: auto;
+}
+
+.freelanceDashBoard .messageDisplay .lancerMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  margin-left: auto;
+}
+
+.messageDisplay .clientMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: black;
+  color: whitesmoke;
+}
+
+.acceptedTasks .taskInfo {
+  background-color: whitesmoke;
+  display: none;
+}
+
+.acceptedTasks .taskInfo section {
+  margin: 0.5rem;
+}
+
+/* Pop-UPs styling */
+
+.PopUp {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+
+.PopUp form {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: absolute;
+  background-color: white;
+  margin-left: 12rem;
+  width: 25rem;
+  height: 15rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 1px #111;
+}
+
+.PopUp form button {
+  width: 6rem;
+  line-height: 1.5rem;
+  color: black;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: transparent;
+  margin: 1rem;
+  cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.PopUp form button:hover {
+  background-color: black;
+  color: white;
+}
+
+.PopUp form #confirmation {
+  width: 6rem;
+  line-height: 1.5rem;
+  color: black;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.PopUp form #confirmation:hover {
+  background-color: black;
+  color: white;
+}
+
+.PopUp form .cancel {
+  color: black;
+  border: 1px solid black;
+}
+
+.PopUp form .cancel:hover {
+  background-color: rgb(198, 198, 198);
+}
+
+.PopUp form #cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border: 1px solid black;
+}
+
+.PopUp form #cancel:hover {
+  background-color: rgb(198, 198, 198);
+}

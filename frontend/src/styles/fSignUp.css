@@ -1,0 +1,199 @@
+.FsignUpPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FsignUpPage .formBlock {
+  width: 600px;
+  height: 500px;
+  margin: 3rem 0 0 0;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff;
+}
+
+.FsignUpPage .formBlock .sideCover {
+  width: 150px;
+  background-color: white;
+  color: white;
+  height: 100%;
+  display: flex;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.FsignUpPage .formBlock .sideCover ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  height: 100%;
+}
+
+.list1 {
+  width: 150px;
+  border-top-right-radius: 55%;
+  justify-content: end;
+  background-color: #007bff;
+}
+
+.list2 {
+  width: 150px;
+  background-color: #007bff;
+}
+
+.FsignUpPage .formBlock .signUpForm {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  -border-top-right-radius: 15%;
+  -border-bottom-right-radius: 15%;
+  border-bottom-left-radius: 25%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.signUpForm .progress-container {
+  display: flex;
+  justify-content: center;
+  height: 4rem;
+  width: 25rem;
+  background-color: white;
+  z-index: 1;
+  padding: 2.2rem 2.5rem;
+}
+
+.signUpForm .progress-container .progress-bar {
+  width: 18rem;
+  height: 0.6rem;
+  background-image: linear-gradient(to right, #aaa, #fff);
+  display: flex;
+  justify-content: space-between;
+}
+
+.signUpForm .progress-container .progress-bar.step2 {
+  background: linear-gradient(to right, black 50%, lightgray 51%);
+}
+
+.signUpForm .progress-container .progress-bar.step3 {
+  background: linear-gradient(to right, black 0%, black 100%);
+}
+
+.signUpForm .progress-container .progress-bar div {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #eee;
+  color: #eee;
+  text-shadow: 1px 2px 4px #eee;
+  transform: translateY(-0.7rem);
+}
+
+.signUpForm .progress-container .progress-bar div.color {
+  background-color: black;
+}
+
+.FsignUpPage fieldset {
+  border: none;
+  background-color: white;
+  margin: 0;
+  padding: 1rem;
+}
+
+.signUpForm .input-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.signUpForm input {
+  width: 100%;
+  height: 3rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.3s;
+}
+
+/* rgb(12,97,254) */
+
+.signUpForm input:focus {
+  outline: none;
+  border-color: teal;
+}
+
+.signUpForm .input-wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  width: 126px;
+  height: 20.5px;
+  pointer-events: none;
+}
+
+.signUpForm .input-wrapper input:focus+img,
+.signUpForm .input-wrapper input:not(:placeholder-shown)+img {
+  top: -10px;
+  left: 10px;
+  width: 95px;
+  height: 15px;
+  transform: translateY(0);
+}
+
+.FsignUpPage fieldset span {
+  color: red;
+}
+
+.signUpForm .display1 {
+  width: 25rem;
+}
+
+.signUpForm .display2 {
+  width: 25rem;
+}
+
+.signUpForm .display3 {
+  width: 25rem;
+}
+
+.FsignUpPage .linking {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 25rem;
+  height: 2rem;
+  color: white;
+}
+
+.FsignUpPage .linking button {
+  width: 5rem;
+  color: inherit;
+  text-decoration: none;
+  background-color: white;
+  font-size: 1.1rem;
+  padding: 0.2rem;
+  color: black;
+  outline: none;
+  cursor: pointer;
+}

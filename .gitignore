@@ -1,0 +1,40 @@
+node_modules/
+.env
+
+# # Node.js dependencies
+# node_modules/
+# package-lock.json
+
+# # Environment variables
+# .env
+
+# # Build & Cache files
+# dist/
+# build/
+# .cache/
+# .vite/
+# .next/
+# .nuxt/
+# .parcel-cache/
+
+# # Logs & Debugging files
+# npm-debug.log*
+# yarn-error.log
+
+# # Operating system metadata files
+# .DS_Store
+# Thumbs.db
+
+# # IDE & Editor-specific files
+# .vscode/
+# .idea/
+
+# # Git-specific files
+# .gitconfig
+
+# # Test coverage reports
+# coverage/
+
+# # Docker (if used)
+# docker-compose.override.yml
+# .dockerignore

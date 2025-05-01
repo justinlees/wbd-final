@@ -1,0 +1,55 @@
+.Settings {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 10%; /* Replaced fixed rem with percentage for flexibility */
+  padding: 1rem; /* Added padding for better spacing */
+}
+
+.Settings .changePasswordForm {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column; /* Made direction explicit */
+  justify-content: space-evenly;
+  align-items: flex-start; /* Adjusted alignment for cleaner layout */
+  border: 1px solid #ccc; /* Changed to lighter border for modern look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Softer shadow for better aesthetics */
+  padding: 1.5rem; /* Increased padding for improved spacing */
+  border-radius: 12px; /* Slightly rounded corners */
+  width: 90%; /* Responsive width */
+  max-width: 400px; /* Limit maximum width */
+  background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.Settings .changePasswordForm input {
+  line-height: 2rem;
+  font-size: 1rem;
+  width: 100%;
+  margin: 0.5rem 0; /* Combined margins for cleaner code */
+  padding: 0.5rem;
+  border: 1px solid #ddd; /* Subtle border for inputs */
+  border-radius: 6px; /* Rounded input fields */
+  box-sizing: border-box; /* Prevent overflow issues */
+}
+
+.Settings .changePasswordForm button {
+  margin: 1rem auto 0; /* Center button and provide spacing */
+  width: 10rem;
+  line-height: 2.5rem;
+  background-color: #ff6347; /* Tomato with hex for consistency */
+  font-weight: bold;
+  color: #fff; /* White text for better visibility */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth hover transition */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Softer shadow */
+}
+
+.Settings .changePasswordForm button:hover {
+  background-color: #ff4a33; /* Slightly darker on hover */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); /* Enhance hover effect */
+}

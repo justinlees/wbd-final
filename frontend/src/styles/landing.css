@@ -1,0 +1,243 @@
+/* General Reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.Landing button {
+  border: none;
+  background-color: transparent;
+}
+
+/* Header Styling */
+.Landing #Header {
+  background-color: #ffffff;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Landing #Header h1 {
+  margin: 0 2rem;
+  font-size: 2.3rem;
+  color: #007bff;
+  font-weight: bold;
+  font-family: "Kanit";
+}
+
+.Landing #Header h1 span {
+  color: #0056b3;
+  margin: 0 0.5rem;
+  font-family: "Kanit";
+}
+
+.Landing #Header ul {
+  margin-left: auto;
+  margin-right: 2rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.Landing #Header ul li {
+  margin-left: 1.5rem;
+}
+
+.Landing #Header ul li .login.button {
+  text-decoration: none;
+  background: #007bff;
+  color: #ffffff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: all 0.5s ease;
+}
+
+.Landing #Header ul li .login.button:hover {
+  background: #0056b3;
+}
+
+/* Landing Page Styling */
+.Landing {
+  height: 100%;
+  width: 100%;
+  background-color: #f8f9fa;
+  overflow-x: hidden;
+}
+
+.Landing main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 5%;
+  height: calc(100vh - 5rem);
+  margin-top: 5rem;
+}
+
+.Landing main .mainleft {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Landing main .mainleft h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.Landing main .mainleft h3 {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333333;
+}
+
+.Landing main .mainleft .buttons {
+  margin-top: 1.5rem;
+  display: flex;
+}
+
+.Landing main .mainleft .buttons button a {
+  margin-right: 1rem;
+  border: 1px solid #007bff;
+  display: block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  background-color: transparent;
+  font-size: 1rem;
+  color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.Landing main .mainleft .buttons button a:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.Landing main .mainleft .buttons .client,
+.Landing main .mainleft .buttons .freelancer {
+  text-decoration: none;
+  color: #000000;
+}
+
+.Landing main .mainleft .buttons .client:hover,
+.Landing main .mainleft .buttons .freelancer:hover {
+  color: #ffffff;
+}
+
+.Landing main .mainright {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Landing main .mainright img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.8s;
+}
+
+.Landing main .mainright img:hover {
+  max-width: 450px;
+}
+
+/* Freelance Sections */
+.freelance-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 5%;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  transition: all 0.5s;
+}
+
+.freelance-section:hover {
+  background-color: #efefef;
+  text-shadow: 1px 1px 3px #aaa;
+}
+
+.freelance-section img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.freelance-section .text-right,
+.freelance-section .text-left {
+  width: 50%;
+  padding: 1rem;
+}
+
+.freelance-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.freelance-section p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333333;
+}
+
+.freelance-section .image-left {
+  width: 50%;
+}
+
+.freelance-section.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Responsiveness for Freelance Sections */
+@media (max-width: 768px) {
+  .freelance-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .freelance-section.reverse {
+    flex-direction: column;
+  }
+
+  .freelance-section .image-left,
+  .freelance-section .image-right {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .freelance-section .text-right,
+  .freelance-section .text-left {
+    width: 100%;
+  }
+}
+
+/* Ensure No Hidden or Overlapping Sections */
+.Landing section {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.Landing main,
+.Landing section {
+  position: relative;
+  z-index: 1;
+}

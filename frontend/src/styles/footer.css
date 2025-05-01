@@ -1,0 +1,143 @@
+/* Reset Default Margins and Paddings */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%; /* Ensure the body takes the full height */
+  font-family: Arial, sans-serif; /* Optional: Add a default font */
+  box-sizing: border-box;
+}
+
+/* Body Layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the layout spans the viewport height */
+}
+
+/* Main Content */
+#main-content {
+  flex: 1; /* Pushes footer to the bottom of the page when content is short */
+  padding: 2rem; /* Optional: Add padding for content */
+}
+
+/* Footer Styling */
+#Footer {
+  width: 100%; /* Ensures footer spans the entire width */
+  background-color: #f8f9fa; /* Light grey background for footer */
+  padding: 2rem 0; /* Adds vertical padding */
+  margin-top: auto; /* Pushes footer to the bottom when content is short */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow at the top of footer */
+  text-align: left;
+  position: static; /* Keeps footer in the normal document flow */
+  box-sizing: border-box;
+}
+
+/* Footer Container */
+.footer-container {
+  max-width: 1200px; /* Restrict content width */
+  margin: 0 auto; /* Centers the footer content */
+  display: flex;
+  justify-content: space-between; /* Spreads footer sections evenly */
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
+  gap: 1rem; /* Adds space between sections */
+}
+
+/* Footer Section Styling */
+.footer-section {
+  flex: 1;
+  min-width: 250px; /* Prevents sections from being too narrow */
+  margin: 1rem 0;
+}
+
+.footer-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff; /* Primary blue color for JobDone */
+  margin-bottom: 1rem;
+}
+
+.footer-section h2 span {
+  color: #0056b3; /* Darker blue for emphasis */
+}
+
+.footer-section p {
+  font-size: 1rem;
+  color: #666666; /* Neutral grey for text */
+  margin: 0.5rem 0;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  color: #333333; /* Dark grey */
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #007bff; /* Link color */
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #0056b3; /* Darker blue for hover effect */
+}
+
+/* Social Links */
+.social-links li {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.social-links li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #007bff; /* Social link color */
+  transition: color 0.3s ease;
+}
+
+.social-links li a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #666666; /* Neutral grey for bottom text */
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center;
+  }
+
+  .footer-section {
+    text-align: center; /* Center align content on smaller screens */
+    width: 100%;
+  }
+
+  .social-links li {
+    margin-right: 0.5rem;
+  }
+}

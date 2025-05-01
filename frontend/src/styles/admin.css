@@ -1,0 +1,296 @@
+.adminDashBoard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.adminDashBoard .mainContent {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.adminDashBoard .adminSideBar {
+  width: 15rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin-top: 8rem;
+  left: 0;
+  background-color: rgb(240, 240, 240);
+  z-index: 1;
+}
+
+.adminDashBoard .adminSideBar .top {
+  width: 100%;
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.adminDashBoard .adminSideBar .top h1 {
+  margin: 0;
+  padding: 0;
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.adminDashBoard .adminSideBar .top hr {
+  margin-top: 1rem;
+  width: 90%;
+  height: 2px;
+  background-color: #aaa;
+  border: none;
+}
+
+.adminDashBoard .adminSideBar .adminPic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.adminDashBoard .adminSideBar .middle {
+  width: 100%;
+  height: 100%;
+}
+
+.adminDashBoard .adminSideBar .middle {
+  list-style-type: none;
+}
+
+.adminDashBoard .adminSideBar .middle li {
+  padding: 0.3rem;
+  color: red;
+  font-size: 1.2rem;
+}
+
+.adminDashBoard .adminSideBar .middle li .NavLink {
+  display: block;
+  margin: 0 1rem;
+  -background-color: rgb(240, 240, 240);
+  padding: 0.2rem 0.7rem;
+  color: black;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.adminDashBoard .adminSideBar .middle li .NavLink:hover {
+  background-color: #cdcdcd;
+}
+
+.adminDashBoard .adminSideBar .middle li .ActiveNavLink {
+  display: block;
+  margin: 0 1rem;
+  background-color: #cdcdcd;
+  padding: 0.2rem 0.7rem;
+  color: rgb(233, 60, 75);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.adminDashBoard .adminSideBar .bottom {
+  width: 100%;
+  position: relative;
+}
+
+.adminDashBoard .adminSideBar .bottom button {
+  position: fixed;
+  bottom: 0;
+  width: 15rem;
+  height: 3rem;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.adminDashBoard .adminDetail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15rem;
+  z-index: 0;
+}
+
+.adminDashBoard .adminDetail .topHeader {
+  padding-left: 2rem;
+  margin-top: 4rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  background-color: #cdcdcd;
+  color: white;
+  position: relative;
+}
+
+.adminDashBoard .adminDetail .topHeader h1 {
+  margin: 1rem 0rem;
+  font-size: 3rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.adminDashBoard .adminDetail .topHeader h1 span {
+  color: rgb(233, 60, 75);
+  text-shadow: none;
+}
+
+.adminDashBoard .adminDetail .topHeader h2 {
+  font-size: 2rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.adminDashBoard .adminDetail .briefDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: scroll;
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent {
+  width: 80%;
+  padding: 2rem; /* Increase padding for better spacing */
+  border-radius: 12px; /* Slightly more rounded corners */
+  background-color: rgb(240, 240, 240); /* Light background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 1rem auto; /* Center align and add margin */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem; /* Add spacing below the heading */
+  color: rgb(233, 60, 75); /* Emphasize the username with a color */
+  text-align: center; /* Center-align the username */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent p {
+  font-size: 1.2rem;
+  margin: 0.8rem 0; /* Space between paragraphs */
+  color: #333; /* Darker text for readability */
+}
+
+.adminDashBoard .adminDetail .briefDetails .briefContent p strong {
+  font-weight: bold; /* Emphasize the labels with bold text */
+}
+
+.adminDashBoard .adminDetail .briefDetails .graph {
+  border: 100px solid;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.adminDashBoard .adminDetail .briefDetails .graph .innerGraph {
+  border: 94px solid gold;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.adminDashBoard .adminProfile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15rem;
+  z-index: 0;
+}
+
+.adminDashBoard .adminProfile .topHeader {
+  padding-left: 2rem;
+  margin-top: 4rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  background-color: #cdcdcd;
+  color: white;
+  position: relative;
+}
+
+.adminDashBoard .adminProfile .topHeader h1 {
+  margin: 1rem 0rem;
+  font-size: 3rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.adminDashBoard .adminProfile .topHeader h1 span {
+  color: rgb(233, 60, 75);
+  text-shadow: none;
+}
+
+.adminDashBoard .adminProfile .topHeader h2 {
+  font-size: 2rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.adminDashBoard .adminProfile .briefDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: auto;
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent {
+  width: 80%;
+  padding: 2rem; /* Increase padding for better spacing */
+  border-radius: 12px; /* Rounded corners for a soft look */
+  background-color: rgb(
+    245,
+    245,
+    245
+  ); /* Slightly different background color for profile */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin: 1rem auto; /* Center align and add spacing around content */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent:hover {
+  background-color: #e5e5e5; /* Change background color on hover */
+  transform: translateY(-5px); /* Slight upward movement on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem; /* More spacing below the heading */
+  color: rgb(233, 60, 75); /* Highlight the profile name with this color */
+  text-align: center; /* Center-align the profile name */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent p {
+  font-size: 1.2rem;
+  margin: 0.8rem 0; /* Consistent spacing between paragraphs */
+  color: #333; /* Ensure good contrast for readability */
+}
+
+.adminDashBoard .adminProfile .briefDetails .briefContent p strong {
+  font-weight: bold; /* Bold the labels like "FirstName", "LastName", etc. */
+}

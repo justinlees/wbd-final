@@ -1,0 +1,22 @@
+#Header {
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.139);
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+#Header h1 {
+  margin: 1.5rem;
+}
+
+#Header h1 span {
+  -color: #8b31af;
+  -color: #982ec2;
+  -color: rgb(250, 60, 80);
+  color: rgb(233, 60, 75);
+}

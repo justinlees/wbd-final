@@ -1,0 +1,246 @@
+.managerDashBoard {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.managerDashBoard .mainContent {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.managerDashBoard .managerSideBar {
+  width: 15rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  margin-top: 8rem;
+  left: 0;
+  background-color: whitesmoke;
+  z-index: 1;
+}
+
+.managerDashBoard .managerSideBar .top {
+  width: 100%;
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.managerDashBoard .managerSideBar .top h1 {
+  margin: 0;
+  padding: 0;
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
+.managerDashBoard .managerSideBar .top hr {
+  margin-top: 1rem;
+  width: 90%;
+  height: 2px;
+  background-color: #aaa;
+  border: none;
+}
+
+.managerDashBoard .managerSideBar .managerPic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.managerDashBoard .managerSideBar .middle {
+  width: 100%;
+  height: 100%;
+}
+
+.managerDashBoard .managerSideBar .middle {
+  list-style-type: none;
+}
+
+.managerDashBoard .managerSideBar .middle li {
+  padding: 0.3rem;
+  color: red;
+  font-size: 1.2rem;
+}
+
+.managerDashBoard .managerSideBar .middle li .NavLink {
+  display: block;
+  margin: 0 1rem;
+  -background-color: #cdcdcd;
+  padding: 0.2rem 0.7rem;
+  color: black;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.managerDashBoard .managerSideBar .middle li .NavLink:hover {
+  background-color: #cdcdcd;
+}
+
+.managerDashBoard .managerSideBar .middle li .ActiveNavLink {
+  display: block;
+  margin: 0 1rem;
+  background-color: #cdcdcd;
+  padding: 0.2rem 0.7rem;
+  color: rgb(233, 60, 75);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.managerDashBoard .managerSideBar .bottom {
+  width: 100%;
+  position: relative;
+}
+
+.managerDashBoard .managerSideBar .bottom button {
+  position: fixed;
+  bottom: 0;
+  width: 15rem;
+  height: 3rem;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.managerDashBoard .mainContent .managerDetail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15rem;
+  z-index: 0;
+}
+
+.managerDashBoard .mainContent .managerDetail .topHeader {
+  padding-left: 2rem;
+  margin-top: 4rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  background-color: #cdcdcd;
+  color: white;
+  position: relative;
+}
+
+.managerDashBoard .mainContent .managerDetail .topHeader h1 {
+  margin: 1rem 0rem;
+  font-size: 3rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.managerDashBoard .mainContent .managerDetail .topHeader h1 span {
+  color: rgb(233, 60, 75);
+  text-shadow: none;
+}
+
+.managerDashBoard .mainContent .managerDetail .topHeader h2 {
+  font-size: 2rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.managerDashBoard .mainContent .managerDetail .briefDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: auto;
+}
+
+.managerDashBoard .mainContent .managerDetail .briefDetails .briefContent {
+  width: 80%;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #cdcdcd;
+}
+.managerDashBoard .mainContent .managerDetail .briefDetails .graph {
+  border: 100px solid;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.managerDashBoard .mainContent .managerDetail .briefDetails .graph .innerGraph {
+  border: 94px solid gold;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.managerDashBoard .mainContent .managerProfile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15rem;
+  z-index: 0;
+}
+
+.managerDashBoard .topHeader {
+  padding-left: 2rem;
+  margin-top: 4rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  background-color: #cdcdcd;
+  color: white;
+  position: relative;
+}
+
+.managerDashBoard .topHeader h1 {
+  -margin: 1rem 0rem;
+  font-size: 3rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.managerDashBoard .topHeader h1 span {
+  color: rgb(233, 60, 75);
+  text-shadow: none;
+}
+
+.managerDashBoard .topHeader h2 {
+  font-size: 2rem;
+  text-shadow: 3px 2px 6px #333;
+}
+
+.managerDashBoard .briefDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: auto;
+}
+
+.managerDashBoard .briefDetails .briefContent {
+  width: 80%;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #cdcdcd;
+}
+
+.managerDashBoard .mainContent .managerEarnings {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15rem;
+  z-index: 0;
+}
