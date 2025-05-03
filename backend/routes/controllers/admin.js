@@ -15,22 +15,62 @@ const adminAuth = (req, res) => {
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
 
-    const admin = await collectionA.findOne({ UserName: decoded.data });
-    const allClients = await collectionC.find();
-    res.send({ admin, allClients });
+    try {
+      const admin = await collectionA
+        .findOne({ UserName: decoded.data })
+        .lean();
+      const allClients = await collectionC
+        .find()
+        .select("UserName Email MobileNo")
+        .lean();
+      res.send({ admin, allClients });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Error in loading data or server error", error });
+    }
   });
 };
 
 const adminShowLancers = async (req, res) => {
-  const allLancers = await collectionF.find();
-  res.send(allLancers);
+  try {
+    const allLancers = await collectionF
+      .find()
+      .select("UserName Email MobileNo")
+      .lean();
+    res.send(allLancers);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Coudn't fetch Freelancer details", error });
+  }
 };
 
 const adminDeleteLancer = async (req, res) => {
-  const lancerDetails = await collectionF.deleteOne({
-    UserName: req.body.lancerId,
-  });
-  res.send("deleted");
+  try {
+    const lancerDetails = await collectionF.deleteOne({
+      UserName: req.body.lancerId,
+    });
+    res.send("deleted");
+  } catch (error) {
+    res.status(500).json({ message: "Unable to delete", error });
+  }
 };
 
-module.exports = { adminAuth, adminShowLancers, adminDeleteLancer };
+const adminDeleteClient = async (req, res) => {
+  try {
+    const clientDetails = await collectionC.deleteOne({
+      UserName: req.body.clientId,
+    });
+    res.send("deleted");
+  } catch (error) {
+    res.status(500).json({ message: "Unable to delete", error });
+  }
+};
+
+module.exports = {
+  adminAuth,
+  adminShowLancers,
+  adminDeleteLancer,
+  adminDeleteClient,
+};

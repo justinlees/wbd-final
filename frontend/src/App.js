@@ -53,6 +53,7 @@ import { Action as ProfileAction } from "./components/Freelancer/SideBar";
 /* Admin Imports */
 import Admin, { Loader as ALoader } from "./Layouts/Admin/admin";
 import AdminDashBoard, {
+  Action as ClientsDeleteAction,
   Loader as ClientsLoader,
 } from "./components/Admin/AdminDashBoard";
 import Profit from "./components/Admin/Profit";
@@ -153,6 +154,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  /* Freelancer routes */
   {
     path: "/freelancer/:fUser",
     element: <FreeLance />,
@@ -223,6 +225,7 @@ const router = createBrowserRouter([
     ],
     action: ProfileAction,
   },
+  /* Admin routes */
   {
     path: "/admin/:aUser",
     element: <Admin />,
@@ -231,6 +234,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AdminDashBoard />,
+        action: ClientsDeleteAction,
       },
       {
         path: "profit",
@@ -252,6 +256,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  /* Manager Routes */
   {
     path: "/manager/:mUser",
     element: <Manager />,

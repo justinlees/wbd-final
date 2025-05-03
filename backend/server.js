@@ -170,12 +170,12 @@ app.use("/admin", adminRouter);
 
 app.post("/login", async (req, res) => {
   const { UserName, Password } = req.body;
-  const freelancer = await collectionF.findOne({ UserName: UserName });
-  const client = await collectionC.findOne({ UserName: UserName });
-  const admin = await collectionA.findOne({ UserName: UserName });
-  const manager = await collectionM.findOne({ UserName: UserName });
+  const freelancer = await collectionF.findOne({ UserName: UserName }).lean();
+  const client = await collectionC.findOne({ UserName: UserName }).lean();
+  const admin = await collectionA.findOne({ UserName: UserName }).lean();
+  //const manager = await collectionM.findOne({ UserName: UserName }).lean();
 
-  if (!freelancer && !admin && !manager && !client) {
+  if (!freelancer && !admin && !client) {
     res.send("NoUser");
   } else if (freelancer) {
     if (!(await bcrypt.compare(Password, freelancer.Password))) {
@@ -217,19 +217,6 @@ app.post("/login", async (req, res) => {
       );
       res.send({ token, client });
     }
-  } else if (manager) {
-    if (!(await bcrypt.compare(Password, manager.Password))) {
-      res.send("check");
-    } else {
-      const token = jwt.sign(
-        {
-          data: manager.UserName,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "1hr" }
-      );
-      res.send({ token, manager });
-    }
   }
 });
 
@@ -237,12 +224,12 @@ app.post("/login", async (req, res) => {
 
 app.post("/signUp/freelancer", async (req, res) => {
   const { UserName } = req.body;
-  const FuserCheck = await collectionF.findOne({ UserName: UserName });
-  const AuserCheck = await collectionA.findOne({ UserName: UserName });
-  const MuserCheck = await collectionM.findOne({ UserName: UserName });
-  const CuserCheck = await collectionC.findOne({ UserName: UserName });
+  const FuserCheck = await collectionF.findOne({ UserName: UserName }).lean();
+  const AuserCheck = await collectionA.findOne({ UserName: UserName }).lean();
+  //const MuserCheck = await collectionM.findOne({ UserName: UserName }).lean();
+  const CuserCheck = await collectionC.findOne({ UserName: UserName }).lean();
 
-  if (!FuserCheck && !AuserCheck && !MuserCheck && !CuserCheck) {
+  if (!FuserCheck && !AuserCheck && !CuserCheck) {
     req.body.Password = await bcrypt.hash(req.body.Password, 10);
     const data = await collectionF.create(req.body);
     res.send(data.UserName);
@@ -256,12 +243,12 @@ app.post("/signUp/freelancer", async (req, res) => {
 
 app.post("/signUp/user", async (req, res) => {
   const { UserName } = req.body;
-  const FuserCheck = await collectionF.findOne({ UserName: UserName });
-  const AuserCheck = await collectionA.findOne({ UserName: UserName });
-  const MuserCheck = await collectionM.findOne({ UserName: UserName });
-  const CuserCheck = await collectionC.findOne({ UserName: UserName });
+  const FuserCheck = await collectionF.findOne({ UserName: UserName }).lean();
+  const AuserCheck = await collectionA.findOne({ UserName: UserName }).lean();
+  //const MuserCheck = await collectionM.findOne({ UserName: UserName }).lean();
+  const CuserCheck = await collectionC.findOne({ UserName: UserName }).lean();
 
-  if (!FuserCheck && !AuserCheck && !MuserCheck && !CuserCheck) {
+  if (!FuserCheck && !AuserCheck && !CuserCheck) {
     req.body.Password = await bcrypt.hash(req.body.Password, 10);
     const data = await collectionC.create(req.body);
     res.send(data.UserName);
@@ -272,25 +259,25 @@ app.post("/signUp/user", async (req, res) => {
 });
 
 /* Not there */
-app.post("/admin/:aUser/managersInfo", async (req, res) => {
-  const { UserName } = req.body;
-  const FuserCheck = await collectionF.findOne({ UserName: UserName });
-  const AuserCheck = await collectionA.findOne({ UserName: UserName });
-  const MuserCheck = await collectionM.findOne({ UserName: UserName });
-  const CuserCheck = await collectionC.findOne({ UserName: UserName });
+// app.post("/admin/:aUser/managersInfo", async (req, res) => {
+//   const { UserName } = req.body;
+//   const FuserCheck = await collectionF.findOne({ UserName: UserName });
+//   const AuserCheck = await collectionA.findOne({ UserName: UserName });
+//   const MuserCheck = await collectionM.findOne({ UserName: UserName });
+//   const CuserCheck = await collectionC.findOne({ UserName: UserName });
 
-  console.log("234");
+//   console.log("234");
 
-  if (!FuserCheck && !AuserCheck && !MuserCheck && !CuserCheck) {
-    req.body.Password = await bcrypt.hash(req.body.Password, 10);
-    const data = await collectionM.create(req.body);
-    console.log("managerCreated");
-    res.send(data.UserName);
-  } else {
-    const set = false;
-    res.send(set);
-  }
-});
+//   if (!FuserCheck && !AuserCheck && !MuserCheck && !CuserCheck) {
+//     req.body.Password = await bcrypt.hash(req.body.Password, 10);
+//     const data = await collectionM.create(req.body);
+//     console.log("managerCreated");
+//     res.send(data.UserName);
+//   } else {
+//     const set = false;
+//     res.send(set);
+//   }
+// });
 /*
 // app.post("/home/:userId", async (req, res) => {
 //   const { searchSkill } = req.body;

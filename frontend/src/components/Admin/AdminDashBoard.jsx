@@ -1,5 +1,6 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
 
 export default function AdminDashBoard() {
   const allClients = useOutletContext();
@@ -32,6 +33,33 @@ export default function AdminDashBoard() {
               <p>User Id:{item.UserName}</p>
               <p>Email:{item.Email}</p>
               <p>Mobile No:{item.MobileNo}</p>
+              <Form method="post">
+                <div className="display1">
+                  <input
+                    type="text"
+                    name="clientId"
+                    value={item.UserName}
+                    style={{ display: "none" }}
+                  />
+                </div>
+                <fieldset style={{ border: "none" }}>
+                  <button
+                    type="submit"
+                    style={{
+                      width: "6rem",
+                      lineHeight: "2rem",
+                      backgroundColor: "tomato",
+                      margin: "1rem",
+                      border: "1px solid black",
+                      borderRadius: "8px",
+                      boxShadow: "1px 1px 6px #333",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </fieldset>
+              </Form>
             </div>
           ))
         ) : (
@@ -40,6 +68,19 @@ export default function AdminDashBoard() {
       </div>
     </div>
   );
+}
+
+export async function Action({ request, params }) {
+  const formData = Object.fromEntries(await request.formData());
+
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URI}/admin/${params.aUser}`,
+    formData
+  );
+  console.log(response.data);
+  if (response.data) {
+    return "";
+  }
 }
 
 // export async function Loader({ request, params }) {
