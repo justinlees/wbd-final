@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/header";
 import FsideBar from "../../components/Freelancer/SideBar";
-import { Outlet, useLoaderData, redirect } from "react-router-dom";
+import { Outlet, useLoaderData, Navigate, redirect } from "react-router-dom";
 import "../../styles/freelancer.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -20,7 +20,7 @@ export default function FreeLanceDashBoard() {
           </div>
         </>
       ) : (
-        <h2>Loading.....</h2>
+        <Navigate to="/login" replace={true} />
       )}
     </div>
   );
@@ -28,33 +28,23 @@ export default function FreeLanceDashBoard() {
 
 export async function Loader({ params }) {
   const token = localStorage.getItem("token");
-
-  // Redirect to landing page if token is missing
-  if (!token) {
-    return redirect(`/`);
+  const decodedToken = jwtDecode(token);
+  if (!token || decodedToken.data !== params.fUser) {
+    return redirect("/");
   }
 
   try {
-    const decodedToken = jwtDecode(token);
-
-    // Redirect if the token's user data does not match the route parameter
-    if (decodedToken.data !== params.fUser) {
-      return redirect(`/`);
-    }
-
-    // Fetch freelancer data
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
         },
       }
     );
 
     return response.data;
   } catch (error) {
-    // Redirect to landing page on any error (e.g., invalid token, network error)
-    return redirect(`/`);
+    return redirect("/");
   }
 }
