@@ -35,6 +35,13 @@ app.use(express.static("/public"));
 
 /* third party middleware */
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
+  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type"); // Allow specific headers
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow specific methods
+  next(); // Pass control to the next middleware
+});
+
 app.use(
   cors({
     origin: "https://freelancing-frontend-lake.vercel.app",
