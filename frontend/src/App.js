@@ -47,6 +47,7 @@ import FMessages, {
   Action as MessageAction,
 } from "./components/Freelancer/FMessages";
 import FMessageDisplay from "./components/Freelancer/FMessageDisplay";
+import FRecent from "./components/Freelancer/FRecent";
 
 import { Action as ProfileAction } from "./components/Freelancer/SideBar";
 
@@ -61,6 +62,8 @@ import Utilities, {
   Action as MAction,
   Loader as UtilityLoader,
 } from "./components/Admin/ManagerInfo";
+
+import ErrorPage from "./components/ErrorPage";
 
 const router = createBrowserRouter([
   {
