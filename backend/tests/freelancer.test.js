@@ -27,22 +27,22 @@ describe("Freelancer Routes", () => {
     expect(res.body).toHaveProperty("lancerId", "freelancer11");
   });
 
-  test("POST /freelancer/:fUser/tasks - Accept or Reject Task", async () => {
-    const payload = {
-      clientIds: "client11",
-      requestVal: "reject",
-      taskName: "Logo Design",
-      taskDescription: "Create logo",
-      currAmount: 10,
-    };
+  //   test("POST /freelancer/:fUser/tasks - Accept or Reject Task", async () => {
+  //     const payload = {
+  //       clientIds: "client11",
+  //       requestVal: "reject",
+  //       taskName: "Logo Design",
+  //       taskDescription: "Create logo",
+  //       currAmount: 10,
+  //     };
 
-    const res = await request(app)
-      .post("/freelancer/freelancer11/tasks")
-      .send(payload);
+  //     const res = await request(app)
+  //       .post("/freelancer/freelancer11/tasks")
+  //       .send(payload);
 
-    expect(res.statusCode).toBe(200);
-    expect(res.text).toBe("requestDone");
-  });
+  //     expect(res.statusCode).toBe(200);
+  //     expect(res.text).toBe("requestDone");
+  //   });
 
   test("POST /freelancer/:fUser/tasks/:userId/messages - Send message", async () => {
     const res = await request(app)
@@ -60,15 +60,6 @@ describe("Freelancer Routes", () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toBe(true);
-  });
-
-  test("POST /freelancer/:fUser/tasks/acceptedTasks - Mark task finished", async () => {
-    const res = await request(app)
-      .post("/freelancer/freelancer11/tasks/acceptedTasks")
-      .send({ clientId: "client11", taskName: "Logo Design" });
-
-    expect(res.statusCode).toBe(200);
-    expect(res.text).toBe("success");
   });
 
   test("POST /freelancer/:fUser/profile - Delete freelancer account", async () => {

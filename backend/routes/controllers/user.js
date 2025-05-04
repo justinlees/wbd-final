@@ -20,7 +20,7 @@ const userAuth = async (req, res) => {
     try {
       const user = await collectionC.findOne({ UserName: decoded.data }).lean();
       const freelancer = await collectionF.find().lean();
-      res.send({ user, freelancer });
+      res.status(200).send({ user, freelancer });
     } catch (error) {
       res.status(500).json({ message: "Server Error", error });
     }
@@ -35,7 +35,7 @@ const showUserTasks = async (req, res) => {
       })
       .lean();
 
-    res.send(requests);
+    res.status(200).send(requests);
   } catch (error) {
     res.status(500).json({ message: "Can't show Requests", error });
   }
@@ -47,7 +47,10 @@ const showUserMsg = async (req, res) => {
       lancerId: req.params.fUser,
       clientId: req.params.userId,
     });
-    res.send(msgUpdate);
+    if (!messages) {
+      return res.status(500).json({ message: "Messages not found" });
+    }
+    res.status(200).send(msgUpdate);
   } catch (error) {
     res.status(500).json({ message: "Can't show messages", error });
   }
@@ -66,9 +69,9 @@ const searchLancer = async (req, res) => {
     if (!searchLancerSkill && !searchLancerId) {
       res.send("");
     } else if (searchLancerSkill) {
-      res.send(searchLancerSkill);
+      res.status(200).send(searchLancerSkill);
     } else {
-      res.send(searchLancerId);
+      res.status(200).send(searchLancerId);
     }
   } catch (error) {
     res.status(500).json({ message: "Error occured in searching", error });
@@ -186,7 +189,10 @@ const userMsg = async (req, res) => {
         },
       }
     );
-    res.send(msgUpdate);
+    if (!msgUpdate) {
+      return res.status(500).json({ message: "Message not found" });
+    }
+    res.status(200).send(msgUpdate);
   } catch (error) {
     res.status(500).json({ message: "Error occured", error });
   }

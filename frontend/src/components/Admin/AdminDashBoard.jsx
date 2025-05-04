@@ -1,5 +1,5 @@
 import React from "react";
-import { useOutletContext, Form } from "react-router-dom";
+import { useOutletContext, Form, redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function AdminDashBoard() {
@@ -79,7 +79,8 @@ export async function Action({ request, params }) {
   );
   console.log(response.data);
   if (response.data) {
-    return "";
+    window.location.reload();
+    return `admin/${params.aUser}`;
   }
 }
 

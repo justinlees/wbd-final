@@ -24,7 +24,7 @@ const lancerAuth = async (req, res) => {
         .findOne({ UserName: decoded.data })
         .lean();
       console.log("Token Created,Logged in");
-      res.send(freelancer);
+      res.status(200).send(freelancer);
     } catch (error) {
       res.status(500).json({ message: "Server error", error });
     }
@@ -41,7 +41,7 @@ const showLancerMsg = async (req, res) => {
       })
       .lean();
     console.log("Msg Display");
-    res.send(msgUpdate);
+    res.status(200).send(msgUpdate);
   } catch (error) {
     res.status(500).json({ message: "Can't load messages", error });
   }
@@ -243,7 +243,7 @@ const lancerMsg = async (req, res) => {
       }
     );
     console.log("msg sent");
-    res.send(msgUpdate);
+    res.status(200).send(msgUpdate);
   } catch (error) {
     res.status(500).json({ message: "message can't send", error });
   }
@@ -268,7 +268,7 @@ const lancerEarnings = async (req, res) => {
       { UserName: "varunpuli11" },
       { $inc: { currAmount: 2 } }
     );
-    res.send(true);
+    res.status(200).send(true);
   }
 };
 
@@ -278,7 +278,7 @@ const lancerAccountDelete = async (req, res) => {
     const deleteAccount = await collectionF.deleteMany({
       UserName: req.params.fUser,
     });
-    res.send("success");
+    res.status(200).send("success");
   } catch (error) {
     res.status(500).json({ message: "Error in Deletion", error });
   }

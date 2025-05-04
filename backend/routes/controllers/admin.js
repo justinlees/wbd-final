@@ -36,7 +36,7 @@ const adminShowLancers = async (req, res) => {
   try {
     const allLancers = await collectionF
       .find()
-      .select("UserName Email MobileNo")
+      .select("UserName Email MobileNo Skill")
       .lean();
     res.status(200).send(allLancers);
   } catch (error) {

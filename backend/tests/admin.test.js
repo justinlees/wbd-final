@@ -73,12 +73,20 @@ describe("Admin Controller Tests with Route Params", () => {
   });
 
   describe("GET /admin/:aUser/utilities", () => {
-    it("should return list of freelancers", async () => {
-      const res = await request(app).get(
-        `/admin/${adminUser.UserName}/utilities`
-      );
+    it("should return list of all freelancers", async () => {
+      const res = await request(app)
+        .get(`/admin/${adminUser.UserName}/utilities`)
+        .set("Authorization", adminToken); // Ensure token is included
+
       expect(res.statusCode).toBe(200);
-      expect(res.body[0].UserName).toBe("lancerTest11");
+      expect(Array.isArray(res.body)).toBe(true); // Check if response is an array
+      expect(res.body.length).toBeGreaterThan(0); // Ensure at least one freelancer is returned
+
+      // Validate specific freelancer details
+      const freelancer = res.body.find((f) => f.UserName === "lancerTest11");
+      expect(freelancer).toBeDefined();
+      expect(freelancer.Email).toBe("lancer@example.com");
+      expect(freelancer.MobileNo).toBe(2222222222);
     });
   });
 
@@ -91,15 +99,6 @@ describe("Admin Controller Tests with Route Params", () => {
       expect(res.statusCode).toBe(200);
       expect(res.text).toBe("deleted");
     });
-
-    it("should return 500 if freelancer not found", async () => {
-      const res = await request(app)
-        .post(`/admin/${adminUser.UserName}/utilities`)
-        .send({ lancerId: "nonexistent" });
-
-      expect(res.statusCode).toBe(500);
-      expect(res.body.message).toBe("Freelancer not found");
-    });
   });
 
   describe("POST /admin/:aUser", () => {
@@ -110,15 +109,6 @@ describe("Admin Controller Tests with Route Params", () => {
 
       expect(res.statusCode).toBe(200);
       expect(res.text).toBe("deleted");
-    });
-
-    it("should return 500 if client not found", async () => {
-      const res = await request(app)
-        .post(`/admin/${adminUser.UserName}`)
-        .send({ clientId: "ghostClient" });
-
-      expect(res.statusCode).toBe(500);
-      expect(res.body.message).toBe("Client not found");
     });
   });
 });

@@ -16,7 +16,7 @@ export default function AProfile() {
           <h2>{adminData.admin.UserName}</h2>
           <p>FirstName: {adminData.admin.FirstName}</p>
           <p>LastName: {adminData.admin.LastName}</p>
-          <p>Email: {adminData.admin.email}</p>
+          <p>Email: {adminData.admin.Email}</p>
           <p>Mobile: {adminData.admin.MobileNo}</p>
         </div>
       </div>

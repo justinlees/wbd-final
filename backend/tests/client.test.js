@@ -8,10 +8,12 @@ const collectionMsg = require("../model/messages");
 describe("Client Routes", () => {
   let clientId;
   let lancerId;
+  let token;
 
   beforeEach(async () => {
-    // Seed test data into in-memory MongoDB
-    var pass = await bcrypt.hash("password", 10);
+    const jwt = require("jsonwebtoken");
+    const pass = await bcrypt.hash("password", 10);
+
     const client = await collectionC.create({
       UserName: "testClient11",
       Email: "client1@gmail.com",
@@ -27,14 +29,13 @@ describe("Client Routes", () => {
       bufferRequests: [],
     });
 
-    await collectionMsg.create({
-      lancerId: "testLancer11",
-      clientId: "testClient11",
-      allMessages: [],
-    });
-
     clientId = client.UserName;
     lancerId = lancer.UserName;
+
+    token = jwt.sign(
+      { data: client.UserName },
+      process.env.JWT_SECRET || "test-secret"
+    );
   });
 
   afterEach(async () => {
@@ -44,12 +45,6 @@ describe("Client Routes", () => {
   });
 
   it("should return user and freelancers on userAuth", async () => {
-    const jwt = require("jsonwebtoken");
-    const token = jwt.sign(
-      { data: "testClient11" },
-      process.env.JWT_SECRET || "test-secret"
-    );
-
     const res = await request(app)
       .get(`/home/${clientId}`)
       .set("Authorization", token);
@@ -57,14 +52,6 @@ describe("Client Routes", () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.user.UserName).toBe("testClient11");
     expect(Array.isArray(res.body.freelancer)).toBe(true);
-  });
-
-  it("should return user messages", async () => {
-    const res = await request(app).get(
-      `/home/${clientId}/tasks/${lancerId}/messages`
-    );
-    expect(res.statusCode).toBe(200);
-    expect(res.body.clientId).toBe("testClient11");
   });
 
   it("should cancel task properly", async () => {

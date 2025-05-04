@@ -18,6 +18,7 @@ export default function ManagersInfo() {
             <h3>UserName: {item.UserName}</h3>
             <p>Email: {item.Email}</p>
             <p>Mobile: {item.MobileNo}</p>
+            <p>Skill: {item.Skill}</p>
             <Form method="post">
               <div className="display1">
                 <input
