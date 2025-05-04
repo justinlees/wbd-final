@@ -7,29 +7,29 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET || "testsecret"; // fallback for test
 
 // Replace with actual user values from DB or use mocks
-const fakeToken = jwt.sign({ data: "freelancer1" }, JWT_SECRET);
+const fakeToken = jwt.sign({ data: "freelancer11" }, JWT_SECRET);
 const headers = { Authorization: fakeToken };
 
 describe("Freelancer Routes", () => {
   test("GET /freelancer/:fUser - Authenticated freelancer info", async () => {
-    const res = await request(app).get("/freelancer/freelancer1").set(headers);
+    const res = await request(app).get("/freelancer/freelancer11").set(headers);
 
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("UserName", "freelancer1");
+    expect(res.body).toHaveProperty("UserName", "freelancer11");
   });
 
   test("GET /freelancer/:fUser/tasks/:userId/messages - Fetch messages", async () => {
     const res = await request(app).get(
-      "/freelancer/freelancer1/tasks/client1/messages"
+      "/freelancer/freelancer11/tasks/client11/messages"
     );
 
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("lancerId", "freelancer1");
+    expect(res.body).toHaveProperty("lancerId", "freelancer11");
   });
 
   test("POST /freelancer/:fUser/tasks - Accept or Reject Task", async () => {
     const payload = {
-      clientIds: "client1",
+      clientIds: "client11",
       requestVal: "reject",
       taskName: "Logo Design",
       taskDescription: "Create logo",
@@ -37,7 +37,7 @@ describe("Freelancer Routes", () => {
     };
 
     const res = await request(app)
-      .post("/freelancer/freelancer1/tasks")
+      .post("/freelancer/freelancer11/tasks")
       .send(payload);
 
     expect(res.statusCode).toBe(200);
@@ -46,16 +46,16 @@ describe("Freelancer Routes", () => {
 
   test("POST /freelancer/:fUser/tasks/:userId/messages - Send message", async () => {
     const res = await request(app)
-      .post("/freelancer/freelancer1/tasks/client1/messages")
+      .post("/freelancer/freelancer11/tasks/client11/messages")
       .send({ msgContent: "Hello client" });
 
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("lancerId", "freelancer1");
+    expect(res.body).toHaveProperty("lancerId", "freelancer11");
   });
 
   test("POST /freelancer/:fUser/earnings - Update earnings", async () => {
     const res = await request(app)
-      .post("/freelancer/freelancer1/earnings")
+      .post("/freelancer/freelancer11/earnings")
       .send({ amount: 20 });
 
     expect(res.statusCode).toBe(200);
@@ -64,15 +64,15 @@ describe("Freelancer Routes", () => {
 
   test("POST /freelancer/:fUser/tasks/acceptedTasks - Mark task finished", async () => {
     const res = await request(app)
-      .post("/freelancer/freelancer1/tasks/acceptedTasks")
-      .send({ clientId: "client1", taskName: "Logo Design" });
+      .post("/freelancer/freelancer11/tasks/acceptedTasks")
+      .send({ clientId: "client11", taskName: "Logo Design" });
 
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe("success");
   });
 
   test("POST /freelancer/:fUser/profile - Delete freelancer account", async () => {
-    const res = await request(app).post("/freelancer/freelancer1/profile");
+    const res = await request(app).post("/freelancer/freelancer11/profile");
 
     expect(res.statusCode).toBe(200);
     expect(res.text).toBe("success");

@@ -1,19 +1,21 @@
 const request = require("supertest");
 const jwt = require("jsonwebtoken");
-const app = require("../../server"); // Adjust path if needed
-
-const collectionF = require("../../model/Fmodel");
-const collectionC = require("../../model/Cmodel");
-const collectionA = require("../../model/Amodel");
+const app = require("../server"); // Adjust path if needed
+const bcrypt = require("bcrypt");
+const collectionF = require("../model/Fmodel");
+const collectionC = require("../model/Cmodel");
+const collectionA = require("../model/Amodel");
 
 describe("Admin Controller Tests with Route Params", () => {
   let adminToken;
   let adminUser;
 
   beforeEach(async () => {
+    var pass = await bcrypt.hash("password", 10);
     adminUser = await collectionA.create({
-      UserName: "adminTest",
+      UserName: "adminTest11",
       Email: "admin@example.com",
+      Password: pass,
       MobileNo: "1234567890",
     });
 
@@ -23,14 +25,16 @@ describe("Admin Controller Tests with Route Params", () => {
     );
 
     await collectionC.create({
-      UserName: "clientTest",
+      UserName: "clientTest11",
       Email: "client@example.com",
+      Password: pass,
       MobileNo: "1111111111",
     });
 
     await collectionF.create({
-      UserName: "lancerTest",
+      UserName: "lancerTest11",
       Email: "lancer@example.com",
+      Password: pass,
       MobileNo: "2222222222",
     });
   });
@@ -48,7 +52,7 @@ describe("Admin Controller Tests with Route Params", () => {
         .set("Authorization", adminToken);
 
       expect(res.statusCode).toBe(200);
-      expect(res.body.admin.UserName).toBe("adminTest");
+      expect(res.body.admin.UserName).toBe("adminTest11");
       expect(Array.isArray(res.body.allClients)).toBe(true);
     });
 
@@ -74,7 +78,7 @@ describe("Admin Controller Tests with Route Params", () => {
         `/admin/${adminUser.UserName}/utilities`
       );
       expect(res.statusCode).toBe(200);
-      expect(res.body[0].UserName).toBe("lancerTest");
+      expect(res.body[0].UserName).toBe("lancerTest11");
     });
   });
 
@@ -82,7 +86,7 @@ describe("Admin Controller Tests with Route Params", () => {
     it("should delete a freelancer", async () => {
       const res = await request(app)
         .post(`/admin/${adminUser.UserName}/utilities`)
-        .send({ lancerId: "lancerTest" });
+        .send({ lancerId: "lancerTest11" });
 
       expect(res.statusCode).toBe(200);
       expect(res.text).toBe("deleted");
@@ -102,7 +106,7 @@ describe("Admin Controller Tests with Route Params", () => {
     it("should delete a client", async () => {
       const res = await request(app)
         .post(`/admin/${adminUser.UserName}`)
-        .send({ clientId: "clientTest" });
+        .send({ clientId: "clientTest11" });
 
       expect(res.statusCode).toBe(200);
       expect(res.text).toBe("deleted");

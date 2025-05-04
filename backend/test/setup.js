@@ -4,6 +4,7 @@ const collectionF = require("../model/Fmodel");
 const collectionC = require("../model/Cmodel");
 const collectionMsg = require("../model/messages");
 const collectionA = require("../model/Amodel");
+const bcrypt = require("bcrypt");
 
 let mongo;
 
@@ -25,8 +26,11 @@ beforeEach(async () => {
   }
 
   // Seed data
+  var pass = await bcrypt.hash("password", 10);
   await collectionF.create({
-    UserName: "freelancer1",
+    UserName: "freelancer11",
+    Email: "freelancer11@gmail.com",
+    Password: pass,
     currAmount: 100,
     bufferRequests: [],
     tasksAssigned: [],
@@ -34,7 +38,9 @@ beforeEach(async () => {
   });
 
   await collectionC.create({
-    UserName: "client1",
+    UserName: "client11",
+    Email: "client11@gmail.com",
+    Password: pass,
     currAmount: 50,
     bufferRequests: [],
     tasksRequested: [],
@@ -42,13 +48,15 @@ beforeEach(async () => {
   });
 
   await collectionMsg.create({
-    lancerId: "freelancer1",
-    clientId: "client1",
+    lancerId: "freelancer11",
+    clientId: "client11",
     allMessages: [],
   });
 
   await collectionA.create({
     UserName: "varunpuli11",
+    Email: "varunpuli11@gmail.com",
+    Password: pass,
     currAmount: 1000,
   });
 });
