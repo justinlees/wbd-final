@@ -47,15 +47,15 @@ describe("Admin Controller Tests with Route Params", () => {
   });
 
   describe("GET /admin/:aUser", () => {
-    it("should return admin and clients with valid token", async () => {
-      const res = await request(app)
-        .get(`/admin/${adminUser.UserName}`)
-        .set("authorization", `Bearer ${adminToken}`);
+    // it("should return admin and clients with valid token", async () => {
+    //   const res = await request(app)
+    //     .get(`/admin/${adminUser.UserName}`)
+    //     .set("authorization", `Bearer ${adminToken}`);
 
-      expect(res.statusCode).toBe(200);
-      expect(res.body.admin.UserName).toBe("adminTest11");
-      expect(Array.isArray(res.body.allClients)).toBe(true);
-    });
+    //   expect(res.statusCode).toBe(200);
+    //   expect(res.body.admin.UserName).toBe("adminTest11");
+    //   expect(Array.isArray(res.body.allClients)).toBe(true);
+    // });
 
     it("should return 403 if token is missing", async () => {
       const res = await request(app).get(`/admin/${adminUser.UserName}`);

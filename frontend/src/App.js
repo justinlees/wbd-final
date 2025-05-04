@@ -62,14 +62,6 @@ import Utilities, {
   Loader as UtilityLoader,
 } from "./components/Admin/ManagerInfo";
 
-/* Manager Imports */
-import Manager, { Loader as Mloader } from "./Layouts/Manager/manager";
-import ManagerDashBoard from "./components/Manager/ManagerDashBoard";
-import MProfile from "./components/Manager/ManagerProfile";
-import MEarnings from "./components/Manager/MEarnings";
-import FRecent from "./components/Freelancer/FRecent";
-import ErrorPage from "./components/ErrorPage";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -255,26 +247,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  /* Manager Routes */
-  {
-    path: "/manager/:mUser",
-    element: <Manager />,
-    loader: Mloader,
-    children: [
-      {
-        index: true,
-        element: <ManagerDashBoard />,
-      },
-      {
-        path: "profile",
-        element: <MProfile />,
-      },
-      {
-        path: "earnings",
-        element: <MEarnings />,
-      },
-    ],
-  },
+
   {
     path: "*",
     element: <ErrorPage />,

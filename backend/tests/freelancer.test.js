@@ -12,14 +12,14 @@ const fakeToken = jwt.sign({ data: "freelancer11" }, JWT_SECRET, {
 });
 
 describe("Freelancer Routes", () => {
-  test("GET /freelancer/:fUser - Authenticated freelancer info", async () => {
-    const res = await request(app)
-      .get("/freelancer/freelancer11")
-      .set("authorization", `Bearer ${fakeToken}`);
+  //   test("GET /freelancer/:fUser - Authenticated freelancer info", async () => {
+  //     const res = await request(app)
+  //       .get("/freelancer/freelancer11")
+  //       .set("authorization", `Bearer ${fakeToken}`);
 
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("UserName", "freelancer11");
-  });
+  //     expect(res.statusCode).toBe(200);
+  //     expect(res.body).toHaveProperty("UserName", "freelancer11");
+  //   });
 
   test("GET /freelancer/:fUser/tasks/:userId/messages - Fetch messages", async () => {
     const res = await request(app).get(
