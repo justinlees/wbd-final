@@ -39,6 +39,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+});
+
 const mongodbConnect = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI);
