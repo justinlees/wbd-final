@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET || "test-secret"; // fallback for test
 
 // Replace with actual user values from DB or use mocks
-const fakeToken = jwt.sign({ data: "freelancer11" }, JWT_SECRET);
+const fakeToken = jwt.sign({ data: "freelancer11" }, JWT_SECRET, {
+  expiresIn: "1hr",
+});
 
 describe("Freelancer Routes", () => {
   test("GET /freelancer/:fUser - Authenticated freelancer info", async () => {

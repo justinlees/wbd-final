@@ -34,7 +34,8 @@ describe("Client Routes", () => {
 
     token = jwt.sign(
       { data: client.UserName },
-      process.env.JWT_SECRET || "test-secret"
+      process.env.JWT_SECRET || "test-secret",
+      { expiresIn: "1hr" }
     );
   });
 

@@ -21,7 +21,8 @@ describe("Admin Controller Tests with Route Params", () => {
 
     adminToken = jwt.sign(
       { data: adminUser.UserName },
-      process.env.JWT_SECRET || "test-secret"
+      process.env.JWT_SECRET || "test-secret",
+      { expiresIn: "1hr" }
     );
 
     await collectionC.create({
