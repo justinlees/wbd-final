@@ -49,7 +49,7 @@ describe("Admin Controller Tests with Route Params", () => {
     it("should return admin and clients with valid token", async () => {
       const res = await request(app)
         .get(`/admin/${adminUser.UserName}`)
-        .set("Authorization", adminToken);
+        .set("authorization", adminToken);
 
       expect(res.statusCode).toBe(200);
       expect(res.body.admin.UserName).toBe("adminTest11");

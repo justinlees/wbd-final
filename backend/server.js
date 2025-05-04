@@ -176,7 +176,7 @@ app.post("/login", async (req, res) => {
   //const manager = await collectionM.findOne({ UserName: UserName }).lean();
 
   if (!freelancer && !admin && !client) {
-    res.send("NoUser");
+    res.status(404).send("NoUser");
   } else if (freelancer) {
     if (!(await bcrypt.compare(Password, freelancer.Password))) {
       res.send("check");
@@ -189,7 +189,7 @@ app.post("/login", async (req, res) => {
         { expiresIn: "1hr" }
       );
 
-      res.send({ token, freelancer });
+      res.status(200).send({ token, freelancer });
     }
   } else if (admin) {
     if (!(await bcrypt.compare(Password, admin.Password))) {
@@ -202,7 +202,7 @@ app.post("/login", async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
-      res.send({ token, admin });
+      res.status(200).send({ token, admin });
     }
   } else if (client) {
     if (!(await bcrypt.compare(Password, client.Password))) {
@@ -215,7 +215,7 @@ app.post("/login", async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1hr" }
       );
-      res.send({ token, client });
+      res.status(200).send({ token, client });
     }
   }
 });

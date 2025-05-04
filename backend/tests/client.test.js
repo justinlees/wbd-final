@@ -47,7 +47,7 @@ describe("Client Routes", () => {
   it("should return user and freelancers on userAuth", async () => {
     const res = await request(app)
       .get(`/home/${clientId}`)
-      .set("Authorization", token);
+      .set("authorization", token);
 
     expect(res.statusCode).toBe(200);
     expect(res.body.user.UserName).toBe("testClient11");
