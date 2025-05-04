@@ -35,18 +35,22 @@ app.use(express.static("/public"));
 
 /* third party middleware */
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
-  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type"); // Allow specific headers
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow specific methods
-  next(); // Pass control to the next middleware
+app.options("*", (req, res) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://freelancing-frontend-lake.vercel.app"
+  );
+  res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.sendStatus(200); // Respond with HTTP 200 for preflight requests
 });
 
 app.use(
   cors({
-    origin: "https://freelancing-frontend-lake.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    origin: "https://freelancing-frontend-lake.vercel.app", // Allow only your frontend origin
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific HTTP methods
+    allowedHeaders: ["Authorization", "Content-Type"], // Allow specific headers
+    credentials: true, // Allow cookies and credentials
   })
 );
 
