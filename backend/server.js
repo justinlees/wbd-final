@@ -5,6 +5,10 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
+
 //const { GridFsStorage } = require("multer-gridfs-storage");
 const url = "mongodb://localhost:27017/JobDone";
 const mongoose = require("mongoose");
@@ -48,6 +52,8 @@ const mongodbConnect = async () => {
     process.exit(1);
   }
 };
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // get requests //
 

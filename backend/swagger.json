@@ -1,0 +1,393 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Freelancing Platform API",
+    "version": "1.0.0",
+    "description": "API documentation for the Freelancing platform"
+  },
+  "servers": [
+    {
+      "url": "https://freelancing-backend-66oj.onrender.com",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:5500",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/home/{userId}": {
+      "get": {
+        "summary": "Get user and freelancer data",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User and freelancer data retrieved successfully"
+          },
+          "403": {
+            "description": "No token provided"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/home/{userId}/tasks/{fUser}/messages": {
+      "get": {
+        "summary": "Get messages between user and freelancer",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the user"
+          },
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Messages retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/home/{userId}/tasks": {
+      "post": {
+        "summary": "Cancel a task",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the user"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lancerIds": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task canceled successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/freelancer/{fUser}": {
+      "get": {
+        "summary": "Get freelancer data",
+        "parameters": [
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Freelancer data retrieved successfully"
+          },
+          "403": {
+            "description": "Token required"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/freelancer/{fUser}/tasks": {
+      "post": {
+        "summary": "Accept or reject a task",
+        "parameters": [
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientIds": {
+                    "type": "string"
+                  },
+                  "requestVal": {
+                    "type": "string"
+                  },
+                  "taskName": {
+                    "type": "string"
+                  },
+                  "taskDescription": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task processed successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/freelancer/{fUser}/tasks/{userId}/messages": {
+      "post": {
+        "summary": "Send a message",
+        "parameters": [
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the user"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "msgContent": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message sent successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/freelancer/{fUser}/earnings": {
+      "post": {
+        "summary": "Update freelancer earnings",
+        "parameters": [
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Earnings updated successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/freelancer/{fUser}/profile": {
+      "post": {
+        "summary": "Delete freelancer account",
+        "parameters": [
+          {
+            "name": "fUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the freelancer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account deleted successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/admin/{aUser}": {
+      "get": {
+        "summary": "Get admin and client data",
+        "parameters": [
+          {
+            "name": "aUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the admin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin and client data retrieved successfully"
+          },
+          "403": {
+            "description": "Token required"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/admin/{aUser}/utilities": {
+      "get": {
+        "summary": "Get list of freelancers",
+        "parameters": [
+          {
+            "name": "aUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the admin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Freelancers retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Delete a freelancer",
+        "parameters": [
+          {
+            "name": "aUser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the admin"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lancerId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Freelancer deleted successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  }
+}
