@@ -23,8 +23,9 @@ export default function FMessageDisplay() {
   return (
     <div className="messageDisplay">
       {allMessages.allMessages ? (
-        allMessages.allMessages.map((item) => (
+        allMessages.allMessages.map((item, index) => (
           <div
+            key={index}
             className={item.userId === params.fUser ? "lancerMsg" : "clientMsg"}
           >
             <span>{item.msgContent}</span>

@@ -12,8 +12,9 @@ export default function RequestPage() {
   return (
     <div className="requestPage">
       <h1>Task Request Page</h1>
-      {filterData?.map((item) => (
+      {filterData?.map((item, index) => (
         <div
+          key={index}
           style={{
             display: "flex",
             justifyContent: "space-between",

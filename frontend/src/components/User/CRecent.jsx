@@ -6,8 +6,8 @@ export default function CRecent() {
   return (
     <>
       {clientData.finishedTasks.length ? (
-        clientData.finishedTasks.map((item) => (
-          <div className="acceptedTasks block1">
+        clientData.finishedTasks.map((item, index) => (
+          <div key={index} className="acceptedTasks block1">
             <div className="acceptedRequests">
               <h3>{item.lancerId}</h3>
               <div className="acceptButtons">

@@ -14,8 +14,8 @@ export default function CRequestedTasks() {
     <div className="connections">
       <h1>Queued Tasks</h1>
       {errors?.cancel && <span>{errors.cancel}</span>}
-      {requestedTasks.bufferRequests?.map((item) => (
-        <div className="block1">
+      {requestedTasks.bufferRequests?.map((item, index) => (
+        <div key={index} className="block1">
           <Form method="post">
             <h3>TaskName: {item.taskName}</h3>
             <p>Description: {item.taskDescription}</p>

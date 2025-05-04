@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  useOutletContext,
-  Form,
-  redirect,
-  useActionData,
-} from "react-router-dom";
+import { useOutletContext, Form, redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function CProfile() {
   const clientData = useOutletContext();
-  const response = useActionData();
+
   console.log(clientData);
 
   return (

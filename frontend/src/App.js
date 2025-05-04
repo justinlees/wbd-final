@@ -54,7 +54,6 @@ import { Action as ProfileAction } from "./components/Freelancer/SideBar";
 import Admin, { Loader as ALoader } from "./Layouts/Admin/admin";
 import AdminDashBoard, {
   Action as ClientsDeleteAction,
-  Loader as ClientsLoader,
 } from "./components/Admin/AdminDashBoard";
 import Profit from "./components/Admin/Profit";
 import AProfile from "./components/Admin/AdminProfile";

@@ -5,8 +5,8 @@ export default function FRecent() {
   return (
     <>
       {freelancerData.finishedTasks.length ? (
-        freelancerData.finishedTasks.map((item) => (
-          <div className="acceptedTasks block1">
+        freelancerData.finishedTasks.map((item, index) => (
+          <div key={index} className="acceptedTasks block1">
             <div className="acceptedRequests">
               <h3>{item.clientId}</h3>
               <p>{item.taskName}</p>

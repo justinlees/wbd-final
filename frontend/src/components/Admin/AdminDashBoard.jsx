@@ -28,8 +28,8 @@ export default function AdminDashBoard() {
       </div>
       <div className="briefDetails">
         {allClients ? (
-          allClients?.allClients.map((item) => (
-            <div className="briefContent">
+          allClients?.allClients.map((item, index) => (
+            <div key={index} className="briefContent">
               <p>User Id:{item.UserName}</p>
               <p>Email:{item.Email}</p>
               <p>Mobile No:{item.MobileNo}</p>
@@ -80,7 +80,7 @@ export async function Action({ request, params }) {
   console.log(response.data);
   if (response.data) {
     window.location.reload();
-    return `admin/${params.aUser}`;
+    return redirect(`admin/${params.aUser}`);
   }
 }
 

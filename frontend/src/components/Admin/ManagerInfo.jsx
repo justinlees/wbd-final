@@ -13,8 +13,8 @@ export default function ManagersInfo() {
         </h1>
       </div>
       <div className="briefDetails">
-        {allLancers?.map((item) => (
-          <div className="briefContent">
+        {allLancers?.map((item, index) => (
+          <div key={index} className="briefContent">
             <h3>UserName: {item.UserName}</h3>
             <p>Email: {item.Email}</p>
             <p>Mobile: {item.MobileNo}</p>

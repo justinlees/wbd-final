@@ -20,8 +20,9 @@ export default function CmessageDisplay() {
   return (
     <div className="CmessageDisplay">
       {allMessages.allMessages ? (
-        allMessages.allMessages?.map((item) => (
+        allMessages.allMessages?.map((item, index) => (
           <div
+            key={index}
             className={
               item.userId === params.userId ? "clientMsg" : "lancerMsg"
             }

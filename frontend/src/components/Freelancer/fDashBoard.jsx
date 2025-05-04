@@ -36,12 +36,12 @@ export default function FdashBoard() {
         <div className="block1">
           <h4>Recent Tasks</h4>
           {finishedTasks.length ? (
-            finishedTasks.map((item) => (
-              <>
+            finishedTasks.map((item, index) => (
+              <React.Fragment key={index}>
                 <br />
                 <b>{item.clientId}</b>
                 <p>{item.taskName}</p>
-              </>
+              </React.Fragment>
             ))
           ) : (
             <>

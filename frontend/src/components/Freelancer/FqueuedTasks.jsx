@@ -10,8 +10,8 @@ export default function FqueuedTasks() {
   return (
     <>
       {freelancerData.bufferRequests.length ? (
-        freelancerData.bufferRequests.map((item) => (
-          <div className="requestedClients block1">
+        freelancerData.bufferRequests.map((item, index) => (
+          <div key={index} className="requestedClients block1">
             <h3>{item.clientIds}</h3>
             <p>{item.taskName}</p>
             <p>{item.taskDescription}</p>

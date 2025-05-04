@@ -11,6 +11,11 @@ import axios from "axios";
 export default function FMessages() {
   const freelancer = useOutletContext();
   const params = useParams();
+
+  const matchedTasks = freelancer.tasksAssigned?.filter(
+    (item) => item.clientId === params.userId
+  );
+
   //const [data, setData] = React.useState("");
   return (
     <div className="freelanceDetail">
@@ -19,16 +24,14 @@ export default function FMessages() {
       </div>
       <div className="briefDetails">
         <div className="block1">
-          {freelancer.tasksAssigned?.map((item) => {
-            if (item.clientId === params.userId) {
-              return (
-                <div style={{ backgroundColor: "#afafaf" }}>
-                  <p>{item.clientId}</p>
-                  <p>{item.taskName}</p>
-                  <p>{item.taskDescription}</p>
-                </div>
-              );
-            }
+          {matchedTasks?.map((item, index) => {
+            return (
+              <div key={index} style={{ backgroundColor: "#afafaf" }}>
+                <p>{item.clientId}</p>
+                <p>{item.taskName}</p>
+                <p>{item.taskDescription}</p>
+              </div>
+            );
           })}
           <Outlet />
           <Form

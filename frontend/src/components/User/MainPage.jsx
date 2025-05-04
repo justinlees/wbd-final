@@ -10,7 +10,6 @@ export default function MainPage() {
   const userData = useOutletContext();
   const lancers = userData.freelancer ? userData.freelancer : userData;
   const [searchParams] = useSearchParams();
-  const [anime, setAnime] = React.useState("freelancerData");
 
   const query = searchParams.get("query");
 
@@ -44,7 +43,7 @@ export default function MainPage() {
               required
             />
             <button type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </fieldset>
         </Form>
@@ -53,10 +52,10 @@ export default function MainPage() {
       <div className="freelancersDisplay">
         <div className="row">
           {filteredData.length ? (
-            filteredData?.map((item) => (
-              <div className={anime}>
+            filteredData?.map((item, index) => (
+              <div key={index} className="freelancerData">
                 <div className="inner-freelancerData">
-                  <div clssName="lancerDetails">
+                  <div className="lancerDetails">
                     <div
                       style={{
                         width: "80px",

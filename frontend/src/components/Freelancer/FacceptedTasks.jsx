@@ -8,8 +8,8 @@ export default function FacceptedTasks() {
   return (
     <>
       {freelancerData.tasksAssigned.length ? (
-        freelancerData.tasksAssigned.map((item) => (
-          <div className="acceptedTasks block1">
+        freelancerData.tasksAssigned.map((item, index) => (
+          <div key={index} className="acceptedTasks block1">
             <div className="acceptedRequests">
               <h3>{item.clientId}</h3>
               <p>{item.taskName}</p>
