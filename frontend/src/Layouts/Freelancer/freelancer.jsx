@@ -4,7 +4,7 @@ import FsideBar from "../../components/Freelancer/SideBar";
 import { Outlet, useLoaderData, redirect } from "react-router-dom";
 import "../../styles/freelancer.css";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export default function FreeLanceDashBoard() {
   const pageContent = useLoaderData();
