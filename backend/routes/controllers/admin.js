@@ -23,7 +23,7 @@ const adminAuth = (req, res) => {
         .find()
         .select("UserName Email MobileNo")
         .lean();
-      res.send({ admin, allClients });
+      res.status(200).send({ admin, allClients });
     } catch (error) {
       res
         .status(500)
@@ -38,7 +38,7 @@ const adminShowLancers = async (req, res) => {
       .find()
       .select("UserName Email MobileNo")
       .lean();
-    res.send(allLancers);
+    res.status(200).send(allLancers);
   } catch (error) {
     res
       .status(500)
@@ -51,7 +51,7 @@ const adminDeleteLancer = async (req, res) => {
     const lancerDetails = await collectionF.deleteOne({
       UserName: req.body.lancerId,
     });
-    res.send("deleted");
+    res.status(200).send("deleted");
   } catch (error) {
     res.status(500).json({ message: "Unable to delete", error });
   }
@@ -62,7 +62,7 @@ const adminDeleteClient = async (req, res) => {
     const clientDetails = await collectionC.deleteOne({
       UserName: req.body.clientId,
     });
-    res.send("deleted");
+    res.status(200).send("deleted");
   } catch (error) {
     res.status(500).json({ message: "Unable to delete", error });
   }

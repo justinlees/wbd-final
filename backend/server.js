@@ -830,7 +830,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(process.env.PORT || 5500, () => {
-  console.log("Server Running in ", process.env.PORT);
-  mongodbConnect();
-});
+module.exports = app;
+
+if (require.main === module) {
+  // Only listen when running server.js directly
+  app.listen(process.env.PORT || 5500, () => {
+    console.log("Server Running in ", process.env.PORT);
+    mongodbConnect();
+  });
+}
