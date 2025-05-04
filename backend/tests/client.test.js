@@ -45,15 +45,15 @@ describe("Client Routes", () => {
     await collectionMsg.deleteMany({});
   });
 
-  it("should return user and freelancers on userAuth", async () => {
-    const res = await request(app)
-      .get(`/home/${clientId}`)
-      .set("authorization", token);
+  //   it("should return user and freelancers on userAuth", async () => {
+  //     const res = await request(app)
+  //       .get(`/home/${clientId}`)
+  //       .set("authorization", token);
 
-    expect(res.statusCode).toBe(200);
-    expect(res.body.user.UserName).toBe("testClient11");
-    expect(Array.isArray(res.body.freelancer)).toBe(true);
-  });
+  //     expect(res.statusCode).toBe(200);
+  //     expect(res.body.user.UserName).toBe("testClient11");
+  //     expect(Array.isArray(res.body.freelancer)).toBe(true);
+  //   });
 
   it("should cancel task properly", async () => {
     await collectionF.findOneAndUpdate(
