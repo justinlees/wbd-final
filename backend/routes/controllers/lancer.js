@@ -1,4 +1,4 @@
-/* Freelancer Controlls */
+/* Freelancer Controls */
 
 const jwt = require("jsonwebtoken");
 const collectionF = require("../../model/Fmodel");
@@ -8,7 +8,7 @@ const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
 const mongoose = require("mongoose");
 
-//freelancer token authentication
+// Freelancer token authentication
 const lancerAuth = async (req, res) => {
   const token = req.headers["authorization"];
 
@@ -23,7 +23,7 @@ const lancerAuth = async (req, res) => {
       const freelancer = await collectionF
         .findOne({ UserName: decoded.data })
         .lean();
-      console.log("Token Created,Logged in");
+      console.log("Token Created, Logged in");
       res.status(200).send(freelancer);
     } catch (error) {
       res.status(500).json({ message: "Server error", error });
@@ -31,7 +31,7 @@ const lancerAuth = async (req, res) => {
   });
 };
 
-//freelancer message display
+// Freelancer message display
 const showLancerMsg = async (req, res) => {
   try {
     const msgUpdate = await collectionMsg
@@ -47,7 +47,7 @@ const showLancerMsg = async (req, res) => {
   }
 };
 
-//freelancer profile upload
+// Freelancer profile upload
 const profileUpload = async (req, res) => {
   console.log(req.params.fUser);
   console.log(req.body);
@@ -64,18 +64,14 @@ const profileUpload = async (req, res) => {
   }
 };
 
-//freelancer task request operation ("accept" / "reject")
+// Freelancer task request operation ("accept" / "reject")
 const lancerTasks = async (req, res) => {
-  const { clientIds, requestVal, taskName, taskDescription, currAmount } =
-    req.body;
-  const session = await mongoose.startSession();
+  const { clientIds, requestVal, taskName, taskDescription } = req.body;
   try {
-    session.startTransaction();
     console.log("TaskRoute");
-    //request accept operation
     if (requestVal === "accept") {
       console.log("accepted");
-      const lancerRequestOp = await collectionF.findOneAndUpdate(
+      await collectionF.findOneAndUpdate(
         { UserName: req.params.fUser },
         {
           $pull: {
@@ -86,144 +82,104 @@ const lancerTasks = async (req, res) => {
             },
           },
           $inc: { currAmount: -2 },
-          // currAmount: parseInt(currAmount) - parseInt(2),
-        },
-        { session }
+        }
       );
 
-      console.log("first");
+      await collectionA.findOneAndUpdate(
+        { UserName: "varunpuli11" },
+        { $inc: { currAmount: 2 } }
+      );
 
-      if (lancerRequestOp) {
-        const adminAdd = await collectionA.findOneAndUpdate(
-          {
-            UserName: "varunpuli11",
-          },
-          {
-            $inc: { currAmount: 2 },
-            // currAmount: parseInt(currAmount) + parseInt(2),
-          },
-          { session }
-        );
-      }
-
-      console.log("second");
-
-      const clientRequestOp = await collectionC.findOneAndUpdate(
+      await collectionC.findOneAndUpdate(
         { UserName: clientIds },
         {
           $pull: {
             bufferRequests: {
               lancerIds: req.params.fUser,
-              taskName: taskName,
-              taskDescription: taskDescription,
+              taskName,
+              taskDescription,
             },
           },
-        },
-        { session }
+        }
       );
 
-      console.log("third");
-
-      const lancerUpdateReq = await collectionF.findOneAndUpdate(
+      await collectionF.findOneAndUpdate(
         { UserName: req.params.fUser },
         {
           $push: {
             tasksAssigned: {
               clientId: clientIds,
-              taskName: taskName,
-              taskDescription: taskDescription,
+              taskName,
+              taskDescription,
             },
           },
-        },
-        { session }
+        }
       );
 
-      console.log("fourth");
-
-      const clientUpdateReq = await collectionC.findOneAndUpdate(
+      await collectionC.findOneAndUpdate(
         { UserName: clientIds },
         {
           $push: {
             tasksRequested: {
               lancerId: req.params.fUser,
-              taskName: taskName,
-              taskDescription: taskDescription,
+              taskName,
+              taskDescription,
             },
           },
-        },
-        { session }
+        }
       );
 
-      console.log("fifth");
-
       const connectionCheck = await collectionMsg
-        .findOne(
-          {
-            clientId: clientIds,
-            lancerId: req.params.fUser,
-          },
-          null,
-          { session }
-        )
+        .findOne({
+          clientId: clientIds,
+          lancerId: req.params.fUser,
+        })
         .lean();
 
-      console.log("sixth");
-
       if (!connectionCheck) {
-        const messageConnection = await collectionMsg.insertMany(
-          {
-            clientId: clientIds,
-            lancerId: req.params.fUser,
-          },
-          { session }
-        );
+        await collectionMsg.insertMany({
+          clientId: clientIds,
+          lancerId: req.params.fUser,
+        });
       }
 
       console.log("accept finish");
-    }
-    //request reject operation
-    else if (requestVal === "reject") {
+    } else if (requestVal === "reject") {
       console.log("rejected");
-      const lancerRequestOp = await collectionF.findOneAndUpdate(
+      await collectionF.findOneAndUpdate(
         { UserName: req.params.fUser },
         {
           $pull: {
             bufferRequests: {
-              clientIds: clientIds,
-              taskName: taskName,
-              taskDescription: taskDescription,
+              clientIds,
+              taskName,
+              taskDescription,
             },
           },
-        },
-        { session }
+        }
       );
 
-      const clientRequestOp = await collectionC.findOneAndUpdate(
+      await collectionC.findOneAndUpdate(
         { UserName: clientIds },
         {
           $pull: {
             bufferRequests: {
               lancerIds: req.params.fUser,
-              taskName: taskName,
-              taskDescription: taskDescription,
+              taskName,
+              taskDescription,
             },
           },
-        },
-        { session }
+        }
       );
     }
-    await session.commitTransaction();
     res.send("requestDone");
   } catch (error) {
-    await session.abortTransaction();
-    console.error("Transaction error:", error);
-    res.status(500).send("Transaction failed");
-  } finally {
-    session.endSession();
+    console.error("Error:", error);
+    res.status(500).send("Operation failed");
   }
 };
 
-//freelancer message entry
+// Freelancer message entry
 const lancerMsg = async (req, res) => {
   const { msgContent } = req.body;
   try {
@@ -236,7 +192,7 @@ const lancerMsg = async (req, res) => {
         $push: {
           allMessages: {
             userId: req.params.fUser,
-            msgContent: msgContent,
+            msgContent,
             msgDate: Date.now(),
           },
         },
@@ -245,11 +201,11 @@ const lancerMsg = async (req, res) => {
     console.log("msg sent");
     res.status(200).send(msgUpdate);
   } catch (error) {
-    res.status(500).json({ message: "message can't send", error });
+    res.status(500).json({ message: "Message can't send", error });
   }
 };
 
-//freelancer profits
+// Freelancer profits
 const lancerEarnings = async (req, res) => {
   const findLancer = await collectionF
     .findOne({ UserName: req.params.fUser })
@@ -259,12 +215,12 @@ const lancerEarnings = async (req, res) => {
   } else {
     const price = req.body.amount;
     console.log("profit");
-    const lancerUpdate = await collectionF.findOneAndUpdate(
+    await collectionF.findOneAndUpdate(
       { UserName: req.params.fUser },
       { currAmount: parseInt(findLancer.currAmount) + parseInt(price) }
     );
 
-    const adminProfit = await collectionA.findOneAndUpdate(
+    await collectionA.findOneAndUpdate(
       { UserName: "varunpuli11" },
       { $inc: { currAmount: 2 } }
     );
@@ -272,78 +228,64 @@ const lancerEarnings = async (req, res) => {
   }
 };
 
-//freelancer account delete functionality
+// Freelancer account delete functionality
 const lancerAccountDelete = async (req, res) => {
   try {
-    const deleteAccount = await collectionF.deleteMany({
-      UserName: req.params.fUser,
-    });
+    await collectionF.deleteMany({ UserName: req.params.fUser });
     res.status(200).send("success");
   } catch (error) {
     res.status(500).json({ message: "Error in Deletion", error });
   }
 };
 
-//freelancer finished tasks display
+// Freelancer finished tasks display
 const finishedTasks = async (req, res) => {
-  const session = await mongoose.startSession();
   try {
-    await session.withTransaction(async () => {
-      await collectionF.findOneAndUpdate(
-        { UserName: req.params.fUser },
-        { $pull: { tasksAssigned: { clientId: req.body.clientId } } },
-        { session }
-      );
+    await collectionF.findOneAndUpdate(
+      { UserName: req.params.fUser },
+      { $pull: { tasksAssigned: { clientId: req.body.clientId } } }
+    );
 
-      await collectionC.findOneAndUpdate(
-        { UserName: req.body.clientId },
-        { $pull: { tasksRequested: { lancerId: req.params.fUser } } },
-        { session }
-      );
+    await collectionC.findOneAndUpdate(
+      { UserName: req.body.clientId },
+      { $pull: { tasksRequested: { lancerId: req.params.fUser } } }
+    );
 
-      await collectionC.findOneAndUpdate(
-        { UserName: req.body.clientId },
-        {
-          $push: {
-            finishedTasks: {
-              lancerId: req.params.fUser,
-              taskName: req.body.taskName,
-            },
+    await collectionC.findOneAndUpdate(
+      { UserName: req.body.clientId },
+      {
+        $push: {
+          finishedTasks: {
+            lancerId: req.params.fUser,
+            taskName: req.body.taskName,
           },
         },
-        { session }
-      );
+      }
+    );
 
-      await collectionF.findOneAndUpdate(
-        { UserName: req.params.fUser },
-        {
-          $push: {
-            finishedTasks: {
-              clientId: req.body.clientId,
-              taskName: req.body.taskName,
-            },
+    await collectionF.findOneAndUpdate(
+      { UserName: req.params.fUser },
+      {
+        $push: {
+          finishedTasks: {
+            clientId: req.body.clientId,
+            taskName: req.body.taskName,
           },
         },
-        { session }
-      );
+      }
+    );
 
-      await collectionMsg.deleteOne(
-        {
-          clientId: req.body.clientId,
-          lancerId: req.params.fUser,
-        },
-        { session }
-      );
+    await collectionMsg.deleteOne({
+      clientId: req.body.clientId,
+      lancerId: req.params.fUser,
     });
 
     res.send("success");
   } catch (error) {
-    console.error("Transaction error:", error);
+    console.error("Error:", error);
     res
       .status(500)
       .json({ message: "Couldn't perform requested operation", error });
-  } finally {
-    session.endSession();
   }
 };
 
