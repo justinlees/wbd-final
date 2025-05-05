@@ -13,12 +13,12 @@ export default function FsideBar({ userData }) {
   const fetcher = useFetcher();
 
   // Trigger a refresh after upload success
-  // React.useEffect(() => {
-  //   if (fetcher.data?.success) {
-  //     alert("Upload success");
-  //     refreshUserData(); // function passed from parent to reload user data
-  //   }
-  // }, [fetcher.data]);
+  React.useEffect(() => {
+    if (fetcher.data?.success) {
+      alert("Upload success");
+      refreshUserData(); // function passed from parent to reload user data
+    }
+  }, [fetcher.data]);
 
   return (
     <nav className="fSideBar">
