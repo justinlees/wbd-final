@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../app"); // Path to your Express app
+const app = require("../server"); // Path to your Express app
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 

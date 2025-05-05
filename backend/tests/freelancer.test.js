@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../../app");
+const app = require("../server");
 const jwt = require("jsonwebtoken");
 
 const token = jwt.sign({ UserName: "freelancer1" }, process.env.JWT_SECRET);
