@@ -3,7 +3,7 @@ const app = require("../server"); // Path to your Express app
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
-const token = jwt.sign({ UserName: "testuser" }, process.env.JWT_SECRET);
+const token = jwt.sign({ UserName: "testuser" }, process.env.JWT_SECRET || "test-secret");
 
 describe("User Controller", () => {
 

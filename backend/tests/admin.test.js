@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../server"); // Path to your Express app
 const jwt = require("jsonwebtoken");
 
-const token = jwt.sign({ data: "adminUser" }, process.env.JWT_SECRET);
+const token = jwt.sign({ data: "adminUser" }, process.env.JWT_SECRET || "test-secret");
 
 describe("Admin Controller", () => {
 

@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../server");
 const jwt = require("jsonwebtoken");
 
-const token = jwt.sign({ UserName: "freelancer1" }, process.env.JWT_SECRET);
+const token = jwt.sign({ UserName: "freelancer1" }, process.env.JWT_SECRET || "test-secret");
 
 describe("Lancer Controller", () => {
 
