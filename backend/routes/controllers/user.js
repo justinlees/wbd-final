@@ -6,7 +6,7 @@ const collectionM = require("../../model/Mmodel");
 const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
-const Task = require('../../models/Task');
+const Task = require('../../model/Task');
 
 const userAuth = async (req, res) => {
   const token = req.headers["authorization"];
