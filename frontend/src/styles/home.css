@@ -82,7 +82,7 @@
   margin-top: 10rem;
 }
 
-.HomePage .MainPage .searchBarContainer {
+.MainPage .searchBarContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,7 +91,7 @@
   box-sizing: border-box;
 }
 
-.HomePage .MainPage .postTaskBtn {
+.MainPage .postTaskBtn {
   padding: 0.5rem 1rem;
   background-color: #007bff;
   color: white;
@@ -112,6 +112,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  /* Ensure it overlays above everything */
 }
 
 .popupForm {
