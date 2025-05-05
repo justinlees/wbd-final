@@ -179,6 +179,6 @@ export async function Action({ request, params }) {
     }
   } catch (error) {
     // Handle error – return something usable by useActionData()
-    return res.data;
+    return error;
   }
 }
