@@ -5,6 +5,9 @@ import {
   Form,
   useSearchParams,
 } from "react-router-dom";
+import axios from 'axios';
+import { useState } from "react";
+
 
 export default function MainPage() {
   const userData = useOutletContext();
