@@ -32,6 +32,133 @@
   ],
 
   "paths": {
+    "/login": {
+      "post": {
+        "summary": "User Login",
+        "description": "Authenticate a user (freelancer, client, or admin) and return a JWT token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "UserName": { "type": "string" },
+                  "Password": { "type": "string" }
+                },
+                "required": ["UserName", "Password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" },
+                    "freelancer": { "$ref": "#/components/schemas/Freelancer" },
+                    "admin": { "$ref": "#/components/schemas/Admin" },
+                    "client": { "$ref": "#/components/schemas/Client" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "User not found" },
+          "400": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/signUp/freelancer": {
+      "post": {
+        "summary": "Freelancer SignUp",
+        "description": "Register a new freelancer account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Freelancer" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Freelancer registered successfully" },
+          "409": { "description": "User already exists" }
+        }
+      }
+    },
+    "/signUp/user": {
+      "post": {
+        "summary": "User SignUp",
+        "description": "Register a new client account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Client" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Client registered successfully" },
+          "409": { "description": "User already exists" }
+        }
+      }
+    },
+    "/send-verification-email": {
+      "post": {
+        "summary": "Send Verification Email",
+        "description": "Send a verification code to the user's email address.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Email": { "type": "string", "format": "email" }
+                },
+                "required": ["Email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Verification email sent" },
+          "400": { "description": "Email is required" },
+          "500": { "description": "Error sending email" }
+        }
+      }
+    },
+    "/validate-code": {
+      "post": {
+        "summary": "Validate Verification Code",
+        "description": "Validate the verification code sent to the user's email.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Email": { "type": "string", "format": "email" },
+                  "code": { "type": "string" }
+                },
+                "required": ["Email", "code"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Email verified successfully" },
+          "400": { "description": "Invalid code or email" }
+        }
+      }
+    },
     "/home/{userId}": {
       "get": {
         "summary": "Get user and freelancer data",

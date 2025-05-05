@@ -393,8 +393,17 @@ app.use((err, req, res, next) => {
 
 module.exports = app;
 
-/* Payment Gateway */
-// app.use("/api/payments", require("./routes/stripe"));
+/* Redis TEST */
+app.get('/redis-test', async (req, res) => {
+  try {
+    await client.set('healthcheck', 'ok');
+    const result = await client.get('healthcheck');
+    res.send(`Redis is working: ${result}`);
+  } catch (err) {
+    res.status(500).send(`Redis error: ${err.message}`);
+  }
+});
+
 
 if (require.main === module) {
   // Only listen when running server.js directly
