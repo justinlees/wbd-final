@@ -23,7 +23,7 @@ const lancerRouter = require("./routes/LancerRoutes/lancer.route");
 const userRouter = require("./routes/UserRoutes/user.route");
 const adminRouter = require("./routes/AdminRoutes/admin.route");
 
-const { redisClient } = require('redis');
+const redisClient = require('./utils/redisClient');
 
 //const storage = new GridFsStorage({ url });
 //const upload = multer({ storage });
