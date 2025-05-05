@@ -11,7 +11,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Freelancer token authentication
 const lancerAuth = async (req, res) => {
-  const token = req.headers["authorization"];
+  const token = req.headers["authorization"].split(" ")[1];
 
   if (!token) {
     return res.status(403).json({ message: "Token required" });
