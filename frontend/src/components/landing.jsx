@@ -10,15 +10,15 @@ function Landing() {
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const phrases = [
-    "Discover Talent",
-    "Unlock Opportunities",
-    "Build Your Dream Career",
-  ];
   const typingSpeed = 150;
   const deletingSpeed = 100;
 
   useEffect(() => {
+    const phrases = [
+      "Discover Talent",
+      "Unlock Opportunities",
+      "Build Your Dream Career",
+    ];
     const handleTyping = () => {
       const i = loopNum % phrases.length;
       const fullText = phrases[i];
