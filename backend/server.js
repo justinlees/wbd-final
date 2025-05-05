@@ -23,6 +23,8 @@ const lancerRouter = require("./routes/LancerRoutes/lancer.route");
 const userRouter = require("./routes/UserRoutes/user.route");
 const adminRouter = require("./routes/AdminRoutes/admin.route");
 
+const { redisClient } = require('redis');
+
 //const storage = new GridFsStorage({ url });
 //const upload = multer({ storage });
 
@@ -396,8 +398,8 @@ module.exports = app;
 /* Redis TEST */
 app.get('/redis-test', async (req, res) => {
   try {
-    await client.set('healthcheck', 'ok');
-    const result = await client.get('healthcheck');
+    await redisClient.set('healthcheck', 'ok');
+    const result = await redisClient.get('healthcheck');
     res.send(`Redis is working: ${result}`);
   } catch (err) {
     res.status(500).send(`Redis error: ${err.message}`);
