@@ -42,7 +42,7 @@ export async function Loader({ params }) {
         },
       }
     );
-
+    console.log(`tokendetails: ${token}`);
     return response.data;
   } catch (error) {
     return redirect("/");
