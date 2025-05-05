@@ -1,22 +1,29 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Stripe = require('stripe');
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY); // from your .env
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Create Payment Intent
-router.post('/freelancer/:fUser/payment-intent', async (req, res) => {
+// POST /api/payments/intent/:freelancerId
+router.post("/intent/:freelancerId", async (req, res) => {
     const { amount, currency } = req.body;
+
+    // Basic validation
+    if (!amount || typeof amount !== "number" || amount < 50) {
+        return res.status(400).json({
+            error: "Invalid amount. Minimum $0.50 required.",
+        });
+    }
 
     try {
         const paymentIntent = await stripe.paymentIntents.create({
-            amount, // in cents: $10 = 1000
+            amount, // in cents
             currency,
             automatic_payment_methods: { enabled: true },
         });
 
-        res.send({ clientSecret: paymentIntent.client_secret });
+        res.json({ clientSecret: paymentIntent.client_secret });
     } catch (error) {
-        console.error(error);
+        console.error("Stripe Error:", error.message);
         res.status(500).json({ error: error.message });
     }
 });

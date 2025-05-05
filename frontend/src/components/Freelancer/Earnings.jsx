@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import {
-  Form,
-  redirect,
   useActionData,
   useOutletContext,
+  redirect,
 } from "react-router-dom";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
@@ -16,7 +15,7 @@ import {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
 
-const CheckoutForm = ({ amount, onSuccess }) => {
+const CheckoutForm = ({ amount, fUser, onSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [processing, setProcessing] = useState(false);
@@ -27,30 +26,34 @@ const CheckoutForm = ({ amount, onSuccess }) => {
     setProcessing(true);
     setError("");
 
-    // Step 1: Get PaymentIntent from backend
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/payment-intent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amount * 100 }), // in cents
-    });
+    try {
+      // Step 1: Get PaymentIntent from backend
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/payments/intent/${fUser}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: amount * 100, currency: "usd" }),
+      });
 
-    const { clientSecret } = await res.json();
+      const { clientSecret } = await res.json();
 
-    // Step 2: Confirm Card Payment
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-      },
-    });
+      // Step 2: Confirm Card Payment
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      });
 
-    setProcessing(false);
+      setProcessing(false);
 
-    if (result.error) {
-      setError(result.error.message);
-    } else {
-      if (result.paymentIntent.status === "succeeded") {
+      if (result.error) {
+        setError(result.error.message);
+      } else if (result.paymentIntent.status === "succeeded") {
         onSuccess(); // reload or update wallet
       }
+    } catch (err) {
+      setProcessing(false);
+      setError("Payment failed. Please try again.");
+      console.error(err);
     }
   };
 
@@ -105,6 +108,7 @@ export default function Earnings() {
             <Elements stripe={stripePromise}>
               <CheckoutForm
                 amount={amount}
+                fUser={freelancerData._id}
                 onSuccess={() => {
                   window.location.reload();
                 }}
