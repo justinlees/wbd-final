@@ -12,9 +12,10 @@ function Landing() {
   const [loopNum, setLoopNum] = useState(0);
   const typingSpeed = 150;
   const deletingSpeed = 100;
+  let phrases = [];
 
   useEffect(() => {
-    const phrases = [
+    phrases = [
       "Discover Talent",
       "Unlock Opportunities",
       "Build Your Dream Career",
