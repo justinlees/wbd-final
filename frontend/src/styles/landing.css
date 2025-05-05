@@ -6,6 +6,11 @@
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
 .Landing button {
   border: none;
   background-color: transparent;
@@ -13,7 +18,7 @@
 
 /* Header Styling */
 .Landing #Header {
-  background-color: #ffffff;
+  background-color: #1e1e1e;
   height: 5rem;
   display: flex;
   align-items: center;
@@ -21,19 +26,19 @@
   top: 0;
   width: 100%;
   z-index: 10;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .Landing #Header h1 {
   margin: 0 2rem;
   font-size: 2.3rem;
-  color: #007bff;
+  color: #00bcd4;
   font-weight: bold;
   font-family: "Kanit";
 }
 
 .Landing #Header h1 span {
-  color: #0056b3;
+  color: #0097a7;
   margin: 0 0.5rem;
   font-family: "Kanit";
 }
@@ -52,7 +57,7 @@
 
 .Landing #Header ul li .login.button {
   text-decoration: none;
-  background: #007bff;
+  background: #00bcd4;
   color: #ffffff;
   padding: 0.5rem 1.5rem;
   border-radius: 25px;
@@ -61,14 +66,14 @@
 }
 
 .Landing #Header ul li .login.button:hover {
-  background: #0056b3;
+  background: #0097a7;
 }
 
 /* Landing Page Styling */
 .Landing {
   height: 100%;
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: #121212;
   overflow-x: hidden;
 }
 
@@ -89,16 +94,16 @@
 }
 
 .Landing main .mainleft h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   line-height: 1.2;
   margin-bottom: 1rem;
-  color: #007bff;
+  color: #00bcd4;
 }
 
 .Landing main .mainleft h3 {
   font-size: 1.2rem;
   line-height: 1.5;
-  color: #333333;
+  color: #cccccc;
 }
 
 .Landing main .mainleft .buttons {
@@ -108,19 +113,19 @@
 
 .Landing main .mainleft .buttons button a {
   margin-right: 1rem;
-  border: 1px solid #007bff;
+  border: 1px solid #00bcd4;
   display: block;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
   background-color: transparent;
   font-size: 1rem;
-  color: #007bff;
+  color: #00bcd4;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .Landing main .mainleft .buttons button a:hover {
-  background-color: #007bff;
+  background-color: #00bcd4;
   color: #ffffff;
 }
 
@@ -148,7 +153,7 @@
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   transition: all 0.8s;
 }
 
@@ -240,4 +245,32 @@
 .Landing section {
   position: relative;
   z-index: 1;
+}
+
+/* Animated Text */
+.animated-text {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #00bcd4;
+  width: 2px;
+  height: 1.5rem;
+  margin-left: 0.2rem;
+  animation: blink 0.7s steps(2, start) infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }

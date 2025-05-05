@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/landing.css";
 import landingpageimg from "../images/landingpageimg.png";
-import x1 from "../images/x1.png"; // Import x1.png
-import x2 from "../images/x2.png"; // Import x2.png
+import x1 from "../images/x1.png";
+import x2 from "../images/x2.png";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 
 function Landing() {
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const phrases = [
+    "Discover Talent",
+    "Unlock Opportunities",
+    "Build Your Dream Career",
+  ];
+  const typingSpeed = 150;
+  const deletingSpeed = 100;
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const i = loopNum % phrases.length;
+      const fullText = phrases[i];
+
+      if (isDeleting) {
+        setCurrentText(fullText.substring(0, currentText.length - 1));
+      } else {
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+      }
+
+      if (!isDeleting && currentText === fullText) {
+        setTimeout(() => setIsDeleting(true), 1000);
+      } else if (isDeleting && currentText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(
+      handleTyping,
+      isDeleting ? deletingSpeed : typingSpeed
+    );
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, loopNum]);
+
   return (
     <div className="Landing">
-      <div className="cover"></div>
       <header id="Header">
-        <div className="cover"></div>
         <h1>
           JOB<span>DONE</span>
         </h1>
@@ -27,7 +62,10 @@ function Landing() {
       </header>
       <main>
         <div className="mainleft">
-          <h1>Discover Talent & Unlock Opportunities</h1>
+          <h1 className="animated-text">
+            {currentText}
+            <span className="cursor">|</span>
+          </h1>
           <h3>
             Connecting skilled freelancers with clients seeking the right
             talent, we foster a vibrant community where collaboration thrives
@@ -47,7 +85,7 @@ function Landing() {
           </div>
         </div>
         <div className="mainright">
-          <img src={landingpageimg} alt="" />
+          <img src={landingpageimg} alt="Landing" />
         </div>
       </main>
       <section className="freelance-section">
