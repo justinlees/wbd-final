@@ -10,39 +10,38 @@ function Landing() {
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const typingSpeed = 150;
-  const deletingSpeed = 100;
+
+  const typingSpeed = 100;
+  const deletingSpeed = 50;
 
   const phrasesRef = useRef([
     "Discover Talent",
     "Unlock Opportunities",
     "Build Your Dream Career",
+    "Freelance Without Limits",
+    "Get Jobs Done",
   ]);
 
   useEffect(() => {
-    const handleTyping = () => {
-      const i = loopNum % phrasesRef.current.length;
-      const fullText = phrasesRef.current[i];
+    const i = loopNum % phrasesRef.current.length;
+    const fullText = phrasesRef.current[i];
 
-      if (isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-      }
+    if (isDeleting) {
+      setCurrentText((prev) => fullText.substring(0, prev.length - 1));
+    } else {
+      setCurrentText((prev) => fullText.substring(0, prev.length + 1));
+    }
 
+    let timeout = setTimeout(() => {
       if (!isDeleting && currentText === fullText) {
-        setTimeout(() => setIsDeleting(true), 1000);
+        setTimeout(() => setIsDeleting(true), 800);
       } else if (isDeleting && currentText === "") {
         setIsDeleting(false);
-        setLoopNum(loopNum + 1);
+        setLoopNum((prev) => prev + 1);
       }
-    };
+    }, isDeleting ? deletingSpeed : typingSpeed);
 
-    const timer = setTimeout(
-      handleTyping,
-      isDeleting ? deletingSpeed : typingSpeed
-    );
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timeout);
   }, [currentText, isDeleting, loopNum]);
 
   return (
