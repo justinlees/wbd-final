@@ -2,6 +2,11 @@ import "./App.css";
 import React from "react";
 import Landing from "./components/landing";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
+
 import FsignUp, { Action as FsignUpAction } from "./components/FsignUp";
 import CsignUp, { Action as CsignUpAction } from "./components/CsignUp";
 import Login, { Action as loginAction } from "./components/login";
@@ -10,7 +15,7 @@ import Settings from "./components/Settings";
 
 /*Client Imports */
 import Home, { Loader as Cloader } from "./Layouts/User/home";
-import MainPage, { Action as PostTask } from "./components/User/MainPage";
+import MainPage from "./components/User/MainPage";
 import CTasks, { Loader as Tloader } from "./components/User/CTasks";
 import MessageEntry, {
   Action as UentryAction,
@@ -39,9 +44,7 @@ import FacceptedTasks, {
 import FqueuedTasks, {
   Action as QueuedAction,
 } from "./components/Freelancer/FqueuedTasks";
-import Earnings, {
-  Action as AddMoneyAction,
-} from "./components/Freelancer/Earnings";
+import Earnings from "./components/Freelancer/Earnings";
 import TaskInfo from "./components/Freelancer/TaskInfo";
 import FMessages, {
   Action as MessageAction,
@@ -100,14 +103,12 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MainPage />,
-        action: PostTask
       },
       {
         path: ":fUser/requestPage",
         element: <RequestPage />,
         action: RequestAction,
       },
-
       {
         path: "tasks",
         element: <CTasks />,
@@ -212,7 +213,6 @@ const router = createBrowserRouter([
       {
         path: "earnings",
         element: <Earnings />,
-        action: AddMoneyAction,
       },
       {
         path: "settings",
@@ -261,9 +261,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <Elements stripe={stripePromise}>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
+    </Elements>
   );
 }
 

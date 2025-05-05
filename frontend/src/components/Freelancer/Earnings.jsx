@@ -1,78 +1,61 @@
 import React, { useState } from "react";
 import {
+  Form,
+  redirect,
   useActionData,
   useOutletContext,
-  redirect,
 } from "react-router-dom";
 import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
-
-const CheckoutForm = ({ amount, fUser, onSuccess }) => {
+export default function Earnings() {
+  const errors = useActionData();
+  const freelancerData = useOutletContext();
   const stripe = useStripe();
   const elements = useElements();
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setProcessing(true);
-    setError("");
+  const handlePayment = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const amount = event.target.amount.value;
 
     try {
-      // Step 1: Get PaymentIntent from backend
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/payments/intent/${fUser}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: amount * 100, currency: "usd" }),
-      });
+      // Create a payment intent
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/create-payment-intent`,
+        { amount }
+      );
 
-      const { clientSecret } = await res.json();
+      const clientSecret = data.clientSecret;
 
-      // Step 2: Confirm Card Payment
+      // Confirm the payment
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
       });
 
-      setProcessing(false);
-
       if (result.error) {
-        setError(result.error.message);
+        console.error(result.error.message);
+        alert("Payment failed");
       } else if (result.paymentIntent.status === "succeeded") {
-        onSuccess(); // reload or update wallet
+        // Update the freelancer's wallet
+        await axios.post(
+          `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/earnings`,
+          { amount }
+        );
+        alert("Payment successful! Money added to wallet.");
+        window.location.reload();
       }
-    } catch (err) {
-      setProcessing(false);
-      setError("Payment failed. Please try again.");
-      console.error(err);
+    } catch (error) {
+      console.error("Payment Error:", error);
+      alert("Payment failed");
+    } finally {
+      setLoading(false);
     }
   };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button disabled={!stripe || processing} style={{ marginTop: "1rem" }}>
-        {processing ? "Processing..." : "Pay Now"}
-      </button>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-    </form>
-  );
-};
-
-export default function Earnings() {
-  const errors = useActionData();
-  const freelancerData = useOutletContext();
-  const [amount, setAmount] = useState("");
-  const [showCheckout, setShowCheckout] = useState(false);
 
   return (
     <div className="freelanceDetail freelanceEarnings">
@@ -86,51 +69,27 @@ export default function Earnings() {
           <div className="balance">
             <b>${freelancerData.currAmount}</b>
           </div>
-
-          {!showCheckout ? (
-            <>
-              <legend>Enter Amount</legend>
-              <input
-                type="number"
-                name="amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-              <br />
-              <button
-                style={{ marginTop: "1rem" }}
-                onClick={() => setShowCheckout(true)}
-              >
-                Continue to Pay
-              </button>
-            </>
-          ) : (
-            <Elements stripe={stripePromise}>
-              <CheckoutForm
-                amount={amount}
-                fUser={freelancerData._id}
-                onSuccess={() => {
-                  window.location.reload();
-                }}
-              />
-            </Elements>
-          )}
+          <form onSubmit={handlePayment}>
+            <legend>Enter Amount</legend>
+            <input type="number" name="amount" required />
+            <legend>Card Details</legend>
+            <CardElement />
+            <br />
+            <button
+              type="submit"
+              disabled={!stripe || loading}
+              style={{
+                marginTop: "1rem",
+                backgroundColor: "black",
+                color: "white",
+                cursor: "pointer",
+              }}
+            >
+              {loading ? "Processing..." : "Add Money"}
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
-}
-
-export async function Action({ request, params }) {
-  const formData = Object.fromEntries(await request.formData());
-  const response = await axios.post(
-    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/earnings`,
-    formData
-  );
-
-  if (!response) {
-    return "money not added to wallet";
-  } else {
-    return redirect(`/freelancer/${params.fUser}/earnings`);
-  }
 }

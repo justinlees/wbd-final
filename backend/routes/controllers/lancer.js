@@ -7,6 +7,7 @@ const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
 const mongoose = require("mongoose");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Freelancer token authentication
 const lancerAuth = async (req, res) => {
@@ -289,6 +290,25 @@ const finishedTasks = async (req, res) => {
   }
 };
 
+const createPaymentIntent = async (req, res) => {
+  const { amount } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount * 100, // Convert to cents
+      currency: "usd",
+      payment_method_types: ["card"],
+    });
+
+    res.status(200).send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    console.error("Stripe Error:", error);
+    res.status(500).json({ message: "Payment failed", error });
+  }
+};
+
 module.exports = {
   lancerAuth,
   showLancerMsg,
@@ -298,4 +318,5 @@ module.exports = {
   lancerEarnings,
   lancerMsg,
   profileUpload,
+  createPaymentIntent,
 };
