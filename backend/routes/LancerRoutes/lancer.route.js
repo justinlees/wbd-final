@@ -1,6 +1,6 @@
 const express = require("express");
 const lancerRouter = express.Router();
-const storage = require('../config/storage');
+const storage = require('../../config/storage');
 const multer = require("multer");
 
 const upload = multer({ storage });
