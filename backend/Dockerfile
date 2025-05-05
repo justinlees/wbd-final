@@ -1,23 +1,18 @@
-# Use Node.js LTS version as the base image
-FROM node:16
+# backend/Dockerfile
+FROM node:18
 
-# Set the working directory
+# Create app directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
-
-# Install dependencies
+# Install app dependencies
+COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application code
+# Copy app source code
 COPY . .
 
-# Expose the port the app runs on
+# Expose the backend port
 EXPOSE 5500
 
-# Set environment variables
-ENV NODE_ENV=production
-
-# Start the application
+# Start the backend
 CMD ["node", "server.js"]
