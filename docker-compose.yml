@@ -2,30 +2,42 @@ version: "3.8"
 
 services:
   backend:
-    build:
-      context: ./backend
+    build: ./backend
+    container_name: backend
     ports:
       - "5500:5500"
+    volumes:
+      - ./backend:/app
     environment:
-      - NODE_ENV=production
-      - JWT_SECRET=mySecret
-      - MONGODB_URI=mongodb://mongo:27017/JobDone
+      - NODE_ENV=development
+      - REDIS_URL=redis://redis:6379
+      - STRIPE_SECRET_KEY=sk_test_51RLBaxR4vCYStREE3Fz5XkH8fbw0arP9gETxKJ49TEVMpC8fXbVPioHnZUSuA2On5vaY4RJKXa2nzWbw6J49OmKJ00DoOjwz1r
+      - MONGO_URI=mongodb://mongo:27017/JobDone # ⬅️ Updated
     depends_on:
-      - mongo
+      - redis
+      - mongo # ⬅️ Added
 
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
+    container_name: frontend
     ports:
       - "3000:80"
-    depends_on:
-      - backend
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
 
   mongo:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
+    image: mongo:6 # or mongo:latest
+    container_name: mongo
+    # ports:
+    #   - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
