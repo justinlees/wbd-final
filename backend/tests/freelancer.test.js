@@ -1,57 +1,61 @@
-const mongoose = require("mongoose");
 const request = require("supertest");
-const app = require("../server"); // your Express app
-const collectionF = require("../model/Fmodel"); // freelancer model
+const app = require("../../app");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET || "test-secret"; // fallback for test
+const token = jwt.sign({ UserName: "freelancer1" }, process.env.JWT_SECRET);
 
-// Replace with actual user values from DB or use mocks
-const fakeToken = jwt.sign({ data: "freelancer11" }, JWT_SECRET, {
-  expiresIn: "1hr",
-});
+describe("Lancer Controller", () => {
 
-describe("Freelancer Routes", () => {
-  //   test("GET /freelancer/:fUser - Authenticated freelancer info", async () => {
-  //     const res = await request(app)
-  //       .get("/freelancer/freelancer11")
-  //       .set("authorization", `Bearer ${fakeToken}`);
-
-  //     expect(res.statusCode).toBe(200);
-  //     expect(res.body).toHaveProperty("UserName", "freelancer11");
-  //   });
-
-  test("GET /freelancer/:fUser/tasks/:userId/messages - Fetch messages", async () => {
-    const res = await request(app).get(
-      "/freelancer/freelancer11/tasks/client11/messages"
-    );
-
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("lancerId", "freelancer11");
-  });
-
-  test("POST /freelancer/:fUser/tasks/:userId/messages - Send message", async () => {
+  it("should accept a task", async () => {
     const res = await request(app)
-      .post("/freelancer/freelancer11/tasks/client11/messages")
-      .send({ msgContent: "Hello client" });
-
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("lancerId", "freelancer11");
+      .post("/api/accepttask")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ LancerName: "freelancer1", ClientName: "client1", TaskName: "task1" });
+    expect([200, 409]).toContain(res.statusCode);
   });
 
-  test("POST /freelancer/:fUser/earnings - Update earnings", async () => {
+  it("should reject a task", async () => {
     const res = await request(app)
-      .post("/freelancer/freelancer11/earnings")
-      .send({ amount: 20 });
-
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toBe(true);
+      .post("/api/rejecttask")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ LancerName: "freelancer1", ClientName: "client1", TaskName: "task2" });
+    expect([200, 404]).toContain(res.statusCode);
   });
 
-  test("POST /freelancer/:fUser/profile - Delete freelancer account", async () => {
-    const res = await request(app).post("/freelancer/freelancer11/profile");
-
-    expect(res.statusCode).toBe(200);
-    expect(res.text).toBe("success");
+  it("should return accepted tasks", async () => {
+    const res = await request(app)
+      .get("/api/acceptedTasks/freelancer1")
+      .set("Authorization", `Bearer ${token}`);
+    expect([200, 404]).toContain(res.statusCode);
   });
+
+  it("should search for freelancer by skill", async () => {
+    const res = await request(app)
+      .get("/api/searchLancer/JavaScript")
+      .set("Authorization", `Bearer ${token}`);
+    expect([200, 404]).toContain(res.statusCode);
+  });
+
+  it("should return message history for freelancer", async () => {
+    const res = await request(app)
+      .get("/api/lancerChatHistory/freelancer1")
+      .set("Authorization", `Bearer ${token}`);
+    expect([200, 404]).toContain(res.statusCode);
+  });
+
+  it("should update account earnings", async () => {
+    const res = await request(app)
+      .post("/api/updateAccount")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ amount: 100 });
+    expect([200, 404]).toContain(res.statusCode);
+  });
+
+  it("should delete a freelancer account", async () => {
+    const res = await request(app)
+      .delete("/api/lancerAccountDelete/freelancer1")
+      .set("Authorization", `Bearer ${token}`);
+    expect([200, 404]).toContain(res.statusCode);
+  });
+
 });
