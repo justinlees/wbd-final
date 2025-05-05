@@ -28,7 +28,7 @@ const CheckoutForm = ({ amount, onSuccess }) => {
     setError("");
 
     // Step 1: Get PaymentIntent from backend
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URI}/freelancer/payment-intent`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/payment-intent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: amount * 100 }), // in cents

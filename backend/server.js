@@ -394,7 +394,7 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 /* Payment Gateway */
-app.use('/api/payment', require('./routes/stripe'));
+app.use('/', require('./routes/stripe'));
 
 if (require.main === module) {
   // Only listen when running server.js directly

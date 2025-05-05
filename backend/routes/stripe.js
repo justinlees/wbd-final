@@ -4,7 +4,7 @@ const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY); // from your .env
 
 // Create Payment Intent
-router.post('/create-payment-intent', async (req, res) => {
+router.post('/freelancer/:fUser/payment-intent', async (req, res) => {
     const { amount, currency } = req.body;
 
     try {
