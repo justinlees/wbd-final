@@ -1,276 +1,182 @@
-/* General Reset */
+/* Reset and base styling */
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #f7f9fc;
+  color: #1a1a1a;
 }
 
-.Landing button {
-  border: none;
-  background-color: transparent;
-}
-
-/* Header Styling */
-.Landing #Header {
-  background-color: #1e1e1e;
-  height: 5rem;
+/* Header */
+#Header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  padding: 2rem 4rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.Landing #Header h1 {
-  margin: 0 2rem;
-  font-size: 2.3rem;
-  color: #00bcd4;
+#Header h1 {
+  font-size: 2rem;
   font-weight: bold;
-  font-family: "Kanit";
+  color: #1a73e8;
 }
 
-.Landing #Header h1 span {
-  color: #0097a7;
-  margin: 0 0.5rem;
-  font-family: "Kanit";
+#Header h1 span {
+  color: #ea4335;
 }
 
-.Landing #Header ul {
-  margin-left: auto;
-  margin-right: 2rem;
+#Header ul {
   list-style: none;
-  display: flex;
-  align-items: center;
 }
 
-.Landing #Header ul li {
-  margin-left: 1.5rem;
+#Header ul li {
+  display: inline-block;
 }
 
-.Landing #Header ul li .login.button {
+#Header .button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
   text-decoration: none;
-  background: #00bcd4;
-  color: #ffffff;
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
-  font-size: 1rem;
-  transition: all 0.5s ease;
+  transition: background 0.3s ease;
 }
 
-.Landing #Header ul li .login.button:hover {
-  background: #0097a7;
+#Header .button:hover {
+  background-color: #155ab6;
 }
 
-/* Landing Page Styling */
-.Landing {
-  height: 100%;
-  width: 100%;
-  background-color: #121212;
-  overflow-x: hidden;
-}
-
-.Landing main {
+/* Main */
+main {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 5%;
-  height: calc(100vh - 5rem);
-  margin-top: 5rem;
+  padding: 4rem;
 }
 
-.Landing main .mainleft {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.mainleft,
+.mainright {
+  flex: 1 1 500px;
+  padding: 2rem;
 }
 
-.Landing main .mainleft h1 {
-  font-size: 3rem;
-  line-height: 1.2;
+.mainleft h1.animated-text {
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #00bcd4;
+  line-height: 1.3;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
-.Landing main .mainleft h3 {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: #cccccc;
+.cursor {
+  color: #1a73e8;
+  font-weight: bold;
 }
 
-.Landing main .mainleft .buttons {
-  margin-top: 1.5rem;
-  display: flex;
+.mainleft h3 {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
 }
 
-.Landing main .mainleft .buttons button a {
+.buttons button {
   margin-right: 1rem;
-  border: 1px solid #00bcd4;
-  display: block;
+}
+
+.client.button,
+.freelancer.button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
-  background-color: transparent;
-  font-size: 1rem;
-  color: #00bcd4;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.Landing main .mainleft .buttons button a:hover {
-  background-color: #00bcd4;
-  color: #ffffff;
-}
-
-.Landing main .mainleft .buttons .client,
-.Landing main .mainleft .buttons .freelancer {
-  text-decoration: none;
-  color: #000000;
-}
-
-.Landing main .mainleft .buttons .client:hover,
-.Landing main .mainleft .buttons .freelancer:hover {
-  color: #ffffff;
-}
-
-.Landing main .mainright {
-  width: 45%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Landing main .mainright img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
   border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.8s;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-.Landing main .mainright img:hover {
-  max-width: 450px;
+.client.button:hover,
+.freelancer.button:hover {
+  background-color: #0d47a1;
+}
+
+.mainright img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Freelance Sections */
 .freelance-section {
   display: flex;
+  flex-wrap: wrap;
+  padding: 4rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem 5%;
-  background-color: #ffffff;
-  border-top: 1px solid #ddd;
-  transition: all 0.5s;
+  gap: 2rem;
 }
 
-.freelance-section:hover {
-  background-color: #efefef;
-  text-shadow: 1px 1px 3px #aaa;
+.freelance-section .image-left,
+.freelance-section .image-right {
+  flex: 1 1 400px;
 }
 
 .freelance-section img {
   width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  border-radius: 15px;
 }
 
 .freelance-section .text-right,
 .freelance-section .text-left {
-  width: 50%;
-  padding: 1rem;
+  flex: 1 1 400px;
 }
 
 .freelance-section h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  color: #1a1a1a;
   margin-bottom: 1rem;
-  color: #007bff;
 }
 
 .freelance-section p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: #333333;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
 }
 
-.freelance-section .image-left {
-  width: 50%;
-}
-
-.freelance-section.reverse {
+.reverse {
   flex-direction: row-reverse;
 }
 
-/* Responsiveness for Freelance Sections */
+/* Footer (assumed styling) */
+footer {
+  background-color: #ffffff;
+  padding: 2rem 4rem;
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+
+  main,
   .freelance-section {
     flex-direction: column;
-    text-align: center;
+    padding: 2rem;
   }
 
-  .freelance-section.reverse {
-    flex-direction: column;
-  }
-
-  .freelance-section .image-left,
-  .freelance-section .image-right {
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
-
-  .freelance-section .text-right,
-  .freelance-section .text-left {
-    width: 100%;
-  }
-}
-
-/* Ensure No Hidden or Overlapping Sections */
-.Landing section {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.Landing main,
-.Landing section {
-  position: relative;
-  z-index: 1;
-}
-
-/* Animated Text */
-.animated-text {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #00bcd4;
-}
-
-.cursor {
-  display: inline-block;
-  background-color: #00bcd4;
-  width: 2px;
-  height: 1.5rem;
-  margin-left: 0.2rem;
-  animation: blink 0.7s steps(2, start) infinite;
-}
-
-@keyframes blink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
+  .buttons button {
+    margin-bottom: 1rem;
   }
 }

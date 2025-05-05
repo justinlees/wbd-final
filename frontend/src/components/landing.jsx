@@ -13,7 +13,6 @@ function Landing() {
   const typingSpeed = 150;
   const deletingSpeed = 100;
 
-  // Use useRef to persist the phrases array
   const phrasesRef = useRef([
     "Discover Talent",
     "Unlock Opportunities",
@@ -44,7 +43,7 @@ function Landing() {
       isDeleting ? deletingSpeed : typingSpeed
     );
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, loopNum]);  // Removed `phrases` dependency
+  }, [currentText, isDeleting, loopNum]);
 
   return (
     <div className="Landing">
