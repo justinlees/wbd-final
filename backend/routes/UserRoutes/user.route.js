@@ -8,6 +8,7 @@ const {
   requestTask,
   showUserTasks,
   userMsg,
+  postTask,
 } = require("../controllers/user");
 const userRouter = express.Router();
 
@@ -23,5 +24,6 @@ userRouter.post("/:userId", searchLancer);
 userRouter.post("/:userId/tasks", cancelTask);
 userRouter.post("/:userId/:fUser/requestPage", requestTask);
 userRouter.post("/:userId/tasks/:fUser/messages", userMsg);
+userRouter.post('/:userId/post-task', postTask);
 
 module.exports = userRouter;

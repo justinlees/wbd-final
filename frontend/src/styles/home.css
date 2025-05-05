@@ -82,41 +82,76 @@
   margin-top: 10rem;
 }
 
-.HomePage .MainPage .searchBar {
+.HomePage .MainPage .searchBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.HomePage .MainPage .postTaskBtn {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Popup styles */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
 }
 
-.HomePage .MainPage .searchBar fieldset {
-  width: 60%;
+.popupForm {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
   display: flex;
-  min-width: 500px;
-  margin: 1rem;
-  border: none;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.HomePage .MainPage .searchBar fieldset input {
+.popupForm input,
+.popupForm textarea {
   width: 100%;
-  height: 2.5rem;
-  padding: 0.5rem;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border: 1px solid #aaa;
-  color: #555;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.HomePage .MainPage .searchBar fieldset button {
-  width: 5rem;
-  height: 2.5rem;
-  background-color: #111;
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
 
-  color: #fdfdfd;
+.popupActions button {
+  padding: 0.5rem 1rem;
   border: none;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popupActions button:first-child {
+  background-color: #ccc;
+}
+
+.popupActions button:last-child {
+  background-color: #28a745;
+  color: white;
 }
 
 .HomePage .MainPage .freelancersDisplay {

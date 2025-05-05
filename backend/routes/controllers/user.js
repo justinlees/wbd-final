@@ -6,6 +6,7 @@ const collectionM = require("../../model/Mmodel");
 const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
+const Task = require('../models/Task');
 
 const userAuth = async (req, res) => {
   const token = req.headers["authorization"];
@@ -198,6 +199,23 @@ const userMsg = async (req, res) => {
   }
 };
 
+const postTask = async (req, res) => {
+  try {
+    const { taskName, taskDescription, postedBy } = req.body;
+
+    if (!taskName || !taskDescription || !postedBy) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const task = new Task({ taskName, taskDescription, postedBy });
+    await task.save();
+
+    res.status(201).json({ message: 'Task posted successfully', task });
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};
+
 module.exports = {
   userAuth,
   showUserMsg,
@@ -206,4 +224,5 @@ module.exports = {
   requestTask,
   showUserTasks,
   userMsg,
+  postTask,
 };

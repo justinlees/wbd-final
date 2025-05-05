@@ -31,22 +31,80 @@ export default function MainPage() {
     "#00AA00",
   ];
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData(e.target);
+    const taskName = formData.get('taskName');
+    const taskDescription = formData.get('taskDescription');
+    const postedBy = userData?.UserName || "Unknown"; // Adjust based on actual user context
+  
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/post-task`, {
+        taskName,
+        taskDescription,
+        postedBy,
+      });
+  
+      alert('Task posted successfully!');
+      setShowPopup(false);
+    } catch (error) {
+      console.error('Error posting task:', error);
+      alert('Failed to post task');
+    }
+  };
+  
   return (
     <div className="MainPage">
-      <div className="searchBar">
-        <Form>
-          <fieldset>
-            <input
-              type="search"
-              placeholder="Search skills"
-              name="query"
-              required
-            />
-            <button type="submit">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </fieldset>
-        </Form>
+      <div className="searchBarContainer">
+        <div className="searchBar">
+          <Form>
+            <fieldset>
+              <input
+                type="search"
+                placeholder="Search skills"
+                name="query"
+                required
+              />
+              <button type="submit">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </fieldset>
+          </Form>
+        </div>
+
+        <button className="postTaskBtn" onClick={() => setShowPopup(true)}>
+          Post a Task
+        </button>
+
+        {showPopup && (
+          <div className="popupOverlay">
+            <div className="popupForm">
+              <h2>Post a Task</h2>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="taskName"
+                  placeholder="Task Name"
+                  required
+                />
+                <textarea
+                  name="taskDescription"
+                  placeholder="Task Description"
+                  required
+                />
+                <div className="popupActions">
+                  <button type="button" onClick={() => setShowPopup(false)}>
+                    Cancel
+                  </button>
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="freelancersDisplay">
