@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/landing.css";
 import landingpageimg from "../images/landingpageimg.png";
 import x1 from "../images/x1.png";
@@ -12,17 +12,18 @@ function Landing() {
   const [loopNum, setLoopNum] = useState(0);
   const typingSpeed = 150;
   const deletingSpeed = 100;
-  let phrases = [];
+
+  // Use useRef to persist the phrases array
+  const phrasesRef = useRef([
+    "Discover Talent",
+    "Unlock Opportunities",
+    "Build Your Dream Career",
+  ]);
 
   useEffect(() => {
-    phrases = [
-      "Discover Talent",
-      "Unlock Opportunities",
-      "Build Your Dream Career",
-    ];
     const handleTyping = () => {
-      const i = loopNum % phrases.length;
-      const fullText = phrases[i];
+      const i = loopNum % phrasesRef.current.length;
+      const fullText = phrasesRef.current[i];
 
       if (isDeleting) {
         setCurrentText(fullText.substring(0, currentText.length - 1));
@@ -43,7 +44,7 @@ function Landing() {
       isDeleting ? deletingSpeed : typingSpeed
     );
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, loopNum, phrases]);
+  }, [currentText, isDeleting, loopNum]);  // Removed `phrases` dependency
 
   return (
     <div className="Landing">
