@@ -4,9 +4,11 @@ import {
   Link,
   Form,
   useSearchParams,
+  useActionData,
+  redirect,
 } from "react-router-dom";
 import axios from 'axios';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export default function MainPage() {
   const userData = useOutletContext();
@@ -45,28 +47,7 @@ export default function MainPage() {
 
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
   
-    const formData = new FormData(e.target);
-    const taskName = formData.get('taskName');
-    const taskDescription = formData.get('taskDescription');
-    const postedBy = userData?.UserName || "Unknown"; // Adjust based on actual user context
-  
-    try {
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/post-task`, {
-        taskName,
-        taskDescription,
-        postedBy,
-      });
-  
-      alert('Task posted successfully!');
-      setShowPopup(false);
-    } catch (error) {
-      console.error('Error posting task:', error);
-      alert('Failed to post task');
-    }
-  };
   
   return (
     <div className="MainPage">
@@ -87,7 +68,7 @@ export default function MainPage() {
           </Form>
         </div>
 
-        <button className="postTaskBtn" onClick={() => setShowPopup(true)}>
+        <button className="postTaskBtn" style={{color:"black",backgroundColor:"white"}} onClick={() => setShowPopup(true)}>
           Post a Task
         </button>
 
@@ -95,7 +76,7 @@ export default function MainPage() {
           <div className="popupOverlay">
             <div className="popupForm">
               <h2>Post a Task</h2>
-              <form onSubmit={handleSubmit}>
+              <Form method="post">
                 <input
                   type="text"
                   name="taskName"
@@ -113,7 +94,7 @@ export default function MainPage() {
                   </button>
                   <button type="submit">Submit</button>
                 </div>
-              </form>
+              </Form>
             </div>
           </div>
         )}
@@ -198,6 +179,6 @@ export async function Action({ request, params }) {
     }
   } catch (error) {
     // Handle error – return something usable by useActionData()
-    return json({ error: error.response?.data?.message || 'Failed to post task' }, { status: 500 });
+    return res.data;
   }
 }

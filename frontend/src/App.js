@@ -10,7 +10,7 @@ import Settings from "./components/Settings";
 
 /*Client Imports */
 import Home, { Loader as Cloader } from "./Layouts/User/home";
-import MainPage from "./components/User/MainPage";
+import MainPage, { Action as PostTask } from "./components/User/MainPage";
 import CTasks, { Loader as Tloader } from "./components/User/CTasks";
 import MessageEntry, {
   Action as UentryAction,
@@ -100,12 +100,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MainPage />,
+        action: PostTask
       },
       {
         path: ":fUser/requestPage",
         element: <RequestPage />,
         action: RequestAction,
       },
+
       {
         path: "tasks",
         element: <CTasks />,
