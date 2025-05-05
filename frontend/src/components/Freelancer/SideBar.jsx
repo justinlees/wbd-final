@@ -1,40 +1,37 @@
 import React from "react";
-import { NavLink, useParams, Form } from "react-router-dom";
+import { NavLink, useParams, Form, useFetcher } from "react-router-dom";
 import axios from "axios";
 
 const handleLogout = () => {
-  // Remove the token from local storage
   localStorage.removeItem("token");
-
-  // Redirect to the home page
   window.location.href = "/";
 };
 
-export default function FsideBar({ userData }) {
+export default function FsideBar({ userData, refreshUserData }) {
   const params = useParams();
-  console.log(userData.profilePic);
   const [click, setClick] = React.useState(0);
+  const fetcher = useFetcher();
+
+  // Trigger a refresh after upload success
+  React.useEffect(() => {
+    if (fetcher.data?.success) {
+      alert("Upload success");
+      refreshUserData(); // function passed from parent to reload user data
+    }
+  }, [fetcher.data]);
+
   return (
     <nav className="fSideBar">
       <div className="top">
         <figure>
           {userData.profilePic ? (
-            <img src={"/profile/" + userData.profilePic} alt="profilePicture" />
+            <img src={userData.profilePic} alt="profilePicture" />
           ) : (
-            <>
-              <figcaption>{params.fUser.charAt(0).toUpperCase()}</figcaption>
-            </>
+            <figcaption>{params.fUser.charAt(0).toUpperCase()}</figcaption>
           )}
-          <i
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              if (click === 0) setClick(1);
-              else setClick(0);
-            }}
-          >
-            {click === 0 ? (
-              <span class="material-symbols-outlined">edit</span>
-            ) : (
+
+          <i style={{ cursor: "pointer" }} onClick={() => setClick(!click)}>
+            {click ? (
               <span
                 style={{
                   color: "red",
@@ -43,86 +40,44 @@ export default function FsideBar({ userData }) {
                   backgroundColor: "#ccc",
                   borderRadius: "50%",
                 }}
-                class="material-symbols-outlined"
+                className="material-symbols-outlined"
               >
                 close
               </span>
+            ) : (
+              <span className="material-symbols-outlined">edit</span>
             )}
           </i>
-          {click ? (
+
+          {click && (
             <article>
-              <Form
-                method="POST"
+              <fetcher.Form
+                method="post"
                 encType="multipart/form-data"
                 className="picUpload"
+                action={`../sidebar/${params.fUser}`} // must match route using Action()
               >
                 <input type="file" name="profilePic" required />
                 <button type="submit">Upload</button>
-              </Form>
+              </fetcher.Form>
             </article>
-          ) : (
-            ""
           )}
         </figure>
 
         <h2>{params.fUser}</h2>
         <hr />
       </div>
+
       <div className="middle">
         <ul>
-          <li>
-            <NavLink
-              to="profile"
-              className={({ isActive }) =>
-                isActive ? "activeNavLink" : "NavLink"
-              }
-            >
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="tasks"
-              className={({ isActive }) =>
-                isActive ? "activeNavLink" : "NavLink"
-              }
-            >
-              Tasks
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="earnings"
-              className={({ isActive }) =>
-                isActive ? "activeNavLink" : "NavLink"
-              }
-            >
-              Earnings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="."
-              end
-              className={({ isActive }) =>
-                isActive ? "activeNavLink" : "NavLink"
-              }
-            >
-              DashBoard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="settings"
-              className={({ isActive }) =>
-                isActive ? "activeNavLink" : "NavLink"
-              }
-            >
-              Settings
-            </NavLink>
-          </li>
+          <li><NavLink to="profile" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Profile</NavLink></li>
+          <li><NavLink to="tasks" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Tasks</NavLink></li>
+          <li><NavLink to="earnings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Earnings</NavLink></li>
+          <li><NavLink to="." end className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>DashBoard</NavLink></li>
+          <li><NavLink to="settings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Settings</NavLink></li>
         </ul>
       </div>
+
       <div className="bottom">
         <button onClick={handleLogout}>Logout</button>
       </div>
@@ -132,15 +87,20 @@ export default function FsideBar({ userData }) {
 
 export async function Action({ request, params }) {
   const formData = await request.formData();
-  const res = await axios.post(
-    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}`,
-    formData
-  );
-  if (res) {
-    alert("Upload Success");
-    return "";
-  } else {
-    alert("Upload Failed");
-    return "";
+
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}`,
+      formData
+    );
+
+    if (res.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
+  } catch (err) {
+    console.error("Upload error:", err);
+    return { success: false };
   }
 }

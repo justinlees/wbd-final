@@ -1,52 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import "../styles/landing.css";
 import landingpageimg from "../images/landingpageimg.png";
-import x1 from "../images/x1.png";
-import x2 from "../images/x2.png";
+import x1 from "../images/x1.png"; // Import x1.png
+import x2 from "../images/x2.png"; // Import x2.png
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 
 function Landing() {
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-
-  const typingSpeed = 100;
-  const deletingSpeed = 50;
-
-  const phrasesRef = useRef([
-    "Discover Talent",
-    "Unlock Opportunities",
-    "Build Your Dream Career",
-    "Freelance Without Limits",
-    "Get Jobs Done",
-  ]);
-
-  useEffect(() => {
-    const i = loopNum % phrasesRef.current.length;
-    const fullText = phrasesRef.current[i];
-
-    if (isDeleting) {
-      setCurrentText((prev) => fullText.substring(0, prev.length - 1));
-    } else {
-      setCurrentText((prev) => fullText.substring(0, prev.length + 1));
-    }
-
-    let timeout = setTimeout(() => {
-      if (!isDeleting && currentText === fullText) {
-        setTimeout(() => setIsDeleting(true), 800);
-      } else if (isDeleting && currentText === "") {
-        setIsDeleting(false);
-        setLoopNum((prev) => prev + 1);
-      }
-    }, isDeleting ? deletingSpeed : typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, loopNum]);
-
   return (
     <div className="Landing">
+      <div className="cover"></div>
       <header id="Header">
+        <div className="cover"></div>
         <h1>
           JOB<span>DONE</span>
         </h1>
@@ -62,10 +27,7 @@ function Landing() {
       </header>
       <main>
         <div className="mainleft">
-          <h1 className="animated-text">
-            {currentText}
-            <span className="cursor">|</span>
-          </h1>
+          <h1>Discover Talent & Unlock Opportunities</h1>
           <h3>
             Connecting skilled freelancers with clients seeking the right
             talent, we foster a vibrant community where collaboration thrives
@@ -85,7 +47,7 @@ function Landing() {
           </div>
         </div>
         <div className="mainright">
-          <img src={landingpageimg} alt="Landing" />
+          <img src={landingpageimg} alt="" />
         </div>
       </main>
       <section className="freelance-section">

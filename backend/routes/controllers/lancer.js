@@ -52,18 +52,28 @@ const showLancerMsg = async (req, res) => {
 
 // Freelancer profile upload
 const profileUpload = async (req, res) => {
-  console.log(req.params.fUser);
-  console.log(req.body);
-  console.log(req.file);
-  const findUser = await collectionF.findOneAndUpdate(
-    { UserName: req.params.fUser },
-    { profilePic: req.file.filename }
-  );
-  console.log("Profile Uploaded");
-  if (findUser) {
-    res.send("Success");
-  } else {
-    res.send(null);
+  try {
+    console.log(req.params.fUser);
+    console.log(req.file); // multer + cloudinary adds file info here
+
+    const imageUrl = req.file.path;       // Cloudinary URL
+    const publicId = req.file.filename;   // Cloudinary public ID
+
+    const findUser = await collectionF.findOneAndUpdate(
+      { UserName: req.params.fUser },
+      { profilePic: imageUrl }, // Save full URL
+      { new: true }
+    );
+
+    if (findUser) {
+      console.log("Profile Uploaded");
+      res.status(200).json({ success: true, url: imageUrl });
+    } else {
+      res.status(404).json({ success: false, message: "User not found" });
+    }
+  } catch (err) {
+    console.error("Upload Error:", err);
+    res.status(500).json({ success: false, error: "Server error" });
   }
 };
 
