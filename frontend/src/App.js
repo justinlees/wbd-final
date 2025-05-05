@@ -3,10 +3,6 @@ import React from "react";
 import Landing from "./components/landing";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
-
 import FsignUp, { Action as FsignUpAction } from "./components/FsignUp";
 import CsignUp, { Action as CsignUpAction } from "./components/CsignUp";
 import Login, { Action as loginAction } from "./components/login";
@@ -67,6 +63,10 @@ import Utilities, {
 } from "./components/Admin/ManagerInfo";
 
 import ErrorPage from "./components/ErrorPage";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
 
 const router = createBrowserRouter([
   {

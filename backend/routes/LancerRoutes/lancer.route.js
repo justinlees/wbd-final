@@ -22,6 +22,7 @@ const {
   finishedTasks,
   lancerEarnings,
   profileUpload,
+  createPaymentIntent
 } = require("../controllers/lancer");
 
 /* Router level middleware */
