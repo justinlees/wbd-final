@@ -8,13 +8,22 @@ import {
 import axios from 'axios';
 import { useState } from "react";
 
-
 export default function MainPage() {
   const userData = useOutletContext();
   const lancers = userData.freelancer ? userData.freelancer : userData;
   const [searchParams] = useSearchParams();
 
   const query = searchParams.get("query");
+
+  const actionData = useActionData();
+
+  useEffect(() => {
+    if (actionData?.message) {
+      alert('Task posted!');
+    } else if (actionData?.error) {
+      alert(`Error: ${actionData.error}`);
+    }
+  }, [actionData]);
 
   const filteredData = query
     ? lancers.filter(
@@ -172,14 +181,23 @@ export default function MainPage() {
 }
 
 export async function Action({ request, params }) {
-  const formData = Object.fromEntries(await request.formData());
-  const res = await axios.post(
-    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/profile`,
-    formData
-  );
-  if (res === "success") {
-    return redirect("/");
-  } else {
-    return "";
+  try {
+    const formData = Object.fromEntries(await request.formData());
+
+    const res = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/post-task`,
+      formData
+    );
+
+    if (res.data) {
+      // Option 1: Redirect to a success page or back to main
+      return redirect(`/home/${params.userId}`);
+      
+      // Option 2: Return the task data for display (if not redirecting)
+      // return json(res.data);
+    }
+  } catch (error) {
+    // Handle error – return something usable by useActionData()
+    return json({ error: error.response?.data?.message || 'Failed to post task' }, { status: 500 });
   }
 }
