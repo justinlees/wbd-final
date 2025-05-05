@@ -11,11 +11,13 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Freelancer token authentication
 const lancerAuth = async (req, res) => {
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(403).json({ message: "Token required" });
   }
+
+  const token = authHeader.startsWith('Bearer ') ? authHeader.split(' ')[1] : authHeader;
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
