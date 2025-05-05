@@ -42,7 +42,7 @@ function Landing() {
       isDeleting ? deletingSpeed : typingSpeed
     );
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, loopNum]);
+  }, [currentText, isDeleting, loopNum, phrases]);
 
   return (
     <div className="Landing">
