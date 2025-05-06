@@ -6,7 +6,7 @@ const collectionM = require("../../model/Mmodel");
 const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
-const Task = require('../../model/Task');
+const task = require('../../model/Task');
 
 const userAuth = async (req, res) => {
   const authHeader = req.headers["authorization"];
@@ -209,10 +209,10 @@ const postTask = async (req, res) => {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    const task = new Task({ taskName, taskDescription, postedBy });
-    await task.save();
+    const taskdetails = new tast({ taskName, taskDescription, postedBy });
+    await taskdetails.save();
 
-    res.status(201).json({ message: 'Task posted successfully', task });
+    res.status(201).json({ message: 'Task posted successfully', taskdetails });
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
