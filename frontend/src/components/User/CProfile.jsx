@@ -53,10 +53,12 @@ export default function CProfile() {
     if (!validateForm()) return;
 
     try {
+      console.log("entered");;
       const res = await axios.put(
         `${process.env.REACT_APP_BACKEND_URI}/home/${user._id}/profile`,
         formData
       );
+      console.log("catched response"); 
       if (res.data === "success") {
         alert("Profile updated successfully");
         window.location.reload();
