@@ -55,7 +55,7 @@ export default function FsideBar({ userData }) {
                 method="post"
                 encType="multipart/form-data"
                 className="picUpload"
-                action={`../sidebar/${params.fUser}`} // must match route using Action()
+                action={`../freelancer/${params.fUser}`} // must match route using Action()
               >
                 <input type="file" name="profilePic" required />
                 <button type="submit">Upload</button>
