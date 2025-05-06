@@ -321,6 +321,15 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
+const exploreTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find(); // Optional populate if postedBy is a ref
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};
+
 module.exports = {
   lancerAuth,
   showLancerMsg,
@@ -331,4 +340,5 @@ module.exports = {
   lancerMsg,
   profileUpload,
   createPaymentIntent,
+  exploreTasks
 };

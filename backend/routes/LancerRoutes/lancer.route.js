@@ -14,7 +14,8 @@ const {
   finishedTasks,
   lancerEarnings,
   profileUpload,
-  createPaymentIntent
+  createPaymentIntent,
+  exploreTasks,
 } = require("../controllers/lancer");
 
 /* Router level middleware */
@@ -22,6 +23,7 @@ const {
 //get routes
 lancerRouter.get("/:fUser", lancerAuth);
 lancerRouter.get("/:fUser/tasks/:userId/messages", showLancerMsg);
+lancerRouter.get("/:fUser/explore", exploreTasks);
 
 //post routes
 lancerRouter.post("/:fUser", upload.single("profilePic"), profileUpload);

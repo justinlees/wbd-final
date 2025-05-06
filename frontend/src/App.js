@@ -40,6 +40,7 @@ import FacceptedTasks, {
 import FqueuedTasks, {
   Action as QueuedAction,
 } from "./components/Freelancer/FqueuedTasks";
+import Explore from "./components/Freelancer/Explore";
 import Earnings from "./components/Freelancer/Earnings";
 import TaskInfo from "./components/Freelancer/TaskInfo";
 import FMessages, {
@@ -208,6 +209,10 @@ const router = createBrowserRouter([
             element: <FMessageDisplay />,
           },
         ],
+      },
+      {
+        path: "explore",
+        element: <Explore />,
       },
       {
         path: "earnings",

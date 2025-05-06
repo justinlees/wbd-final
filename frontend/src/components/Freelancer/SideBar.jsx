@@ -72,6 +72,7 @@ export default function FsideBar({ userData }) {
         <ul>
           <li><NavLink to="profile" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Profile</NavLink></li>
           <li><NavLink to="tasks" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Tasks</NavLink></li>
+          <li><NavLink to="explore" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Explore</NavLink></li>
           <li><NavLink to="earnings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Earnings</NavLink></li>
           <li><NavLink to="." end className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>DashBoard</NavLink></li>
           <li><NavLink to="settings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Settings</NavLink></li>

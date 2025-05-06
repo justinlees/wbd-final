@@ -203,13 +203,14 @@ const userMsg = async (req, res) => {
 
 const postTask = async (req, res) => {
   try {
-    const { taskName, taskDescription, postedBy } = req.body;
+    const { taskName, taskDescription } = req.body;
+    const postedBy = req.params.userId;
 
     if (!taskName || !taskDescription || !postedBy) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    const taskdetails = new tast({ taskName, taskDescription, postedBy });
+    const taskdetails = new task({ taskName, taskDescription, postedBy });
     await taskdetails.save();
 
     res.status(201).json({ message: 'Task posted successfully', taskdetails });
