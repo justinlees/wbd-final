@@ -11,7 +11,7 @@ import Settings from "./components/Settings";
 
 /*Client Imports */
 import Home, { Loader as Cloader } from "./Layouts/User/home";
-import MainPage from "./components/User/MainPage";
+import MainPage, { Action as PostTaskAction } from "./components/User/MainPage";
 import CTasks, { Loader as Tloader } from "./components/User/CTasks";
 import MessageEntry, {
   Action as UentryAction,
@@ -67,6 +67,7 @@ import ErrorPage from "./components/ErrorPage";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { postTask } from "../../backend/routes/controllers/user";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
 
 const router = createBrowserRouter([
@@ -103,7 +104,9 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: ":fUser/post-task",
         element: <MainPage />,
+        action: PostTaskAction,
       },
       {
         path: ":fUser/requestPage",
