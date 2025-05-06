@@ -17,7 +17,7 @@ export default function Explore() {
     };
 
     exploreTasks();
-  }, [fUser]); // ✅ dependency added just in case
+  }, [fUser]);
 
   return (
 
