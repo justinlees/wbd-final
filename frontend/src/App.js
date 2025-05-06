@@ -67,7 +67,6 @@ import ErrorPage from "./components/ErrorPage";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { postTask } from "../../backend/routes/controllers/user";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE);
 
 const router = createBrowserRouter([
