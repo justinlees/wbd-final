@@ -1,3 +1,528 @@
+.HomePage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  overflow: auto;
+  background-color: whitesmoke;
+}
+
+.HomePage .topNav {
+  width: 100%;
+  height: 3rem;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background-color: #ededed;
+}
+
+.HomePage .topNav .left {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.HomePage .topNav .left div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.HomePage .topNav .left div a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.HomePage .topNav .left .activeTasks {
+  background-color: whitesmoke;
+  border-bottom: 4px solid tomato;
+  color: black;
+}
+
+.queryNav {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.queryNav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #555;
+  border-radius: 6px;
+}
+
+.HomePage a {
+  text-decoration: none;
+  color: tomato;
+  margin: 1rem;
+}
+
+.MainPage {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.MainPage .searchBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.MainPage .postTaskBtn {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Popup styles */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it overlays above everything */
+}
+
+.popupForm {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.popupForm input,
+.popupForm textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.popupActions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popupActions button:first-child {
+  background-color: #ccc;
+}
+
+.popupActions button:last-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.HomePage .MainPage .freelancersDisplay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+  margin-top: 2rem;
+  margin-bottom: 9rem;
+  background-color: white;
+  /* Black background */
+  position: relative;
+}
+
+.HomePage .MainPage .freelancersDisplay .row {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* Ensure blocks are aligned side by side */
+  align-items: flex-start;
+}
+
+.HomePage .MainPage .freelancerData {
+  width: 18rem;
+  height: 22rem;
+  padding: 1rem;
+  margin: 1.5rem;
+  /* Adjusted margin for better spacing */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+  /* Green border for visibility */
+  border-radius: 10px;
+  color: black;
+  /* Green text color */
+  background-color: white;
+  /* Dark gray background for contrast */
+  box-shadow: 0 0 10px black;
+  /* Green shadow for focus */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.HomePage .MainPage .freelancerData:hover {
+  transform: scale(1.05);
+  /* Slight zoom on hover */
+  box-shadow: 0 0 12px black;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.freelancersDisplay .lancerDetails h3 {
+  font-size: 1rem;
+  /* Adjust text size */
+  margin: 5px 0;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  overflow: hidden;
+  /* Hide overflow */
+  text-overflow: ellipsis;
+  /* Add ellipsis (...) for overflowed text */
+  max-width: 250px;
+  /* Limit text width */
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails img {
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  /* Green border for profile image */
+  border-radius: 50%;
+  /* Circular image */
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails h4 {
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: #00ff00;
+  /* Green text for titles */
+  text-align: center;
+}
+
+.HomePage .MainPage .freelancerData .lancerDetails p {
+  margin: 0.8rem 0;
+  color: #ccc;
+  /* Light gray text for descriptions */
+  font-size: 1rem;
+  text-align: center;
+}
+
+.HomePage .ClientTasks {
+  width: 100%;
+  height: 100%;
+  margin-top: 7rem;
+  display: flex;
+  overflow: scroll;
+}
+
+.HomePage .ClientTasks .top-nav {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.HomePage .ClientTasks .top-nav section {
+  width: 14rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dedede;
+  position: fixed;
+  left: 0;
+  top: 7rem;
+  z-index: 5;
+}
+
+.HomePage .ClientTasks .top-nav section .navigations {
+  width: 12rem;
+  line-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.HomePage .ClientTasks .top-nav .taskData {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 14rem;
+}
+
+.top-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.8s;
+}
+
+.top-nav a .navigations {
+  color: black;
+}
+
+.top-nav .activeTasks .navigations {
+  color: tomato;
+  background-color: #cdcdcd;
+  border-radius: 8px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 4px #111;
+}
+
+/* top-nav ended */
+
+.HomePage .connections {
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: scroll;
+}
+
+.HomePage .connections h1 {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  top: 0;
+  height: 6rem;
+  padding-left: 2rem;
+  background-color: whitesmoke;
+}
+
+.HomePage .connections .block1 {
+  width: 50%;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  background-color: #dedede;
+}
+
+.HomePage .connections .block1 article {
+  margin-left: 3rem;
+}
+
+.HomePage .connections .block1 a {
+  width: 6rem;
+  background-color: black;
+  color: white;
+  line-height: 2.5rem;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  border-radius: 8px;
+  margin-right: 3rem;
+}
+
+.HomePage .requestPage {
+  margin-top: 8rem;
+  margin-left: 2rem;
+}
+
+.HomePage .requestPage ul {
+  list-style-type: none;
+}
+
+.HomePage .requestPage ul li {
+  margin: 1rem;
+}
+
+.HomePage .requestPage .left {
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #111;
+  color: white;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 4px #222;
+}
+
+.HomePage .requestPage .right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.HomePage .requestPage form input {
+  display: none;
+}
+
+.HomePage .requestPage form h3 {
+  margin-bottom: 2rem;
+}
+
+.HomePage .requestPage form button {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: "Ubuntu";
+  color: black;
+  display: block;
+  margin: auto;
+  margin-top: 2rem;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.HomePage .requestPage form button:hover {
+  background-color: rgb(255, 77, 46);
+  box-shadow: 1px 1px 4px #111;
+}
+
+.HomePage .requestPage form .AboutTask {
+  display: block;
+  width: 20rem;
+  height: 8rem;
+  padding-left: 0.5rem;
+  background-color: #ccc;
+  border: 3px inset #ccc;
+  border-radius: 8px;
+  margin: 1rem;
+  color: black;
+  font-size: 1rem;
+}
+
+#TaskName {
+  height: 3rem;
+}
+
+#TaskDescription {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.CmessageEntry {
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CmessageEntry .block {
+  background-color: #dedede;
+  border-radius: 8px;
+}
+
+.CmessageEntry .block h2 {
+  line-height: 3rem;
+  padding: 0.5rem;
+}
+
+.CmessageEntry .block form {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  background-color: rgb(240, 240, 240);
+}
+
+.CmessageDisplay {
+  width: 40rem;
+  height: 25rem;
+  overflow-y: scroll;
+  background-color: rgb(240, 240, 240);
+}
+
+.CmessageEntry input {
+  border: none;
+  background-color: #dedede;
+  width: 20rem;
+  line-height: 2rem;
+  padding: 0.2rem;
+  padding-left: 0.5rem;
+}
+
+.CmessageEntry button {
+  border: none;
+  width: 4rem;
+  line-height: 2rem;
+  padding: 0.2rem;
+  background-color: #111;
+  color: white;
+}
+
+.CmessageDisplay .clientMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: white;
+  color: black;
+  margin-left: auto;
+}
+
+.CmessageDisplay .lancerMsg {
+  width: 10rem;
+  margin: 8px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: black;
+  color: whitesmoke;
+}
+
 .userDetail {
   margin-top: 8rem;
   padding: 20px;
