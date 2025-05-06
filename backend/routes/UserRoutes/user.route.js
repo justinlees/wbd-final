@@ -9,6 +9,7 @@ const {
   showUserTasks,
   userMsg,
   postTask,
+  profileUpdate,
 } = require("../controllers/user");
 const userRouter = express.Router();
 
@@ -25,5 +26,8 @@ userRouter.post("/:userId/tasks", cancelTask);
 userRouter.post("/:userId/:fUser/requestPage", requestTask);
 userRouter.post("/:userId/tasks/:fUser/messages", userMsg);
 userRouter.post('/:userId/post-task', postTask);
+
+//put methods
+userRouter.put('/:userId/profile', profileUpdate)
 
 module.exports = userRouter;

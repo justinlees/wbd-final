@@ -223,6 +223,21 @@ const postTask = async (req, res) => {
   }
 };
 
+const profileUpdate = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      req.body,
+      { new: true }
+    );
+    if (!updatedUser) return res.status(404).send("User not found");
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+}
+
 module.exports = {
   userAuth,
   showUserMsg,
@@ -232,4 +247,5 @@ module.exports = {
   showUserTasks,
   userMsg,
   postTask,
+  profileUpdate
 };
