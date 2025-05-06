@@ -103,10 +103,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: ":fUser/post-task",
         element: <MainPage />,
         action: PostTaskAction,
       },
+      // {
+      //   index: true,
+      //   path: ":fUser/post-task",
+      //   element: <MainPage />,
+      //   action: PostTaskAction,
+      // },
       {
         path: ":fUser/requestPage",
         element: <RequestPage />,
