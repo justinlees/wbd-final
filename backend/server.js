@@ -23,7 +23,7 @@ const lancerRouter = require("./routes/LancerRoutes/lancer.route");
 const userRouter = require("./routes/UserRoutes/user.route");
 const adminRouter = require("./routes/AdminRoutes/admin.route");
 
-const redisClient = require('./utils/redisClient');
+const redisClient = require("./utils/redisClient");
 
 //const storage = new GridFsStorage({ url });
 //const upload = multer({ storage });
@@ -39,9 +39,13 @@ app.use(express.static(path.join(__dirname, "public")));
 /* third party middleware */
 
 app.options("*", (req, res) => {
+  // res.header(
+  //   "Access-Control-Allow-Origin",
+  //   "https://freelancing-frontend-lake.vercel.app"
+  // );
   res.header(
     "Access-Control-Allow-Origin",
-    "https://freelancing-frontend-lake.vercel.app"
+    "https://web-dev-taupe.vercel.app/"
   );
   res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -50,7 +54,8 @@ app.options("*", (req, res) => {
 
 app.use(
   cors({
-    origin: "https://freelancing-frontend-lake.vercel.app", // Allow only your frontend origin
+    //origin: "https://freelancing-frontend-lake.vercel.app", // Allow only your frontend origin
+    origin: "https://web-dev-taupe.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific HTTP methods
     allowedHeaders: ["Authorization", "Content-Type"], // Allow specific headers
     credentials: true, // Allow cookies and credentials
@@ -396,16 +401,15 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 /* Redis TEST */
-app.get('/redis-test', async (req, res) => {
+app.get("/redis-test", async (req, res) => {
   try {
-    await redisClient.set('healthcheck', 'ok');
-    const result = await redisClient.get('healthcheck');
+    await redisClient.set("healthcheck", "ok");
+    const result = await redisClient.get("healthcheck");
     res.send(`Redis is working: ${result}`);
   } catch (err) {
     res.status(500).send(`Redis error: ${err.message}`);
   }
 });
-
 
 if (require.main === module) {
   // Only listen when running server.js directly
