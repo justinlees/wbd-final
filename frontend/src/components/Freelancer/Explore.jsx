@@ -20,7 +20,7 @@ export default function Explore() {
   }, [fUser]); // ✅ dependency added just in case
 
   return (
-    <div className="explorTaskse">
+    <div className="exploreTasks block1">
       <h2>Available Tasks</h2>
       {tasks.length ? (
         tasks.map((task, index) => (
