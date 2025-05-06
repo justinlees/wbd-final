@@ -20,21 +20,24 @@ export default function Explore() {
   }, [fUser]); // ✅ dependency added just in case
 
   return (
-    <div className="exploreTasks block1">
-      <h2>Available Tasks</h2>
-      {tasks.length ? (
-        tasks.map((task, index) => (
-          <div key={index} className="taskCard">
-            <h3>{task.taskName}</h3>
-            <p>{task.taskDescription}</p>
-            {task.postedBy && (
-              <small>Posted by: {task.postedBy.UserName || 'Unknown'}</small>
+
+    <div className="exploreTasks briefDetails">
+        <div className='block1'>
+            <h2>Available Tasks</h2>
+            {tasks.length ? (
+                tasks.map((task, index) => (
+                <div key={index} className="taskCard">
+                    <h3>{task.taskName}</h3>
+                    <p>{task.taskDescription}</p>
+                    {task.postedBy && (
+                    <small>Posted by: {task.postedBy.UserName || 'Unknown'}</small>
+                    )}
+                </div>
+                ))
+            ) : (
+                <p>No tasks to explore.</p>
             )}
-          </div>
-        ))
-      ) : (
-        <p>No tasks to explore.</p>
-      )}
+        </div>
     </div>
   );
 }
