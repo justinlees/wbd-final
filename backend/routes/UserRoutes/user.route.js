@@ -24,6 +24,6 @@ userRouter.post("/:userId", searchLancer, postTask);
 userRouter.post("/:userId/tasks", cancelTask);
 userRouter.post("/:userId/:fUser/requestPage", requestTask);
 userRouter.post("/:userId/tasks/:fUser/messages", userMsg);
-//userRouter.post('/:userId/post-task', postTask);
+userRouter.post('/:userId/post-task', postTask);
 
 module.exports = userRouter;
