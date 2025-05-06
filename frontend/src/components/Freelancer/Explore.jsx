@@ -21,7 +21,7 @@ export default function Explore() {
 
   return (
 
-    <div className="exploreTasks briefDetails">
+    <div className="exploreTasks briefDetails" style={{ zIndex: "100"}}>
         <div className='block1'>
             <h2>Available Tasks</h2>
             {tasks.length ? (
