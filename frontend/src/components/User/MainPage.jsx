@@ -164,6 +164,7 @@ export default function MainPage() {
 export async function Action({ request, params }) {
   try {
     const formData = Object.fromEntries(await request.formData());
+    console.log(formData);
 
     const res = await axios.post(
       `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/post-task`,
