@@ -29,6 +29,7 @@ import CRecent from "./components/User/CRecent";
 
 /* Freelancer Imports */
 import FreeLance, { Loader as Floader } from "./Layouts/Freelancer/freelancer";
+import { Action as SidebarAction } from "./components/Freelancer/SideBar";
 import FProfile, {
   Action as DeleteAction,
 } from "./components/Freelancer/FProfile";
@@ -161,7 +162,11 @@ const router = createBrowserRouter([
         index: true,
         element: <FdashBoard />,
       },
-
+      {
+        path: "sidebar/:fUser",
+        element: <FsideBar />,
+        action: SidebarAction, // 👈 Must import this from `SideBar.jsx`
+      },
       {
         path: "profile",
         element: <FProfile />,
