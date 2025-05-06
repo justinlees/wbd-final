@@ -206,6 +206,10 @@ const postTask = async (req, res) => {
     const { taskName, taskDescription } = req.body;
     const postedBy = req.params.userId;
 
+    console.log("POST /:userId/post-task hit");
+    console.log("Body:", req.body);
+    console.log("Params:", req.params);
+
     if (!taskName || !taskDescription || !postedBy) {
       return res.status(400).json({ message: 'All fields are required' });
     }
