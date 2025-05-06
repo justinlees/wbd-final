@@ -3,25 +3,22 @@ import { NavLink, useParams, useFetcher } from "react-router-dom";
 import axios from "axios";
 
 const handleLogout = () => {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  }
+  localStorage.removeItem("token");
+  window.location.href = "/";
 };
 
-export default function FsideBar({ userData, refreshUserData }) {
+export default function FsideBar({ userData }) {
   const params = useParams();
   const [click, setClick] = React.useState(0);
   const fetcher = useFetcher();
 
-  // Safe useEffect to avoid SSR issues
-  React.useEffect(() => {
-    if (typeof window !== "undefined" && fetcher?.data?.success) {
-      alert("Upload success");
-      refreshUserData?.(); // safely call if provided
-      setClick(false); // Close the upload UI after success
-    }
-  }, [fetcher.data, refreshUserData]);
+  // Trigger a refresh after upload success
+  // React.useEffect(() => {
+  //   if (fetcher.data?.success) {
+  //     alert("Upload success");
+  //     refreshUserData(); // function passed from parent to reload user data
+  //   }
+  // }, [fetcher.data]);
 
   return (
     <nav className="fSideBar">
@@ -30,22 +27,26 @@ export default function FsideBar({ userData, refreshUserData }) {
           {userData.profilePic ? (
             <img src={userData.profilePic} alt="profilePicture" />
           ) : (
-            <figcaption>{params.fUser?.charAt(0)?.toUpperCase()}</figcaption>
+            <figcaption>{params.fUser.charAt(0).toUpperCase()}</figcaption>
           )}
 
           <i style={{ cursor: "pointer" }} onClick={() => setClick(!click)}>
-            <span
-              style={{
-                color: click ? "red" : "inherit",
-                padding: 0,
-                margin: 0,
-                backgroundColor: click ? "#ccc" : "transparent",
-                borderRadius: "50%",
-              }}
-              className="material-symbols-outlined"
-            >
-              {click ? "close" : "edit"}
-            </span>
+            {click ? (
+              <span
+                style={{
+                  color: "red",
+                  padding: 0,
+                  margin: 0,
+                  backgroundColor: "#ccc",
+                  borderRadius: "50%",
+                }}
+                className="material-symbols-outlined"
+              >
+                close
+              </span>
+            ) : (
+              <span className="material-symbols-outlined">edit</span>
+            )}
           </i>
 
           {click && (
@@ -69,31 +70,11 @@ export default function FsideBar({ userData, refreshUserData }) {
 
       <div className="middle">
         <ul>
-          <li>
-            <NavLink to="profile" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="tasks" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>
-              Tasks
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="earnings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>
-              Earnings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="." end className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>
-              DashBoard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="settings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>
-              Settings
-            </NavLink>
-          </li>
+          <li><NavLink to="profile" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Profile</NavLink></li>
+          <li><NavLink to="tasks" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Tasks</NavLink></li>
+          <li><NavLink to="earnings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Earnings</NavLink></li>
+          <li><NavLink to="." end className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>DashBoard</NavLink></li>
+          <li><NavLink to="settings" className={({ isActive }) => isActive ? "activeNavLink" : "NavLink"}>Settings</NavLink></li>
         </ul>
       </div>
 
@@ -104,7 +85,6 @@ export default function FsideBar({ userData, refreshUserData }) {
   );
 }
 
-// Handle file upload POST request
 export async function Action({ request, params }) {
   const formData = await request.formData();
 
@@ -114,7 +94,11 @@ export async function Action({ request, params }) {
       formData
     );
 
-    return { success: res.status === 200 };
+    if (res.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (err) {
     console.error("Upload error:", err);
     return { success: false };
