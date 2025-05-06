@@ -171,6 +171,10 @@ const router = createBrowserRouter([
         action: DeleteAction,
       },
       {
+        path: "explore",
+        element: <Explore />,
+      },
+      {
         path: "tasks",
         element: <FTasks />,
         children: [
