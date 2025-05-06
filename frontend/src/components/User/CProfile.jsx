@@ -19,6 +19,7 @@ export default function CProfile() {
           <p>FirstName: {clientData.user.FirstName}</p>
           <p>LastName: {clientData.user.LastName}</p>
           <p>Email: {clientData.user.Email}</p>
+          <p>DOB: {clientData.user.DOB}</p>
           <p>Phone Number: {clientData.user.MobileNo}</p>
           <Form method="POST">
             <legend>Delete Account</legend>
