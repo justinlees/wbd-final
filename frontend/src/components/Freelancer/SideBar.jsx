@@ -9,7 +9,7 @@ const handleLogout = () => {
 
 export default function FsideBar({ userData }) {
   const params = useParams();
-  const [click, setClick] = React.useState(0);
+  const [click, setClick] = React.useState(false);
   const fetcher = useFetcher();
 
   // Trigger a refresh after upload success
