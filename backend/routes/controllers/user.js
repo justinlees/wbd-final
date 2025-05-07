@@ -76,7 +76,7 @@ const showUserMsg = async (req, res) => {
       lancerId: req.params.fUser,
       clientId: req.params.userId,
     });
-    if (!messages) {
+    if (!msgUpdate) {
       return res.status(500).json({ message: "Messages not found" });
     }
     res.status(200).send(msgUpdate);

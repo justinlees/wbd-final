@@ -50,7 +50,7 @@ export default function FacceptedTasks() {
                         name="taskName"
                         style={{ display: "none" }}
                       />
-                      <input type="file" required/>
+                      <input type="file" name="fileUpload" required/>
                       <button type="submit" id="confirmation">
                         Mark Complete
                       </button>
