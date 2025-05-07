@@ -255,6 +255,8 @@ const lancerAccountDelete = async (req, res) => {
 
 // Freelancer finished tasks display
 const finishedTasks = async (req, res) => {
+  console.log(req.params.fUser);
+  console.log(req.file);
   try {
     await collectionF.findOneAndUpdate(
       { UserName: req.params.fUser },

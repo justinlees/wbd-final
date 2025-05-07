@@ -38,7 +38,7 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <fetcher.Form method="POST" encType="multipart/form-data" action={`/freelancer/${freelancerData.fUser}/tasks/acceptedTasks`}>
+                    <fetcher.Form method="POST" encType="multipart/form-data" action={`../freelancer/${freelancerData.UserName}/tasks/acceptedTasks`}>
                       <input
                         type="text"
                         value={Mark.clientId}
@@ -50,7 +50,7 @@ export default function FacceptedTasks() {
                         value={Mark.taskName}
                         name="taskName"
                         style={{ display: "none" }}
-                      />e
+                      />
                       <input type="file" name="fileUpload" required/>
                       <button type="submit" id="confirmation">
                         Mark Complete
