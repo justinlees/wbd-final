@@ -13,7 +13,9 @@ export default function FProfile() {
     Email: freelancerData.Email || "",
     MobileNo: freelancerData.MobileNo || "",
     UserName: freelancerData.UserName || "",
-    Skill: freelancerData.Skill || ""
+    Skill: freelancerData.Skill || "",
+    workedAt: freelancerData.bio?.workedAt || "",
+    experience: freelancerData.bio?.experience || "",
   });
 
   const [errors, setErrors] = useState({});
@@ -137,7 +139,7 @@ export default function FProfile() {
             <label>Worked At:</label>
             <input
               type="text"
-              name="Skill"
+              name="workedAt"
               value={formData.bio?.workedAt}
               onChange={handleChange}
             />
@@ -146,7 +148,7 @@ export default function FProfile() {
             <label>Skills:</label>
             <input
               type="text"
-              name="Skill"
+              name="experience"
               value={formData.bio?.experience}
               onChange={handleChange}
             />
@@ -154,36 +156,10 @@ export default function FProfile() {
           <button type="submit">Save Changes</button>
         </form>
 
-        <p
-          onClick={() => setShowPopUp(true)}
-          style={{ color: "tomato", cursor: "pointer" }}
-        >
-          Account Deletion
-        </p>
-
-        {showPopUp && (
-          <div className="PopUp">
-            <Form method="POST">
-              <div>
-                <p>
-                  Once you click "delete", all your data will be gone and your
-                  account will not be seen to others.
-                </p>
-                <br />
-                <b>Confirm Deletion</b>
-              </div>
-              <input type="text" value="delete" name="delete" hidden />
-              <button type="submit">Delete</button>
-              <button
-                type="button"
-                className="cancel"
-                onClick={() => setShowPopUp(false)}
-              >
-                Cancel
-              </button>
-            </Form>
-          </div>
-        )}
+        <Form method="Delete">
+          <legend>Delete Account</legend>
+          <button type="submit" name="action" value="delete">Delete</button>
+        </Form>
       </div>
     </div>
   );
@@ -214,7 +190,8 @@ export async function Action({ request, params }) {
     );
 
     if (res.data === "success") {
-      return redirect("/"); // Or wherever you want to go after update
+      window.location.reload();
+
     } else {
       throw new Error("Failed to update profile");
     }

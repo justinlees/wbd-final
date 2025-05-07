@@ -127,10 +127,9 @@ export default function CProfile() {
           <button type="submit">Save Changes</button>
         </form>
 
-        <Form method="POST">
+        <Form method="Delete">
           <legend>Delete Account</legend>
-          <input type="hidden" name="delete" value="delete" />
-          <button>Delete</button>
+          <button type="submit" name="action" value="delete">Delete</button>
         </Form>
       </div>
     </div>
@@ -144,13 +143,13 @@ export async function Action({ request, params }) {
 
   try {
     // If this is a delete request
-    if (formData.delete === "delete") {
+    if (formData.action === "delete") {
       const res = await axios.delete(
         `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`
       );
 
       if (res.data === "success") {
-        return redirect("/");
+        return redirect("/")
       } else {
         throw new Error("Failed to delete account");
       }
@@ -163,7 +162,7 @@ export async function Action({ request, params }) {
     );
 
     if (res.data === "success") {
-      return redirect("/"); // Or wherever you want to go after update
+      window.location.reload();
     } else {
       throw new Error("Failed to update profile");
     }

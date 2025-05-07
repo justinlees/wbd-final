@@ -96,7 +96,8 @@ export async function Action({ request, params }) {
     );
 
     if (res.status === 200) {
-      return redirect('');
+      window.location.reload();
+
     } else {
       return { success: false };
     }
