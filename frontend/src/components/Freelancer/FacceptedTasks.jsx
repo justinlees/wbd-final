@@ -1,10 +1,11 @@
 import React from "react";
-import { useOutletContext, Link } from "react-router-dom";
+import { useOutletContext, Link, useFetcher } from "react-router-dom";
 import axios from "axios";
 
 export default function FacceptedTasks() {
   const freelancerData = useOutletContext();
   const [Mark, setMark] = React.useState(null);
+  const fetcher = useFetcher();
   return (
     <>
       {freelancerData.tasksAssigned.length ? (
@@ -37,7 +38,7 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <form method="POST" encType="multipart/form-data">
+                    <fetcher.Form method="POST" encType="multipart/form-data">
                       <input
                         text="text"
                         value={Mark.clientId}
@@ -62,7 +63,7 @@ export default function FacceptedTasks() {
                       >
                         Cancel
                       </button>
-                    </form>
+                    </fetcher.Form>
                   </div>
                 ) : (
                   ""

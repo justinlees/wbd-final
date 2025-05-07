@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useOutletContext, redirect } from "react-router-dom";
+import { useOutletContext, redirect, useFetcher } from "react-router-dom";
 import axios from "axios";
 
 export default function FProfile() {
   const freelancerData = useOutletContext();
+  const fetcher = useFetcher();
 
   const [formData, setFormData] = useState({
     FirstName: freelancerData.FirstName || "",
@@ -27,7 +28,7 @@ export default function FProfile() {
         <h1>Edit Profile</h1>
       </div>
       <div className="briefDetails">
-        <form className="block1">
+        <fetcher.Form className="block1">
           <div>
             <label>UserName:</label>
             <input type="text" value={formData.UserName} disabled />
@@ -101,12 +102,12 @@ export default function FProfile() {
             />
           </div>
           <button type="submit">Save Changes</button>
-        </form>
+        </fetcher.Form>
 
-        <form method="DELETE">
+        <fetcher.Form method="DELETE">
           <legend>Delete Account</legend>
           <button type="submit" name="action" value="delete">Delete</button>
-        </form>
+        </fetcher.Form>
       </div>
     </div>
   );
