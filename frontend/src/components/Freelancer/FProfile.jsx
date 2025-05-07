@@ -50,24 +50,24 @@ export default function FProfile() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
 
-    try {
-      const res = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/profile`,
-        formData
-      );
-      if (res.data === "success") {
-        alert("Profile updated successfully");
-        window.location.reload();
-      }
-    } catch (err) {
-      alert("Error updating profile");
-      console.error(err);
-    }
-  };
+  //   try {
+  //     const res = await axios.put(
+  //       `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/profile`,
+  //       formData
+  //     );
+  //     if (res.data === "success") {
+  //       alert("Profile updated successfully");
+  //       window.location.reload();
+  //     }
+  //   } catch (err) {
+  //     alert("Error updating profile");
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="freelanceDetail freelanceProfile">
@@ -144,7 +144,7 @@ export default function FProfile() {
             />
           </div>
           <div>
-            <label>Skills:</label>
+            <label>Experience:</label>
             <input
               type="text"
               name="experience"
@@ -155,10 +155,10 @@ export default function FProfile() {
           <button type="submit">Save Changes</button>
         </form>
 
-        <Form method="Delete">
+        <form method="DELETE">
           <legend>Delete Account</legend>
           <button type="submit" name="action" value="delete">Delete</button>
-        </Form>
+        </form>
       </div>
     </div>
   );
@@ -166,11 +166,11 @@ export default function FProfile() {
 
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
-  const userId = params.userId;
+  const userId = params.fUser;
 
   try {
     // If this is a delete request
-    if (formData.delete === "delete") {
+    if (formData.action === "delete") {
       const res = await axios.delete(
         `${process.env.REACT_APP_BACKEND_URI}/freelancer/${userId}/profile`
       );
@@ -182,17 +182,19 @@ export async function Action({ request, params }) {
       }
     }
 
-    // Otherwise, assume it's an update (you could expand this if needed)
-    const res = await axios.put(
-      `${process.env.REACT_APP_BACKEND_URI}/freelancer/${userId}/profile`,
-      formData
-    );
+    else {
+      // Otherwise, assume it's an update (you could expand this if needed)
+      const res = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URI}/freelancer/${userId}/profile`,
+        formData
+      );
 
-    if (res.data === "success") {
-      window.location.reload();
+      if (res.data === "success") {
+        window.location.reload();
 
-    } else {
-      throw new Error("Failed to update profile");
+      } else {
+        throw new Error("Failed to update profile");
+      }
     }
   } catch (error) {
     console.error("Action error:", error);

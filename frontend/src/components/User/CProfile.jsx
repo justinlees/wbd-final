@@ -48,26 +48,26 @@ export default function CProfile() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
 
-    try {
-      console.log("entered");;
-      const res = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URI}/home/${user.UserName}/profile`,
-        formData
-      );
-      console.log("catched response"); 
-      if (res.data === "success") {
-        alert("Profile updated successfully");
-        window.location.reload();
-      }
-    } catch (err) {
-      alert("Error updating profile");
-      console.error(err);
-    }
-  };
+  //   try {
+  //     console.log("entered");;
+  //     const res = await axios.put(
+  //       `${process.env.REACT_APP_BACKEND_URI}/home/${user.UserName}/profile`,
+  //       formData
+  //     );
+  //     console.log("catched response"); 
+  //     if (res.data === "success") {
+  //       alert("Profile updated successfully");
+  //       window.location.reload();
+  //     }
+  //   } catch (err) {
+  //     alert("Error updating profile");
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className="userDetail userProfile">
@@ -127,10 +127,11 @@ export default function CProfile() {
           <button type="submit">Save Changes</button>
         </form>
 
-        <Form method="Delete">
+        <form method="DELETE">
           <legend>Delete Account</legend>
           <button type="submit" name="action" value="delete">Delete</button>
-        </Form>
+        </form>
+        <form action="" method="delete"></form>
       </div>
     </div>
   );
@@ -155,16 +156,18 @@ export async function Action({ request, params }) {
       }
     }
 
-    // Otherwise, assume it's an update (you could expand this if needed)
-    const res = await axios.put(
-      `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`,
-      formData
-    );
+    else{
+      // Otherwise, assume it's an update (you could expand this if needed)
+      const res = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`,
+        formData
+      );
 
-    if (res.data === "success") {
-      window.location.reload();
-    } else {
-      throw new Error("Failed to update profile");
+      if (res.data === "success") {
+        window.location.reload();
+      } else {
+        throw new Error("Failed to update profile");
+      }
     }
   } catch (error) {
     console.error("Action error:", error);
