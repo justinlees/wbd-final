@@ -17,57 +17,9 @@ export default function FProfile() {
     experience: freelancerData.bio?.experience || "",
   });
 
-  const [errors, setErrors] = useState({});
-
-  // const validateForm = () => {
-  //   const currentErrors = {};
-  //   const nameRegEx = /^[a-zA-Z]+$/;
-  //   const mobileNoRegEx = /^[0-9]{10}$/;
-
-  //   if (!nameRegEx.test(formData.FirstName)) {
-  //     currentErrors.FirstName = "Enter a valid first name";
-  //   }
-  //   if (!nameRegEx.test(formData.LastName)) {
-  //     currentErrors.LastName = "Enter a valid last name";
-  //   }
-  //   const dobDate = new Date(formData.DOB);
-  //   const today = new Date();
-  //   if (!formData.DOB || dobDate > today) {
-  //     currentErrors.DOB = "Enter a valid date of birth";
-  //   }
-  //   if (
-  //     !mobileNoRegEx.test(formData.MobileNo) ||
-  //     parseInt(formData.MobileNo) < 6000000000
-  //   ) {
-  //     currentErrors.MobileNo = "Enter a valid 10-digit mobile number";
-  //   }
-
-  //   setErrors(currentErrors);
-  //   return Object.keys(currentErrors).length === 0;
-  // };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!validateForm()) return;
-
-  //   try {
-  //     const res = await axios.put(
-  //       `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/profile`,
-  //       formData
-  //     );
-  //     if (res.data === "success") {
-  //       alert("Profile updated successfully");
-  //       window.location.reload();
-  //     }
-  //   } catch (err) {
-  //     alert("Error updating profile");
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <div className="freelanceDetail freelanceProfile">
@@ -88,7 +40,6 @@ export default function FProfile() {
               value={formData.FirstName}
               disabled
             />
-            {errors.FirstName && <p>{errors.FirstName}</p>}
           </div>
           <div>
             <label>Last Name:</label>
@@ -98,7 +49,6 @@ export default function FProfile() {
               value={formData.LastName}
               disabled
             />
-            {errors.LastName && <p>{errors.LastName}</p>}
           </div>
           <div>
             <label>Email:</label>
@@ -112,7 +62,6 @@ export default function FProfile() {
               value={formData.DOB}
               disabled
             />
-            {errors.DOB && <p>{errors.DOB}</p>}
           </div>
           <div>
             <label>Mobile Number:</label>
@@ -122,7 +71,6 @@ export default function FProfile() {
               value={formData.MobileNo}
               onChange={handleChange}
             />
-            {errors.MobileNo && <p>{errors.MobileNo}</p>}
           </div>
           <div>
             <label>Skills:</label>
