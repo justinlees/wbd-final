@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   useOutletContext,
   Link,
@@ -7,8 +7,7 @@ import {
   useActionData,
   redirect,
 } from "react-router-dom";
-import axios from 'axios';
-import { useState,useEffect } from "react";
+import axios from "axios";
 
 export default function MainPage() {
   const userData = useOutletContext();
@@ -21,7 +20,7 @@ export default function MainPage() {
 
   useEffect(() => {
     if (actionData?.message) {
-      alert('Task posted!');
+      alert("Task posted!");
     } else if (actionData?.error) {
       alert(`Error: ${actionData.error}`);
     }
@@ -47,8 +46,6 @@ export default function MainPage() {
 
   const [showPopup, setShowPopup] = useState(false);
 
-  
-  
   return (
     <div className="MainPage">
       <div className="searchBarContainer">
@@ -68,7 +65,11 @@ export default function MainPage() {
           </Form>
         </div>
 
-        <button className="postTaskBtn" style={{color:"black",backgroundColor:"white"}} onClick={() => setShowPopup(true)}>
+        <button
+          className="postTaskBtn"
+          style={{ color: "black", backgroundColor: "white" }}
+          onClick={() => setShowPopup(true)}
+        >
           Post a Task
         </button>
 
@@ -103,7 +104,7 @@ export default function MainPage() {
       <div className="freelancersDisplay">
         <div className="row">
           {filteredData.length ? (
-            filteredData?.map((item, index) => (
+            filteredData.map((item, index) => (
               <div key={index} className="freelancerData">
                 <div className="inner-freelancerData">
                   <div className="lancerDetails">
@@ -113,25 +114,39 @@ export default function MainPage() {
                         height: "80px",
                         borderRadius: "50%",
                         border: "1px solid black",
+                        overflow: "hidden",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor:
-                          colors[
-                            Math.min(
-                              Math.floor(
-                                (item.UserName.charAt(0)
-                                  .toUpperCase()
-                                  .charCodeAt(0) -
-                                  65) /
-                                  5
-                              ),
-                              colors.length - 1
-                            )
-                          ],
+                        backgroundColor: item.profilePic
+                          ? "transparent"
+                          : colors[
+                              Math.min(
+                                Math.floor(
+                                  (item.UserName.charAt(0)
+                                    .toUpperCase()
+                                    .charCodeAt(0) -
+                                    65) /
+                                    5
+                                ),
+                                colors.length - 1
+                              )
+                            ],
                       }}
                     >
-                      <h2>{item.UserName.charAt(0).toUpperCase()}</h2>
+                      {item.profilePic ? (
+                        <img
+                          src={item.profilePic}
+                          alt={item.UserName}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        <h2>{item.UserName.charAt(0).toUpperCase()}</h2>
+                      )}
                     </div>
                     <br />
                     <br />

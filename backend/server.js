@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", [
-    "https://freelancing-frontend-lake.vercel.app",
+    "https://freelancing-frontend-lake.vercel.app", "http://localhost:3000"
     // "https://web-dev-taupe.vercel.app/",
   ]);
   // res.header(
@@ -56,7 +56,7 @@ app.use(
   cors({
     //origin: "https://freelancing-frontend-lake.vercel.app", // Allow only your frontend origin
     origin: [
-      "https://freelancing-frontend-lake.vercel.app",
+      "https://freelancing-frontend-lake.vercel.app", "http://localhost:3000"
       // "https://web-dev-taupe.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow specific HTTP methods
