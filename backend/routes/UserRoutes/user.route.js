@@ -10,6 +10,7 @@ const {
   userMsg,
   postTask,
   profileUpdate,
+  deleteProfile,
 } = require("../controllers/user");
 const userRouter = express.Router();
 
@@ -29,5 +30,8 @@ userRouter.post('/:userId/post-task', postTask);
 
 //put methods
 userRouter.put('/:userId/profile', profileUpdate)
+
+//delete methods
+userRouter.delete('/:userId/profile', deleteProfile)
 
 module.exports = userRouter;

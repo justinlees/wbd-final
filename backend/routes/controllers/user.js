@@ -264,6 +264,18 @@ const profileUpdate = async (req, res) => {
   }
 }
 
+const deleteProfile = async (req, res) => {
+  const { userId } = req.params.userId;
+
+  try {
+    await collectionC.findByIdAndDelete(userId);
+    return res.status(200).redirect('/');
+  } catch (error) {
+    console.error("Delete error:", error);
+    return res.status(500).send("error");
+  }
+}
+
 module.exports = {
   userAuth,
   showUserMsg,
@@ -273,5 +285,6 @@ module.exports = {
   showUserTasks,
   userMsg,
   postTask,
-  profileUpdate
+  profileUpdate,
+  deleteProfile,
 };

@@ -129,7 +129,7 @@ export default function CProfile() {
 
         <Form method="POST">
           <legend>Delete Account</legend>
-          <input type="text" name="delete" value="delete" hidden />
+          <input type="hidden" name="delete" value="delete" />
           <button>Delete</button>
         </Form>
       </div>
@@ -140,13 +140,35 @@ export default function CProfile() {
 
 export async function Action({ request, params }) {
   const formData = Object.fromEntries(await request.formData());
-  const res = await axios.post(
-    `${process.env.REACT_APP_BACKEND_URI}/home/${params.userId}/profile`,
-    formData
-  );
-  if (res === "success") {
-    return redirect("/");
-  } else {
-    return "";
+  const userId = params.userId;
+
+  try {
+    // If this is a delete request
+    if (formData.delete === "delete") {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`
+      );
+
+      if (res.data === "success") {
+        return redirect("/");
+      } else {
+        throw new Error("Failed to delete account");
+      }
+    }
+
+    // Otherwise, assume it's an update (you could expand this if needed)
+    const res = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`,
+      formData
+    );
+
+    if (res.data === "success") {
+      return redirect("/"); // Or wherever you want to go after update
+    } else {
+      throw new Error("Failed to update profile");
+    }
+  } catch (error) {
+    console.error("Action error:", error);
+    return null; // You can return error info here if needed
   }
 }

@@ -372,6 +372,18 @@ const profileUpdate = async (req, res) => {
   }
 }
 
+const deleteProfile = async (req, res) => {
+  const { userId } = req.params.userId;
+
+  try {
+    await collectionF.findByIdAndDelete(userId);
+    return res.status(200).redirect('/');
+  } catch (error) {
+    console.error("Delete error:", error);
+    return res.status(500).send("error");
+  }
+}
+
 module.exports = {
   lancerAuth,
   showLancerMsg,
@@ -384,4 +396,5 @@ module.exports = {
   createPaymentIntent,
   exploreTasks,
   profileUpdate,
+  deleteProfile,
 };
