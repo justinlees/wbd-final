@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams, useFetcher, redirect } from "react-router-dom";
+import { NavLink, useParams, useFetcher } from "react-router-dom";
 import axios from "axios";
 
 const handleLogout = () => {

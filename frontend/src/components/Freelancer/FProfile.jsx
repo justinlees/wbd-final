@@ -4,7 +4,6 @@ import axios from "axios";
 
 export default function FProfile() {
   const freelancerData = useOutletContext();
-  const [showPopUp, setShowPopUp] = useState(false);
 
   const [formData, setFormData] = useState({
     FirstName: freelancerData.FirstName || "",
