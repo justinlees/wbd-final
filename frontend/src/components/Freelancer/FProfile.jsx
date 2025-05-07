@@ -55,7 +55,7 @@ export default function FProfile() {
 
     try {
       const res = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData._id}/profile`,
+        `${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/profile`,
         formData
       );
       if (res.data === "success") {
@@ -138,7 +138,7 @@ export default function FProfile() {
             <input
               type="text"
               name="Skill"
-              value={formData?.bio.workedAt}
+              value={formData.bio?.workedAt}
               onChange={handleChange}
             />
           </div>
@@ -147,7 +147,7 @@ export default function FProfile() {
             <input
               type="text"
               name="Skill"
-              value={formData?.bio.experience}
+              value={formData.bio?.experience}
               onChange={handleChange}
             />
           </div>
