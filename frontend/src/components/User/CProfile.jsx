@@ -17,32 +17,32 @@ export default function CProfile() {
 
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const currentErrors = {};
-    const nameRegEx = /^[a-zA-Z]+$/;
-    const mobileNoRegEx = /^[0-9]{10}$/;
+  // const validateForm = () => {
+  //   const currentErrors = {};
+  //   const nameRegEx = /^[a-zA-Z]+$/;
+  //   const mobileNoRegEx = /^[0-9]{10}$/;
 
-    if (!nameRegEx.test(formData.FirstName)) {
-      currentErrors.FirstName = "Enter a valid first name";
-    }
-    if (!nameRegEx.test(formData.LastName)) {
-      currentErrors.LastName = "Enter a valid last name";
-    }
-    const dobDate = new Date(formData.DOB);
-    const today = new Date();
-    if (!formData.DOB || dobDate > today) {
-      currentErrors.DOB = "Enter a valid date of birth";
-    }
-    if (
-      !mobileNoRegEx.test(formData.MobileNo) ||
-      parseInt(formData.MobileNo) < 6000000000
-    ) {
-      currentErrors.MobileNo = "Enter a valid 10-digit mobile number";
-    }
+  //   if (!nameRegEx.test(formData.FirstName)) {
+  //     currentErrors.FirstName = "Enter a valid first name";
+  //   }
+  //   if (!nameRegEx.test(formData.LastName)) {
+  //     currentErrors.LastName = "Enter a valid last name";
+  //   }
+  //   const dobDate = new Date(formData.DOB);
+  //   const today = new Date();
+  //   if (!formData.DOB || dobDate > today) {
+  //     currentErrors.DOB = "Enter a valid date of birth";
+  //   }
+  //   if (
+  //     !mobileNoRegEx.test(formData.MobileNo) ||
+  //     parseInt(formData.MobileNo) < 6000000000
+  //   ) {
+  //     currentErrors.MobileNo = "Enter a valid 10-digit mobile number";
+  //   }
 
-    setErrors(currentErrors);
-    return Object.keys(currentErrors).length === 0;
-  };
+  //   setErrors(currentErrors);
+  //   return Object.keys(currentErrors).length === 0;
+  // };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -86,7 +86,7 @@ export default function CProfile() {
               type="text"
               name="FirstName"
               value={formData.FirstName}
-              onChange={handleChange}
+              disabled
             />
             {errors.FirstName && <p>{errors.FirstName}</p>}
           </div>
@@ -96,7 +96,7 @@ export default function CProfile() {
               type="text"
               name="LastName"
               value={formData.LastName}
-              onChange={handleChange}
+              disabled
             />
             {errors.LastName && <p>{errors.LastName}</p>}
           </div>
