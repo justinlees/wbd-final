@@ -14,6 +14,7 @@ export default function Explore() {
           `${process.env.REACT_APP_BACKEND_URI}/freelancer/${fUser}/explore`
         );
         setTasks(res.data);
+        console.log(res.data);
       } catch (error) {
         console.error("Failed to fetch tasks:", error);
       }

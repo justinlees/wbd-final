@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function FacceptedTasks() {
   const freelancerData = useOutletContext();
-  const [Mark, setMark] = React.useState("");
+  const [Mark, setMark] = React.useState(null);
   return (
     <>
       {freelancerData.tasksAssigned.length ? (
@@ -30,23 +30,23 @@ export default function FacceptedTasks() {
                 <button
                   type="button"
                   onClick={() => {
-                    setMark(1);
+                    setMark(item);
                   }}
                 >
                   Mark Complete
                 </button>
-                {Mark ? (
+                {Mark !== null ? (
                   <div className="PopUp">
                     <Form method="POST">
                       <input
                         text="text"
-                        value={item.clientId}
+                        value={Mark.clientId}
                         name="clientId"
                         style={{ display: "none" }}
                       />
                       <input
                         text="text"
-                        value={item.taskName}
+                        value={Mark.taskName}
                         name="taskName"
                         style={{ display: "none" }}
                       />
@@ -56,7 +56,7 @@ export default function FacceptedTasks() {
                       <button
                         id="cancel"
                         onClick={() => {
-                          setMark(0);
+                          setMark(null);
                         }}
                       >
                         Cancel

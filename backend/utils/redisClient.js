@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { createClient } = require('redis');
 
 // Update the URL to point to the Redis container (use 'redis' as hostname)
