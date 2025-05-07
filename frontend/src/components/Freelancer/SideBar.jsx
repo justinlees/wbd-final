@@ -96,7 +96,7 @@ export async function Action({ request, params }) {
     );
 
     if (res.status === 200) {
-      return redirect(`freelancer/${params.fUser}`);
+      return redirect('/');
     } else {
       return { success: false };
     }
