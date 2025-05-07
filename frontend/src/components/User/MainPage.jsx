@@ -157,7 +157,7 @@ export default function MainPage() {
                       <br />
                       <h3>Skill: {item.Skill}</h3>
                       <br />
-                      <h3>Rating: {item.Rating}</h3>
+                      <h3>Rating: {item.Rating ? item.Rating : 'Unrated'}</h3>
                       <br />
                       <Link to={`${item.UserName}/requestPage`}>
                         View Profile &rarr;

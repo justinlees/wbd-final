@@ -275,7 +275,7 @@ const finishedTasks = async (req, res) => {
           finishedTasks: {
             lancerId: req.params.fUser,
             taskName: req.body.taskName,
-            filePath: req.file.path,
+            filePath: req.file.url,
           },
         },
       }
@@ -288,7 +288,7 @@ const finishedTasks = async (req, res) => {
           finishedTasks: {
             clientId: req.body.clientId,
             taskName: req.body.taskName,
-            filePath: req.file.path,
+            filePath: req.file.url,
           },
         },
       }
