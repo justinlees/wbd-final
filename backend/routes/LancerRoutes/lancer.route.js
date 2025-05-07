@@ -40,6 +40,6 @@ lancerRouter.post("/:fUser/create-payment-intent", createPaymentIntent);
 lancerRouter.put('/:fUser/profile', profileUpdate)
 
 //delete routes
-userRouter.delete('/:fUser/profile', deleteProfile)
+lancerRouter.delete('/:fUser/profile', deleteProfile)
 
 module.exports = lancerRouter;
