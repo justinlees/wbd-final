@@ -75,7 +75,7 @@ export default function CProfile() {
         <h1>Edit Profile</h1>
       </div>
       <div className="briefDetails">
-        <form onSubmit={handleSubmit} className="block1">
+        <form className="block1">
           <div>
             <label>UserName:</label>
             <input type="text" value={formData.UserName} disabled />
