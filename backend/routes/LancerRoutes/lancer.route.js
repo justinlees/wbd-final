@@ -31,7 +31,7 @@ lancerRouter.post("/:fUser/tasks", lancerTasks);
 lancerRouter.post("/:fUser/tasks/:userId/messages", lancerMsg);
 lancerRouter.post("/:fUser/earnings", lancerEarnings);
 lancerRouter.post("/:fUser/profile", lancerAccountDelete);
-lancerRouter.post("/:fUser/tasks/acceptedTasks", finishedTasks);
+lancerRouter.post("/:fUser/tasks/acceptedTasks", upload.single("fileUpload"), finishedTasks);
 lancerRouter.post("/:fUser/create-payment-intent", createPaymentIntent);
 
 module.exports = lancerRouter;

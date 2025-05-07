@@ -37,7 +37,7 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <Form method="POST">
+                    <Form method="POST" encType="multipart/form-data">
                       <input
                         text="text"
                         value={Mark.clientId}
@@ -50,6 +50,7 @@ export default function FacceptedTasks() {
                         name="taskName"
                         style={{ display: "none" }}
                       />
+                      <input type="file" required/>
                       <button type="submit" id="confirmation">
                         Mark Complete
                       </button>

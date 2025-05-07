@@ -31,6 +31,7 @@ const clientData = new mongoose.Schema(
       {
         lancerId: { type: String, default: "None" },
         taskName: { type: String, default: "None" },
+        filePath: { type: String, default: null },
       },
     ],
     profilePic: { type: String, default: null },

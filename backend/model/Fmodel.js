@@ -43,6 +43,7 @@ const freelancerData = new mongoose.Schema(
       {
         clientId: { type: String, default: "None" },
         taskName: { type: String, default: "None" },
+        filePath: { type: String, default: null },
       },
     ],
   },
