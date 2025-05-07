@@ -10,7 +10,7 @@ services:
       - ./backend:/app
     environment:
       - NODE_ENV=development
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://default:AU4pAAIjcDE3YTFhMjQ3ODE2ZjI0MTAxYWUzYzQ0ZDUzZmVmMzZmMXAxMA@climbing-caribou-20009.upstash.io:6379
       - STRIPE_SECRET_KEY=sk_test_51RLBaxR4vCYStREE3Fz5XkH8fbw0arP9gETxKJ49TEVMpC8fXbVPioHnZUSuA2On5vaY4RJKXa2nzWbw6J49OmKJ00DoOjwz1r
       - MONGO_URI=mongodb://mongo:27017/JobDone # ⬅️ Updated
     depends_on:

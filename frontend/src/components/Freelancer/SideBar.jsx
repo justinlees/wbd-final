@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams, useFetcher } from "react-router-dom";
+import { NavLink, useParams, useFetcher, redirect } from "react-router-dom";
 import axios from "axios";
 
 const handleLogout = () => {
@@ -7,18 +7,18 @@ const handleLogout = () => {
   window.location.href = "/";
 };
 
-export default function FsideBar({ userData, refreshUserData }) {
+export default function FsideBar({ userData }) {
   const params = useParams();
   const [click, setClick] = React.useState(false);
   const fetcher = useFetcher();
 
   // Trigger a refresh after upload success
-  React.useEffect(() => {
-    if (fetcher.data?.success) {
-      alert("Upload success");
-      refreshUserData(); // function passed from parent to reload user data
-    }
-  }, [fetcher.data]);
+  // React.useEffect(() => {
+  //   if (fetcher.data?.success) {
+  //     alert("Upload success");
+  //     refreshUserData(); // function passed from parent to reload user data
+  //   }
+  // }, [fetcher.data]);
 
   return (
     <nav className="fSideBar">
@@ -96,7 +96,7 @@ export async function Action({ request, params }) {
     );
 
     if (res.status === 200) {
-      return { success: true };
+      return redirect(`freelancer/${params.fUser}`);
     } else {
       return { success: false };
     }
