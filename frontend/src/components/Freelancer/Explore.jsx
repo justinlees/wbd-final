@@ -26,7 +26,7 @@ export default function Explore() {
   const handleAccept = async (task) => {
     const formData = {
       requestVal: "accept",
-      clientIds: task.clientIds || "unknown",
+      clientIds: task.postedBy || "unknown",
       taskName: task.taskName,
       taskDescription: task.taskDescription,
       currAmount: task.currAmount || 0, // Optional, include if available
@@ -39,7 +39,7 @@ export default function Explore() {
       );
 
       if (response.data) {
-        navigate(`/freelancer/${fUser}/tasks`);
+        navigate('tasks');
       }
     } catch (error) {
       console.error("Error accepting task:", error);
@@ -47,7 +47,7 @@ export default function Explore() {
   };
 
   return (
-    <div className="briefDetails" style={{ zIndex: 1000 }}>
+    <div className="briefDetails" style={{ zIndex: 1000, margin: "auto" }}>
       <div className="block1">
         <h2>Available Tasks</h2>
         {tasks.length ? (
@@ -56,7 +56,7 @@ export default function Explore() {
               <h3>{task.taskName}</h3>
               <p>{task.taskDescription}</p>
               {task.postedBy && (
-                <small>Posted by: {task.postedBy.UserName || "Unknown"}</small>
+                <small>Posted by: {task.postedBy || "Unknown"}</small>
               )}
               <button onClick={() => handleAccept(task)}>Accept Task</button>
             </div>

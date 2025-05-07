@@ -138,7 +138,7 @@ export default function FProfile() {
             <input
               type="text"
               name="Skill"
-              value={formData.bio.workedAt}
+              value={formData?.bio.workedAt}
               onChange={handleChange}
             />
           </div>
@@ -147,7 +147,7 @@ export default function FProfile() {
             <input
               type="text"
               name="Skill"
-              value={formData.bio.experience}
+              value={formData?.bio.experience}
               onChange={handleChange}
             />
           </div>

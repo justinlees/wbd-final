@@ -96,7 +96,7 @@ export async function Action({ request, params }) {
     );
 
     if (res.status === 200) {
-      return redirect('/');
+      return redirect('');
     } else {
       return { success: false };
     }

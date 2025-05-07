@@ -37,7 +37,7 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <Form method="POST" encType="multipart/form-data">
+                    <form method="POST" encType="multipart/form-data">
                       <input
                         text="text"
                         value={Mark.clientId}
@@ -62,7 +62,7 @@ export default function FacceptedTasks() {
                       >
                         Cancel
                       </button>
-                    </Form>
+                    </form>
                   </div>
                 ) : (
                   ""
