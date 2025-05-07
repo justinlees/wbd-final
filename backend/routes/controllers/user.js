@@ -7,6 +7,7 @@ const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
 const task = require('../../model/Task');
+const redisClient = require("../../utils/redisClient");
 
 const userAuth = async (req, res) => {
   const authHeader = req.headers["authorization"];
@@ -31,12 +32,23 @@ const userAuth = async (req, res) => {
 };
 
 const showUserTasks = async (req, res) => {
+  const userId = req.params.userId;
+
   try {
-    const requests = await collectionC
-      .findOne({
-        UserName: req.params.userId,
-      })
-      .lean();
+    // Check if data exists in the cache
+    const cachedTasks = await redisClient.get(`userTasks:${userId}`);
+
+    if (cachedTasks) {
+      console.log("Serving showUserTasks from cache");
+      return res.status(200).json(JSON.parse(cachedTasks));
+    }
+
+    // If not cached, fetch from database
+    const requests = await collectionC.findOne({ UserName: userId }).lean();
+
+    // Cache the result for 5 minutes (300 seconds)
+    await redisClient.setEx(`userTasks:${userId}`, 300, JSON.stringify(requests));
+    console.log("Serving showUserTasks from database and caching");
 
     res.status(200).send(requests);
   } catch (error) {
