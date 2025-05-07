@@ -28,7 +28,7 @@ export default function FProfile() {
         <h1>Edit Profile</h1>
       </div>
       <div className="briefDetails">
-        <fetcher.Form className="block1">
+        <fetcher.Form method="PUT" className="block1" action={`/freelancer/${formData.UserName}/profile`}>
           <div>
             <label>UserName:</label>
             <input type="text" value={formData.UserName} disabled />
@@ -104,7 +104,7 @@ export default function FProfile() {
           <button type="submit">Save Changes</button>
         </fetcher.Form>
 
-        <fetcher.Form method="DELETE">
+        <fetcher.Form method="DELETE" action={`/freelancer/${formData.UserName}/profile`}>
           <legend>Delete Account</legend>
           <button type="submit" name="action" value="delete">Delete</button>
         </fetcher.Form>

@@ -38,15 +38,15 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <fetcher.Form method="POST" encType="multipart/form-data">
+                    <fetcher.Form method="POST" encType="multipart/form-data" action={`/freelancer/${Mark.clientId}/tasks/acceptedTasks`}>
                       <input
-                        text="text"
+                        type="text"
                         value={Mark.clientId}
                         name="clientId"
                         style={{ display: "none" }}
                       />
                       <input
-                        text="text"
+                        type="text"
                         value={Mark.taskName}
                         name="taskName"
                         style={{ display: "none" }}
