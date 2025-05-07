@@ -49,6 +49,17 @@ export default function RequestPage() {
                 <br />
                 <b>{item?.MobileNo}</b>
               </li>
+              <b>Bio:</b>
+              <li>
+                Mobile:
+                <br />
+                <b>{item?.workedAt}</b>
+              </li>
+              <li>
+                Mobile:
+                <br />
+                <b>{item?.Experince}</b>
+              </li>
             </ul>
           </div>
           <div className="right">

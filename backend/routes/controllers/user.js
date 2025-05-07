@@ -251,8 +251,8 @@ const postTask = async (req, res) => {
 
 const profileUpdate = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.userId,
+    const updatedUser = await collectionC.findOneAndUpdate(
+      { UserName: req.params.userId },
       req.body,
       { new: true }
     );

@@ -155,9 +155,9 @@ export default function MainPage() {
                       <br />
                       <h3>Email: {item.Email}</h3>
                       <br />
-                      <h3>Mobile: {item.MobileNo}</h3>
-                      <br />
                       <h3>Skill: {item.Skill}</h3>
+                      <br />
+                      <h3>Rating: {item.Rating}</h3>
                       <br />
                       <Link to={`${item.UserName}/requestPage`}>
                         View Profile &rarr;

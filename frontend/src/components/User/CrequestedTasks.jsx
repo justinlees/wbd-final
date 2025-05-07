@@ -10,6 +10,7 @@ import axios from "axios";
 export default function CRequestedTasks() {
   const requestedTasks = useOutletContext();
   const errors = useActionData();
+  console.log(requestedTasks.bufferRequests);
   return (
     <div className="connections">
       <h1>Queued Tasks</h1>

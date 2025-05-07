@@ -357,6 +357,21 @@ const exploreTasks = async (req, res) => {
   }
 };
 
+const profileUpdate = async (req, res) => {
+  try {
+    const updatedUser = await collectionF.findOneAndUpdate(
+      { UserName: req.params.userId },
+      req.body,
+      { new: true }
+    );
+    if (!updatedUser) return res.status(404).send("User not found");
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+}
+
 module.exports = {
   lancerAuth,
   showLancerMsg,
@@ -367,5 +382,6 @@ module.exports = {
   lancerMsg,
   profileUpload,
   createPaymentIntent,
-  exploreTasks
+  exploreTasks,
+  profileUpdate,
 };

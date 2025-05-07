@@ -16,6 +16,7 @@ const {
   profileUpload,
   createPaymentIntent,
   exploreTasks,
+  profileUpdate,
 } = require("../controllers/lancer");
 
 /* Router level middleware */
@@ -33,5 +34,8 @@ lancerRouter.post("/:fUser/earnings", lancerEarnings);
 lancerRouter.post("/:fUser/profile", lancerAccountDelete);
 lancerRouter.post("/:fUser/tasks/acceptedTasks", upload.single("fileUpload"), finishedTasks);
 lancerRouter.post("/:fUser/create-payment-intent", createPaymentIntent);
+
+//put routes
+lancerRouter.put('/:fUser/profile', profileUpdate)
 
 module.exports = lancerRouter;

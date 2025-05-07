@@ -21,6 +21,12 @@ const freelancerData = new mongoose.Schema(
     Skill: String,
     profilePic: { type: String, default: null },
     currAmount: { type: Number, default: 0 },
+    bio: [
+      {
+        workedAt: { type: String, default: null },
+        experience: { type: Number, default: null },
+      }
+    ],
     amountSpent: Number,
     Transactions: Number,
     bufferRequests: [
