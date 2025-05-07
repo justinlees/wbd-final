@@ -4,7 +4,6 @@ const collectionM = require("../../model/Mmodel");
 const collectionA = require("../../model/Amodel");
 const collectionC = require("../../model/Cmodel");
 const collectionMsg = require("../../model/messages");
-const redisClient = require("../../utils/redisClient");
 
 const adminAuth = (req, res) => {
   const authHeader = req.headers["authorization"];
@@ -37,27 +36,15 @@ const adminAuth = (req, res) => {
 
 const adminShowLancers = async (req, res) => {
   try {
-    // Check if the data is already cached
-    const cachedLancers = await redisClient.get("allLancers");
-
-    if (cachedLancers) {
-      console.log("Serving adminShowLancers from cache");
-      return res.status(200).json(JSON.parse(cachedLancers));
-    }
-
-    // Fetch from database if not cached
     const allLancers = await collectionF
       .find()
       .select("UserName Email MobileNo Skill")
       .lean();
-
-    // Cache the result for 10 minutes (600 seconds)
-    await redisClient.setEx("allLancers", 600, JSON.stringify(allLancers));
-    console.log("Serving adminShowLancers from database and caching");
-
     res.status(200).send(allLancers);
   } catch (error) {
-    res.status(500).json({ message: "Couldn't fetch Freelancer details", error });
+    res
+      .status(500)
+      .json({ message: "Coudn't fetch Freelancer details", error });
   }
 };
 

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
@@ -27,8 +28,6 @@ const redisClient = require("./utils/redisClient");
 
 //const storage = new GridFsStorage({ url });
 //const upload = multer({ storage });
-
-require("dotenv").config();
 
 /* In-built middlewares */
 
