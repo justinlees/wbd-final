@@ -191,7 +191,7 @@ const router = createBrowserRouter([
           {
             path: "acceptedTasks",
             element: <FacceptedTasks />,
-            action: AcceptedAction,
+            // action: AcceptedAction,
             children: [
               {
                 path: ":userId/taskInfo",
