@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Form, useOutletContext, redirect } from "react-router-dom";
 
 export default function Explore() {
   const [tasks, setTasks] = useState([]);
   const { fUser } = useParams();
   const [acceptFlag, setAcceptFlag] = React.useState("");
   const [requestVal, setRequestVal] = React.useState("");
+  const freelancerData = useOutletContext();
 
   useEffect(() => {
     const exploreTasks = async () => {
@@ -52,19 +53,19 @@ export default function Explore() {
                   <input
                     type="text"
                     name="clientIds"
-                    value={item.clientIds}
+                    value={task.clientIds}
                     style={{ display: "none" }}
                   />
                   <input
                     type="text"
-                    value={item.taskName}
+                    value={task.taskName}
                     name="taskName"
                     style={{ display: "none" }}
                   />
                   <input
                     type="text"
                     name="taskDescription"
-                    value={item.taskDescription}
+                    value={task.taskDescription}
                     style={{ display: "none" }}
                   />
                   <legend>Current Balance:{freelancerData.currAmount}</legend>
