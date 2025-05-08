@@ -49,14 +49,19 @@ export default function RequestPage() {
                 <br />
                 <b>{item?.MobileNo}</b>
               </li>
+              <li>
+                Rating:
+                <br />
+                <b>{item?.Rating}</b>
+              </li>
               <b>Bio:</b>
               <li>
-                Mobile:
+                Worked At:
                 <br />
                 <b>{item?.workedAt}</b>
               </li>
               <li>
-                Mobile:
+                Experience:
                 <br />
                 <b>{item?.Experince}</b>
               </li>
@@ -65,7 +70,7 @@ export default function RequestPage() {
           <div className="right">
             <Form method="post" encType="multipart/form-data">
               <h3>
-                ClientId:
+                Client Id:
                 <b> {item?.UserName}</b>
               </h3>
               <input type="text" value={params.fUser} name="lancerId" />
@@ -89,11 +94,6 @@ export default function RequestPage() {
                 required
                 className="AboutTask"
                 id="TaskDescription"
-              />
-              <input
-                type="file"
-                name="profilePic"
-                style={{ backgroundColor: "black", display: "block" }}
               />
               <button type="submit">Request</button>
             </Form>

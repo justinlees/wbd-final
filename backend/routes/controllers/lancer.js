@@ -327,37 +327,37 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
-const exploreTasks = async (req, res) => {
-  try {
-    // Check cache first
-    const cachedTasks = await redisClient.get("allTasks");
-
-    if (cachedTasks) {
-      console.log("Serving exploreTasks from cache");
-      return res.status(200).json(JSON.parse(cachedTasks));
-    }
-
-    // If not cached, fetch from DB
-    const tasks = await collectionTask.find().lean();
-
-    // Cache the result for 5 minutes
-    await redisClient.setEx("allTasks", 300, JSON.stringify(tasks));
-    console.log("Serving exploreTasks from database and caching");
-
-    res.status(200).json(tasks);
-  } catch (error) {
-    res.status(500).json({ message: "Server Error", error: error.message });
-  }
-};
-
 // const exploreTasks = async (req, res) => {
 //   try {
-//     const tasks = await collectionTask.find(); // Optional populate if postedBy is a ref
+//     // Check cache first
+//     const cachedTasks = await redisClient.get("allTasks");
+
+//     if (cachedTasks) {
+//       console.log("Serving exploreTasks from cache");
+//       return res.status(200).json(JSON.parse(cachedTasks));
+//     }
+
+//     // If not cached, fetch from DB
+//     const tasks = await collectionTask.find().lean();
+
+//     // Cache the result for 5 minutes
+//     await redisClient.setEx("allTasks", 300, JSON.stringify(tasks));
+//     console.log("Serving exploreTasks from database and caching");
+
 //     res.status(200).json(tasks);
 //   } catch (error) {
-//     res.status(500).json({ message: 'Server Error', error: error.message });
+//     res.status(500).json({ message: "Server Error", error: error.message });
 //   }
 // };
+
+const exploreTasks = async (req, res) => {
+  try {
+    const tasks = await collectionTask.find(); // Optional populate if postedBy is a ref
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error', error: error.message });
+  }
+};
 
 const profileUpdate = async (req, res) => {
   try {

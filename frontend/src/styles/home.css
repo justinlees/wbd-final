@@ -367,8 +367,7 @@
 }
 
 .HomePage .requestPage {
-  margin-top: 8rem;
-  margin-left: 2rem;
+  margin: auto;
 }
 
 .HomePage .requestPage ul {
@@ -385,7 +384,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #111;
+  background-color: #807e7e;
   color: white;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
