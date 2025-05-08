@@ -33,6 +33,7 @@ export default function AdminDashBoard() {
               <p>User Id:{item.UserName}</p>
               <p>Email:{item.Email}</p>
               <p>Mobile No:{item.MobileNo}</p>
+              <p>Posted Tasks: {item.finishedTasks.length}</p>
               <Form method="post">
                 <div className="display1">
                   <input

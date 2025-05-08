@@ -19,6 +19,8 @@ export default function ManagersInfo() {
             <p>Email: {item.Email}</p>
             <p>Mobile: {item.MobileNo}</p>
             <p>Skill: {item.Skill}</p>
+            <p>Completed Tasks: {item.finishedTasks.length}</p>
+            <p>Revenue Generated: ${(item.finishedTasks.length)*2}</p>
             <Form method="post">
               <div className="display1">
                 <input
