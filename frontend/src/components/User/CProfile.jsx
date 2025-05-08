@@ -85,39 +85,39 @@ export default function CProfile() {
 }
 
 
-// export async function Action({ request, params }) {
-//   const formData = Object.fromEntries(await request.formData());
-//   const userId = params.userId;
+export async function Action({ request, params }) {
+  const formData = Object.fromEntries(await request.formData());
+  const userId = params.userId;
 
-//   try {
-//     // If this is a delete request
-//     if (formData.action === "delete") {
-//       const res = await axios.delete(
-//         `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`
-//       );
+  try {
+    // If this is a delete request
+    if (formData.action === "delete") {
+      const res = await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`
+      );
 
-//       if (res.data === "success") {
-//         return redirect("/")
-//       } else {
-//         throw new Error("Failed to delete account");
-//       }
-//     }
+      if (res.data === "success") {
+        return redirect("/")
+      } else {
+        throw new Error("Failed to delete account");
+      }
+    }
 
-//     else{
-//       // Otherwise, assume it's an update (you could expand this if needed)
-//       const res = await axios.put(
-//         `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`,
-//         formData
-//       );
+    else{
+      // Otherwise, assume it's an update (you could expand this if needed)
+      const res = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URI}/home/${userId}/profile`,
+        formData
+      );
 
-//       if (res.data === "success") {
-//         window.location.reload();
-//       } else {
-//         throw new Error("Failed to update profile");
-//       }
-//     }
-//   } catch (error) {
-//     console.error("Action error:", error);
-//     return null; // You can return error info here if needed
-//   }
-// }
+      if (res.data === "success") {
+        window.location.reload();
+      } else {
+        throw new Error("Failed to update profile");
+      }
+    }
+  } catch (error) {
+    console.error("Action error:", error);
+    return null; // You can return error info here if needed
+  }
+}

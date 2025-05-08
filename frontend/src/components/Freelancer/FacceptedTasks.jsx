@@ -81,13 +81,13 @@ export default function FacceptedTasks() {
   );
 }
 
-// export async function Action({ request, params }) {
-//   const formData = Object.fromEntries(await request.formData());
-//   const res = await axios.post(
-//     `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/tasks/acceptedTasks`,
-//     formData
-//   );
-//   if (res) {
-//     return "";
-//   }
-// }
+export async function Action({ request, params }) {
+  const formData = Object.fromEntries(await request.formData());
+  const res = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URI}/freelancer/${params.fUser}/tasks/acceptedTasks`,
+    formData
+  );
+  if (res) {
+    return "";
+  }
+}
