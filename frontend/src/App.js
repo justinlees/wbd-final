@@ -34,7 +34,9 @@ import FProfile, {
 } from "./components/Freelancer/FProfile";
 import FdashBoard from "./components/Freelancer/fDashBoard";
 import FTasks from "./components/Freelancer/FTasks";
-import FacceptedTasks from "./components/Freelancer/FacceptedTasks";
+import FacceptedTasks, {
+  Action as AcceptedAction,
+} from "./components/Freelancer/FacceptedTasks";
 import FqueuedTasks, {
   Action as QueuedAction,
 } from "./components/Freelancer/FqueuedTasks";
@@ -189,7 +191,7 @@ const router = createBrowserRouter([
           {
             path: "acceptedTasks",
             element: <FacceptedTasks />,
-            // action: AcceptedAction,
+            action: AcceptedAction,
             children: [
               {
                 path: ":userId/taskInfo",
