@@ -26,7 +26,7 @@ export default function CProfile() {
         <h1>Edit Profile</h1>
       </div>
       <div className="briefDetails">
-        <fetcher.Form method="POST" className="block1" action={`${process.env,REACT_APP_BACKEND_URI}/home/${formData.UserName}/profile`}>
+        <fetcher.Form method="POST" className="block1" action={`${process.env.REACT_APP_BACKEND_URI}/home/${formData.UserName}/profile`}>
           <div>
             <label>UserName:</label>
             <input type="text" value={formData.UserName} disabled />
