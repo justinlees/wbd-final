@@ -87,6 +87,6 @@ export async function Action({ request, params }) {
     formData
   );
   if (res) {
-    return "";
+    window.location.reload();
   }
 }

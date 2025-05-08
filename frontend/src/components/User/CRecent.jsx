@@ -3,13 +3,6 @@ import { useOutletContext } from "react-router-dom";
 
 export default function CRecent() {
   const clientData = useOutletContext();
-
-  const handleDownload = (filePath) => {
-    if (filePath) {
-      window.open(filePath, "_blank");
-    }
-  };
-
   return (
     <>
       {clientData.finishedTasks.length ? (
@@ -19,14 +12,6 @@ export default function CRecent() {
               <h3>{item.lancerId}</h3>
               <div className="acceptButtons">
                 <button type="button">Info</button>
-                {item.filePath && (
-                  <button
-                    type="button"
-                    onClick={() => handleDownload(item.filePath)}
-                  >
-                    Download
-                  </button>
-                )}
               </div>
             </div>
           </div>
