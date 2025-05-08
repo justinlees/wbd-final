@@ -291,11 +291,7 @@
   padding: 0.4rem;
 }
 
-.freelanceDashBoard
-  .freelanceTasks
-  .briefDetails
-  .requestedClients
-  .requestButtons {
+.freelanceDashBoard .freelanceTasks .briefDetails .requestedClients .requestButtons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;

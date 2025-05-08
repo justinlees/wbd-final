@@ -26,7 +26,7 @@ export default function CProfile() {
         <h1>Edit Profile</h1>
       </div>
       <div className="briefDetails">
-        <fetcher.Form method="POST" className="block1" action={`../home/${formData.UserName}/profile`}>
+        <fetcher.Form method="POST" className="block1" action={`${process.env,REACT_APP_BACKEND_URI}/home/${formData.UserName}/profile`}>
           <div>
             <label>UserName:</label>
             <input type="text" value={formData.UserName} disabled />
@@ -74,7 +74,7 @@ export default function CProfile() {
           <button type="submit">Save Changes</button>
         </fetcher.Form>
 
-        <fetcher.Form method="DELETE" action={`../home/${formData.UserName}/profile`}>
+        <fetcher.Form method="DELETE" action={`${process.env.REACT_APP_BACKEND_URI}/home/${formData.UserName}/profile`}>
           <legend>Delete Account</legend>
           <button type="submit" name="action" value="delete">Delete</button>
         </fetcher.Form>

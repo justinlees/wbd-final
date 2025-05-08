@@ -38,7 +38,7 @@ export default function FacceptedTasks() {
                 </button>
                 {Mark !== null ? (
                   <div className="PopUp">
-                    <fetcher.Form method="POST" encType="multipart/form-data" action={`../freelancer/${freelancerData.UserName}/tasks/acceptedTasks`}>
+                    <fetcher.Form method="POST" encType="multipart/form-data" action={`${process.env.REACT_APP_BACKEND_URI}/freelancer/${freelancerData.UserName}/tasks/acceptedTasks`}>
                       <input
                         type="text"
                         value={Mark.clientId}
