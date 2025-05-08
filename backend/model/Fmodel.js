@@ -15,8 +15,8 @@ const freelancerData = new mongoose.Schema(
     },
     Email: { type: String, required: true, unique: true },
     Rating: {
-      type: Double,
-      default: 0,
+      type: Number,
+      default: 0.0,
     },
     Skill: String,
     profilePic: { type: String, default: null },
